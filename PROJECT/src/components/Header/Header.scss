@@ -1,0 +1,179 @@
+@import "../../containers/Main.scss";
+
+// TOP BANNER - MAIN SETTINGS
+.Banner {
+    background-color: $color0;
+    display: grid;
+    grid-template-columns: 390px 1fr 200px;
+    grid-template-areas: 
+                            'navbar navbar navbar'
+                            'logo sbar uinfo'
+                            'artnav artnav artnav';
+    font-family: $font0;
+    font-size: 1.0em;
+}
+
+// TOP BANNER - ROW 1
+
+// Top banner / Navigation
+.Navbar {
+    justify-self: end;
+    grid-area: navbar;
+    font-size: 0.6em;
+}
+
+// Top banner / Navigation - list
+.Navbar ul {
+    margin-right: 10px;
+    padding: 0;
+    list-style-type: none;
+}
+
+// Top banner / Navigation - list item
+.Navbar ul li {
+    float: left;
+    align-items: start;
+}
+
+// Top banner / Navigation - list item > link
+.Navbar ul li a {
+    color: $color1;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+// Top banner / Navigation - mark active list item
+.Navbar ul li a.active {
+    color: $color3;
+    background-color: $color1;
+}
+
+// Top banner / Navigation - list item > link hover
+.Navbar ul li a:hover {
+    color: $color3;
+    background-color: $color1;
+}
+
+// TOP BANNER - ROW 2
+
+// Top banner / Logo
+.Logo {
+    width: auto;
+    max-width: 390px;
+    margin: 0px;
+    padding-left: 10px;
+    grid-area: logo;
+}
+
+// Top banner / Search Bar
+.SearchBar {
+    grid-area: sbar;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    height: 25px;
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid $color3;
+    min-width: 100px;
+}
+
+.SearchBar input {
+    padding-left: 5px;
+    flex-grow: 1; // fill the rest of Searchbar (Searchbar - button)
+    border: none;
+    border-radius: 5px;
+    min-width: 70px; // SearchBar 100 = input 70 + button 30
+}
+
+.SearchBar button {
+    border: none;
+    color: $color2;
+    background-color: transparent;
+    width: 30px; // SearchBar 100 = input 70 + button 30
+    height: 25px;
+}
+
+.glassicon {
+    padding-top: 1px;
+    width: 20px;
+    opacity: 0.7;
+}
+
+// Top banner / User Zone (Log In + cart)
+.UserZone {
+    grid-area: uinfo;
+    justify-self: center;
+    align-self: center;
+}
+
+// LogIn Button
+.LogBtn {
+    color: $color1;
+    background-color: transparent;
+    padding: 5px 7px;
+    border: 1px solid $color1;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+// LogIn Button - hover
+.LogBtn:hover {
+    color: unset;
+    background-color: $color2;
+    border: solid 1px $color3;
+} 
+
+.CartBtn {
+    color: $color3;
+    background-color: $color2;
+    border: solid 1px $color3;
+    border-radius: 3px;
+    padding: 5px 7px;
+    font-size: 0.8em;
+}
+
+.ArtNav {
+    grid-area: artnav;
+    justify-self: center;
+}
+
+// Top banner / Navigation - list
+.ArtNav ul {
+    margin: 0px;
+    padding: 0;
+    list-style-type: none;
+}
+
+// Top banner / Navigation - list item
+.ArtNav ul li {
+    float: left;
+    margin: 0px;
+    padding: 5px;
+}
+
+// Top banner / Navigation - list item > link
+.ArtNav ul li a {
+    color: $color2;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+// Top banner / Navigation - mark active list item
+.ArtNav ul li a.active {
+    color: $color3;
+    background-color: $color2;
+    border: 1px solid $color3;
+}
+
+// Top banner / Navigation - list item > link hover
+.ArtNav ul li a:hover {
+    color: $color3;
+    background-color: $color2;
+}
+
