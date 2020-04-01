@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'; 
-import logo0 from '../../images/pands.png';
-import mglass from '../../images/mg.png';
+import logo0 from '../../images/icons/pands.png';
+import mglass from '../../images/icons/mg.png';
 import CartBtn from '../CartBtn/CartBtn';
 import './Header.scss';
 

@@ -1,0 +1,17 @@
+@import "../../containers/Main.scss";
+
+.CartBtn {
+    color: $color3;
+    background-color: $color2;
+    border: solid 1px $color3;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 1em;
+    align-items: center;
+}
+
+.carticon {
+    height: 15px;
+    margin-right: 4px;
+    
+}

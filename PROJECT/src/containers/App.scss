@@ -1,23 +1,55 @@
 @import './Main.scss';
 
-.App {
-
-}
-
 .App, button {
     font-family: inherit;
 }
 
-.Banner {
-
-}
-
+// Body style
 .Bodystyle {
-
     background-color: $color1;
+    min-height: 800px;
 }
 
+// Footer
 .footer {
+    background-color: $color3;
+    color: $color1;
+    padding-right: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+}
+
+// Footer children - settings
+.contactbox, .locbox {
+    margin: 10px 0px;
+    width: 250px;
+    justify-content: start;
+}
+
+// Footer / ContactBox - Contact information
+.contactbox {
+    display: inline-flex;
+}
+
+// Footer / LocBox - Box with localization map
+.locbox {
+    display: inline-flex;
+}
+
+// Footer / LocBox / iFrame - Localization map
+.locbox iframe{ 
+    width: 220px;
+}
+
+.contactbox h3, .locbox h3 {
+    writing-mode: vertical-rl;
+    margin: 0;
+    padding-right: 10px;
+    text-align: center;
+    color: $color0;
+    letter-spacing: 3px;
 }
 
 h1 {

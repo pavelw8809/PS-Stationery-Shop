@@ -1,0 +1,35 @@
+@import "../../containers/Main.scss";
+
+.ProdFlexbox {
+    justify-content: center;
+    align-content: flex-start;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.artCard {
+    width: 200px;    
+    margin: 10px;
+    text-align: center;
+    border: solid 2px $color0;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.ProdImg {
+    width: 200px;
+    height: 150px;
+    border-radius: 5px 5px 0 0;
+    z-index: 0;
+}
+
+.ProdName {
+    background-color: $color0;
+    margin-top: 150px;
+    color: $color2;
+}
+
+.ProdName h4, .ProdName p {
+    margin: 0;
+    padding: 5px;
+}
