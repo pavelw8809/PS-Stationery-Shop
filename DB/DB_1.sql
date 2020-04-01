@@ -1,84 +1,107 @@
-﻿CREATE database "shop";
+CREATE DATABASE shop;
 
 use shop;
-CREATE TABLE "users"
+/* tabela z informacją o zalogowanych klientach */
+CREATE TABLE users
 (
-"u_id"     numeric PRIMARY KEY,
-"u_login"  varchar(150) not null,
-"u_mail"   varchar(150) not null,
+u_id      numeric PRIMARY KEY, /* klucz główny id użytkownika */
+u_login   varchar(150) not null, /* login użytkownika */
+u_mail    varchar(150) not null, /* mail użytkownika */
+u_password varchar (150) not null /* hasło użytkownika */
 );
 
 use shop;
-CREATE TABLE "client_individual"
+/* tabela z danymi potrzebnymi do faktury dla klientów indywidualnych */
+CREATE TABLE client_individual
 (
-"ci_id"       numeric PRIMARY KEY,
-"ci_u_id"     numeric not null,
-"ci_name"     varchar(150) not null,
-"ci_surname"  varchar(150) not null,
-"ci_street"   varchar(150) not null,
-"ci_number"   varchar(150) not null,
-"ci_city"     varchar(150) not null,
-"ci_zip"      varchar(150) not null,
+ci_id       numeric PRIMARY KEY, /* klucz główny */
+ci_u_id     numeric not null, /* klucz obcy do tabeli users */
+ci_name     varchar(150) not null, /* imie klienta */
+ci_surname  varchar(150) not null, /* nazwisko klienta */
+ci_street   varchar(150) not null, /* ulica */
+ci_number   int not null, /* numer domu/mieszkania */
+ci_city     varchar(150) not null, /* miasto */
+ci_zip      varchar(150) not null, /* kod pocztowy */
 Constraint fk_client_individual FOREIGN KEY (ci_u_id)
 references users (u_id)
 );
 
 use shop;
-CREATE TABLE "client_company"
+/* tabela z danymi potrzebnymi do faktury dla klientów firmowych */
+CREATE TABLE client_company
 (
-"cc_id"       numeric PRIMARY KEY,
-"cc_u_id"     numeric references users (u_id) not null,
-"cc_name"     varchar(150) not null,
-"cc_NIP"      int not null,
-"cc_REGON"    int not null,
-"cc_street"   varchar(150) not null,
-"cc_number"   int not null,
-"cc_city"     varchar(150) not null,
-"cc_zip"      varchar(150) not null,
+cc_id       numeric PRIMARY KEY, /* klucz główny */
+cc_u_id     numeric not null, /* klucz obcy do tabeli users */
+cc_name     varchar(150) not null, /* nazwa firmy */
+cc_NIP      int not null, /* NIP firmy */
+cc_REGON    int not null, /* REGON firmy */
+cc_street   varchar(150) not null, /* ulica */
+cc_number   int not null, /* numer domu/mieszkania */
+cc_city     varchar(150) not null, /* miasto */
+cc_zip      varchar(150) not null, /* kod pocztowy */
+Constraint fk_client_company FOREIGN KEY (cc_u_id)
+references users (u_id)
 );
 
 use shop;
-CREATE TABLE "category"
+/* tabela z kategoriami (każdy produkt należy do odpowiedniej kategorii) */
+CREATE TABLE category
 (
-"c_id"     numeric PRIMARY KEY,
-"c_name"   varchar(150) not null,
+c_id     numeric PRIMARY KEY, /* klucz główny */
+c_name   varchar(150) not null /* nazwa kategorii */
 );
 
 use shop;
-CREATE TABLE "products"
+/* tabela z poszcezgólnymi produktami dostępnymi w sklepie */
+CREATE TABLE products
 (
-"p_id"             numeric PRIMARY KEY,
-"p_c_id"           numeric references category (c_id) not null,
-"p_name"           varchar(150) not null,
-"p_code"           varchar(150) not null,
-"p_description"    varchar(350) not null,
-"p_price"          varchar(150) not null,
+p_id             numeric PRIMARY KEY, /* klucz główny */
+p_c_id           numeric not null, /* klucz obcy di tabeli category */
+p_name           varchar(150) not null, /* nazwa produktu */
+p_code           varchar(150) not null, /* kod produktu - nazwa zdjęcia produktu */
+p_description    varchar(350) not null, /* opis produktu */
+p_price          numeric(6,2) not null, /* cena produktu */
+Constraint fk_products FOREIGN KEY (p_c_id)
+references category (c_id)
 );
 
 use shop;
-CREATE TABLE "products_quality"
+/* tabela z ilością produktów dostępnych w sklepie wraz z ilością w danym kolorze */
+CREATE TABLE products_quality
 (
-"pq_id"        numeric PRIMARY KEY,
-"pq_p_id"      numeric references products (p_id) not null,
-"pq_quality"   int not null,
+pq_id        numeric PRIMARY KEY, /* klucz główny */
+pq_p_id      numeric not null, /* klucz obcy do tabeli products */
+pq_color     varchar(150), /* kolor produktu */
+pq_quality   numeric not null, /* ilosc produktów na stanie sklepu */
+Constraint fk_products_quality FOREIGN KEY (pq_p_id)
+references products (p_id)
 );
 
 use shop;
-CREATE TABLE "orders"
+/* tabela z zamówieniem */
+CREATE TABLE orders
 (
-"o_id"             numeric PRIMARY KEY,
-"o_ci_id"          numeric references client_individual (ci_id) not null,
-"o_cc_id"          numeric references client_company (cc_id) not null,
-"o_number"         int not null,
-"o_status"         varchar(150) not null,
-"o_price"          varchar(150) not null,
+o_id             numeric PRIMARY KEY, /* klucz główny */
+o_ci_id          numeric not null, /* klucz obcy do tabeli client_individual */
+o_cc_id          numeric not null, /* klucz obcy do tabeli client_company */
+o_number         int not null, /* numer zamówienia */
+o_status         varchar(150) not null, /* status zamówienia czy w trakcie czy zrealizowane */
+o_price          numeric(6,2) not null, /* cena za całe zamówienie - ostateczna cena do zapłaty za wszytskie produkty w koszyku */
+Constraint fk_orders FOREIGN KEY (o_ci_id)
+references client_individual (ci_id),
+Constraint fk2_orders FOREIGN KEY (o_cc_id)
+references client_company (cc_id)
 );
 
-CREATE TABLE "order_details"
+CREATE TABLE order_details
+/* tabela ze szczególami zamówienia */
 (
-"od_id"             numeric PRIMARY KEY,
-"od_o_id"           numeric references orders (o_id) not null,
-"od_p_id"           numeric references products (p_id) not null,
-"od_quality"        int not null,
+od_id             numeric PRIMARY KEY, /* klucz główny */
+od_o_id           numeric not null, /* klucz obcy do tabeli orders  */
+od_p_id           numeric not null, /* klucz obcy do tabeli products */
+od_quality        numeric not null, /* ilość danego produktu w zamówieniu np 3 sztuki lub 15 sztuk... */
+Constraint fk_order_details FOREIGN KEY (od_o_id)
+references orders (o_id),
+Constraint fk2_order_details FOREIGN KEY (od_p_id)
+references products (p_id)
 );
-
