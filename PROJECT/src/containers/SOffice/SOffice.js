@@ -1,5 +1,15 @@
+/*
+    Plik:               SOffice.js
+    Funkcja:            SKLEP - ARTYKUŁY BIUROWE
+    Opis:               Strona sklepu wyświetlająca artykuły z kategorii art. biurowe.
+    Elementy:           Product Query - ComponentDidMount(), 
+                        Karta Produktu dla każdego z elementów (ArdCard)
+    Przykład użycia:    N/A
+    Dodatkowe info:     Query + zwrócenie wyniku w kartach
+*/
+
 import React, {useState} from 'react';
-import ArtCard from '../../components/ArtCard/ArtCard';
+import ArtCard from '../../components/ArtCard/ArtCard';             // import komponentu karty produktu
 import "../../components/ArtCard/ArtCard.scss";
 
 function SOffice() {
@@ -14,11 +24,11 @@ function SOffice() {
         ]
     });
 
-    let showCards;
+    let showCards;                                                  // pusta zmienna dla tablicy z wynikami zapytania
 
     showCards = (
         <div className="ProdFlexbox">
-            {sOffice.products.map((sOfficeR, index) => {
+            {sOffice.products.map((sOfficeR, index) => {            // mapowanie zapytania
                 return(
                     <ArtCard
                         imagename={sOfficeR.p_code}

@@ -1,25 +1,37 @@
-import React, {useState} from 'react';
-import './App.scss';
-import './Main.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from '../components/Header/Header';
+/*
+    Plik:               App.js
+    Funkcja:            GŁÓWNY KOMPONENT APLIKACJI
+    Opis:               *** MAIN COMPONENT ***
+    Elementy:           Baner aplikacji (Header), 
+                        Część główna (Bodystyle) - ROUTING,
+                        Footer
+    Funkcje:
+    Przykład użycia:    N/A
+    Dodatkowe info:     Główna strona wyświetlająca cały kontekt aplikacji oraz funkcję odpowiedzialne za zmianę stanu.
+*/
 
-import Index from './Index/Index';
-import About from './About/About';
-import Catalog from './Catalog/Catalog';
-import Contact from './Contact/Contact';
-import Offer from './Offer/Offer';
-import Orders from './Orders/Orders';
-import ShopService from './ShopService/Services';
-import Notfound from './Notfound/Notfound';
-import SOffice from './SOffice/SOffice';
-import SPaper from './SPaper/SPaper';
-import SEnvelopes from './SEnvelopes/SEnvelopes';
-import SPackages from './SPackages/SPackages';
-import SHygienic from './SHygienic/SHygienic';
+import React, {useState} from 'react';
+import './App.scss';                                                          // import arkusza dla głównego komponentu
+import './Main.scss';                                                         // import arkusza ze zmiennymi głównymi SASS
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    // import komponentów routingu
+import Header from '../components/Header/Header';                             // import komponentu bannera
+
+import Index from './Index/Index';                                            // Strona Główna
+import About from './About/About';                                            // O Nas
+import Contact from './Contact/Contact';                                      // Kontakt
+import Offer from './Offer/Offer';                                            // Oferta
+import Orders from './Orders/Orders';                                         // Zamówienia
+import ShopService from './ShopService/Services';                             // Usługi
+import Notfound from './Notfound/Notfound';                                   // 404 - Not found
+import SOffice from './SOffice/SOffice';                                      // Sklep - Art. biurowe
+import SPaper from './SPaper/SPaper';                                         // Sklep - Papier
+import SEnvelopes from './SEnvelopes/SEnvelopes';                             // Sklep - Koperty
+import SPackages from './SPackages/SPackages';                                // Sklep - Materiały opakowaniowe
+import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
+import Cart from './Cart/Cart'                                                // Koszyk
 
 function App() {
-
+  // Wartości początkowe aplikacji
   const [initSum] = useState({
     total: 0.00
   });
@@ -32,7 +44,6 @@ function App() {
               <Switch>
                   <Route exact path="/" component={Index}/>
                   <Route path="/about" component={About}/>
-                  <Route path="/catalog" component={Catalog}/>
                   <Route path="/contact" component={Contact}/>
                   <Route path="/offer" component={Offer}/>
                   <Route path="/orders" component={Orders}/>
@@ -42,6 +53,7 @@ function App() {
                   <Route path="/senvelopes" component={SEnvelopes}/>
                   <Route path="/spackages" component={SPackages}/>
                   <Route path="/shygienic" component={SHygienic}/>
+                  <Route path="/cart" component={Cart}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>

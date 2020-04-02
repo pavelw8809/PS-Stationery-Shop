@@ -1,3 +1,5 @@
+// PROBABLY TO REMOVE
+
 import React from 'react';
 
 const offer = () => {

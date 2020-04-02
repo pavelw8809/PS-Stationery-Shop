@@ -1,14 +1,43 @@
+/*
+    Plik:               App.scss
+    Funkcja:            GŁÓWNY KOMPONENT APLIKACJI - ARKUSZ STYLI
+    Opis:               N/A
+    Przykład użycia:    import './App.scss' w pliku App.js
+*/
+
 @import './Main.scss';
 
+// MAIN APPLICATION SETTINGS
 .App, button {
     font-family: inherit;
 }
 
-// Body style
-.Bodystyle {
-    background-color: $color1;
-    min-height: 800px;
+h1 {
+    margin: 0;
+    padding: 10px
 }
+
+// APP PART 1 - HEADER
+
+// Settings in the Header.scss file
+
+// APP PART 2 - BODY
+
+// BODY / Body style
+.Bodystyle {
+    background-color: $color1;  // Background of the body components
+    min-height: 800px;          // Min. height of the body components
+}
+
+// BODY / Displaying product cards in shop containers
+.ProdFlexbox {
+    justify-content: center;
+    align-content: flex-start;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+// APP PART 3 - FOOTER
 
 // Footer
 .footer {
@@ -21,7 +50,7 @@
     justify-items: center;
 }
 
-// Footer children - settings
+// Footer / children - common settings
 .contactbox, .locbox {
     margin: 10px 0px;
     width: 250px;
@@ -43,6 +72,8 @@
     width: 220px;
 }
 
+// Footer / ContactBox, LocBox / h3
+
 .contactbox h3, .locbox h3 {
     writing-mode: vertical-rl;
     margin: 0;
@@ -50,9 +81,4 @@
     text-align: center;
     color: $color0;
     letter-spacing: 3px;
-}
-
-h1 {
-    margin: 0;
-    padding: 10px
 }

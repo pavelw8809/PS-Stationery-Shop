@@ -1,11 +1,11 @@
-@import "../../containers/Main.scss";
+/*
+    Plik:               ArtCard.scss
+    Funkcja:            KARTA PRODUKTU - ARKUSZ STYLI
+    Opis:               N/A
+    Przykład użycia:    import './ArtCart.scss' w pliku ArtCart.js
+*/
 
-.ProdFlexbox {
-    justify-content: center;
-    align-content: flex-start;
-    display: inline-flex;
-    flex-wrap: wrap;
-}
+@import "../../containers/Main.scss";
 
 .artCard {
     width: 200px;    

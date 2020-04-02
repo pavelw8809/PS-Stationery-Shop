@@ -1,3 +1,10 @@
+/*
+    Plik:               Header.scss
+    Funkcja:            BANNER APLIKACJI - ARKUSZ STYLI
+    Opis:               N/A
+    Przykład użycia:    import './Header.scss' w pliku Header.js
+*/
+
 @import "../../containers/Main.scss";
 
 // TOP BANNER - MAIN SETTINGS
@@ -15,27 +22,27 @@
 
 // TOP BANNER - ROW 1
 
-// Top banner / Navigation
+// Top banner / Top Navigation
 .Navbar {
     justify-self: end;
     grid-area: navbar;
     font-size: 0.6em;
 }
 
-// Top banner / Navigation - list
+// Top banner / Top Navigation / list
 .Navbar ul {
     margin-right: 10px;
     padding: 0;
     list-style-type: none;
 }
 
-// Top banner / Navigation - list item
+// Top banner / Top Navigation / list item
 .Navbar ul li {
     float: left;
     align-items: start;
 }
 
-// Top banner / Navigation - list item > link
+// Top banner / Top Navigation / list item / link
 .Navbar ul li a {
     color: $color1;
     text-decoration: none;
@@ -43,13 +50,13 @@
     border-radius: 3px;
 }
 
-// Top banner / Navigation - mark active list item
+// Top banner / Top Navigation / list item / link / active
 .Navbar ul li a.active {
     color: $color3;
     background-color: $color1;
 }
 
-// Top banner / Navigation - list item > link hover
+// Top banner / Top Navigation / list item / link / hover
 .Navbar ul li a:hover {
     color: $color3;
     background-color: $color1;
@@ -63,12 +70,12 @@
     max-width: 390px;
     margin: 0px;
     padding-left: 10px;
-    grid-area: logo;
+    grid-area: logo; // grid area name
 }
 
-// Top banner / Search Bar
+// Top banner / Searching Bar
 .SearchBar {
-    grid-area: sbar;
+    grid-area: sbar; // grid area name
     display: flex;
     justify-self: center;
     align-self: center;
@@ -81,6 +88,7 @@
     min-width: 100px;
 }
 
+// Top banner / Searching Bar / Input Field
 .SearchBar input {
     padding-left: 5px;
     flex-grow: 1; // fill the rest of Searchbar (Searchbar - button)
@@ -89,6 +97,7 @@
     min-width: 70px; // SearchBar 100 = input 70 + button 30
 }
 
+// Top banner / Searching Bar / Searching Button
 .SearchBar button {
     border: none;
     color: $color2;
@@ -97,6 +106,7 @@
     height: 25px;
 }
 
+// Top banner / Searching Bar / Glass Icon
 .glassicon {
     padding-top: 1px;
     width: 20px;
@@ -105,7 +115,7 @@
 
 // Top banner / User Zone (Log In + cart)
 .UserZone {
-    grid-area: uinfo;
+    grid-area: uinfo; // grid area name
     justify-self: end;
     align-self: center;
     margin-right: 10px;
@@ -113,7 +123,7 @@
     display: flex;
 }
 
-// LogIn Button
+// Top Banner / User Zone / LogIn Button
 .LogBtn {
     color: $color1;
     background-color: transparent;
@@ -125,33 +135,36 @@
     align-items: center;
 }
 
-// LogIn Button - hover
+// Top Banner / User Zone / LogIn Button - hover
 .LogBtn:hover {
     color: unset;
     background-color: $color2;
     border: solid 1px $color3;
 } 
 
+// TOP BANNER - ROW 3
+
+// Top banner / Shop Navigation
 .ArtNav {
     grid-area: artnav;
     justify-self: center;
 }
 
-// Top banner / Navigation - list
+// Top banner / Shop Navigation / list
 .ArtNav ul {
     margin: 0px;
     padding: 0;
     list-style-type: none;
 }
 
-// Top banner / Navigation - list item
+// Top banner / Shop Navigation / list item
 .ArtNav ul li {
     float: left;
     margin: 0px;
     padding: 5px;
 }
 
-// Top banner / Navigation - list item > link
+// Top banner / Shop Navigation / list item / link
 .ArtNav ul li a {
     color: $color2;
     text-decoration: none;
@@ -159,14 +172,14 @@
     padding: 5px;
 }
 
-// Top banner / Navigation - mark active list item
+// Top banner / Shop Navigation / list item / link / active
 .ArtNav ul li a.active {
     color: $color3;
     background-color: $color2;
     border: 1px solid $color3;
 }
 
-// Top banner / Navigation - list item > link hover
+// Top banner / Shop Navigation / list item / link / hover
 .ArtNav ul li a:hover {
     color: $color3;
     background-color: $color2;

@@ -1,3 +1,11 @@
+/*
+    Plik:               App.scss
+    Funkcja:            GŁÓWNY ARKUSZ ZE ZMIENNYMI PREPROCESORA SASS
+    Opis:               Arkusz z definiowaniem styli projektu
+    Przykład użycia:    import './Main.scss' w pliku App.js
+                        @import "../../containers/Main.scss" w każdym pliku scss;
+*/
+
 @font-face {
     font-family: 'BS';
     src: url('../fonts/bahnschrift.ttf');
@@ -7,13 +15,13 @@
 
 $font0: 'BS';
 
+* {                                                         
+    font-family: $font0; // Default font for all objects
+}
+
 // COLORS
 
-$color0: #333; //color0
-$color1: #ccc; //color1
-$color2: #D4AC0D;//color2
-$color3: #111;   //color3
-
-*{
-    font-family: $font0;
-}
+$color0: #333;      // color0
+$color1: #ccc;      // color1
+$color2: #D4AC0D;   // color2
+$color3: #111;      // color3
