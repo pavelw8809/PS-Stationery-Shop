@@ -118,7 +118,7 @@ VALUES
 (107, 2, 'Wkład do długopisu ZENITH', 'DD29', 'Metalowy, oryginalny wkład do długopisu ZENITH w kolorze czarnym', 1.10),
 (108, 2, 'Wkład do długopisu ZENITH', 'DD29', 'Metalowy, oryginalny wkład do długopisu ZENITH w kolorze niebieskim', 1.10),
 (109, 2, 'Wkład ołówkowy', 'OO6', 'Wkład ołówkowy w rozmiarach 0,5-0,9', 1.50),
-110, 2, 'Zakreślacz', 'ZA1', 'Zakreślacz tracycyjny w kolorze różowym', 9.40),
+(110, 2, 'Zakreślacz', 'ZA1', 'Zakreślacz tracycyjny w kolorze różowym', 9.40),
 (111, 2, 'Zakreślacz', 'ZA1', 'Zakreślacz tracycyjny w kolorze fioletowym', 9.40),
 (112, 2, 'Zakreślacz', 'ZA1', 'Zakreślacz tracycyjny w kolorze pomarańczowym', 9.40),
 (113, 2, 'Zakreślacz', 'ZA1', 'Zakreślacz tracycyjny w kolorze żółtym', 9.40),
