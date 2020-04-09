@@ -59,12 +59,13 @@ use shop;
 /* tabela z poszcezgólnymi produktami dostępnymi w sklepie */
 CREATE TABLE products
 (
-p_id             INT NOT NULL AUTO_INCREMENT, /* klucz główny */
-p_c_id           INT NOT NULL, /* klucz obcy di tabeli category */
-p_name           varchar(150) not null, /* nazwa produktu */
-p_code           varchar(150) not null, /* kod produktu - nazwa zdjęcia produktu */
-p_description    varchar(350) not null, /* opis produktu */
-p_price          numeric(6,2) not null, /* cena produktu */
+p_id                INT NOT NULL AUTO_INCREMENT, /* klucz główny */
+p_c_id              INT NOT NULL, /* klucz obcy di tabeli category */
+p_name              varchar(150) not null, /* nazwa produktu */
+p_code              varchar(150) not null, /* kod produktu - nazwa zdjęcia produktu */
+p_description       varchar(350) not null, /* opis produktu */
+p_price             numeric(6,2) not null, /* cena produktu */
+p_shortdescription  varchar(350) not null, /* któtki opis produktu, może być kolor */
 Constraint fk_products FOREIGN KEY (p_c_id)
 references category (c_id),
 PRIMARY KEY (p_id)
