@@ -91,7 +91,7 @@ VALUES
 (2, 'Długopis żelowy G-O32', 'DD26', 'Długopis żelowy klikający w kolorze zielonym', 4.40),
 (2, 'Flamaster', 'FF1', 'Flamaster z zatyczką w kolorze czarnym', 6.00),
 (2, 'Flamaster Stabilo Pen 68', 'FF2', 'Flamaster z końcówką w owalnym kształcie z zatyczką w kolorze czarnym', 5.90),
-(2, 'Flamaster Stabilo Pen 68', 'FF3', 'Flamaster z końcówką w owalnym kształcie z zatyczką w kolorze niebieskim', 5.90),
+(2, 'Flamaster Stabilo Pen 68', 'FF2', 'Flamaster z końcówką w owalnym kształcie z zatyczką w kolorze niebieskim', 5.90),
 (2, 'Marker do CD', 'MM1', 'Marker do płyt CD w kolorze czarnym', 5.90),
 (2, 'Marker do CD dwustronny', 'MM2', 'Dwustronny marker do płyt CD w kolorze czarnym', 5.90),
 (2, 'Marker Edding 750', 'MM3', 'Marker do podpisywania płyt CD w kolorze czarnym', 6.40),
