@@ -8,12 +8,14 @@
     Dodatkowe info:     Query + zwrócenie wyniku w kartach
 */
 
-import React, {useState} from 'react';
+import React, { Component } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';             // import komponentu karty produktu
+import axios from 'axios';
 import "../../components/ArtCard/ArtCard.scss";
 
-function SOffice() {
-    const [sOffice] = useState({
+class SOffice extends Component {
+
+    state = ({
         products: [
         {p_id: "6251", p_c_id: "ARTY", p_name: "Cienkopis PILOT V5", p_code: "ARTY62510", p_description: "czarny", p_price: 5.69},
         {p_id: "2267", p_c_id: "ARTY", p_name: "Długopis TOMA 059/050", p_code: "ARTY22670", p_description: "niebieski", p_price: 1.21},
@@ -24,30 +26,42 @@ function SOffice() {
         ]
     });
 
-    let showCards;                                                  // pusta zmienna dla tablicy z wynikami zapytania
+    componentDidMount() {
+        axios.get(`http://localhost:80/WSB_SELCOR/SERVER/SOffice.php`)
+            .then(res => {
+                    this.setState({products: res.data});
+                    console.log(res.data);
+                }
+            )
+    }
 
-    showCards = (
-        <div className="ProdFlexbox">
-            {sOffice.products.map((sOfficeR, index) => {            // mapowanie zapytania
-                return(
-                    <ArtCard
-                        imagename={sOfficeR.p_code}
-                        name={sOfficeR.p_name}
-                        description={sOfficeR.p_description}
-                        price={sOfficeR.p_price}
-                        key={index}
-                    />
-                )
-            })}
-        </div>
-    );
+    render() {
 
-    return(
-        <div>
-            <h1>SHOP - OFFICE ARTICLES</h1>
-            {showCards}
-        </div>
-    )
+        let showCards;                                                  // pusta zmienna dla tablicy z wynikami zapytania
+
+        showCards = (
+            <div className="ProdFlexbox">
+                {this.state.products.map((record, index) => {            // mapowanie zapytania
+                    return(
+                        <ArtCard
+                            imagename={record.p_code}
+                            name={record.p_name}
+                            description={record.p_description}
+                            price={record.p_price}
+                            key={index}
+                        />
+                    )
+                })}
+            </div>
+        );
+
+        return(
+            <div>
+                <h1>SHOP - OFFICE ARTICLES</h1>
+                {showCards}
+            </div>     
+        )
+    }
 }
 
 export default SOffice;

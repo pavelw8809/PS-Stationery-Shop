@@ -1,4 +1,4 @@
-use shop;
+﻿use shop;
 INSERT INTO category
 VALUES
 (1, 'Artkuły biurowe'),
