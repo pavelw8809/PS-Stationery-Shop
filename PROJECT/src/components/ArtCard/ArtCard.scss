@@ -7,29 +7,92 @@
 
 @import "../../containers/Main.scss";
 
+.ProdFlexbox {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
 .artCard {
     width: 200px;    
     margin: 10px;
     text-align: center;
-    border: solid 2px $color0;
-    border-radius: 5px;
-    z-index: 1;
+    border: solid 1px $color0;
+    border-radius: 5px;    // zmienna radius
+    box-shadow: 3px 3px 10px $color4;
+}
+
+.artCard:hover {
+    transform: scale(1.08, 1.08); // zmienna cardHover
+    transition-duration: 1s; // zmienna cardHoverTime
+}
+
+.ProdImgContainer {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: white;
+    border-top-left-radius: 4px; // zmienna radius - card border
+    border-top-right-radius: 4px; // zmienna radius - card border
+    height: 150px;
 }
 
 .ProdImg {
-    width: 200px;
-    height: 150px;
-    border-radius: 5px 5px 0 0;
-    z-index: 0;
+    max-height: 150px;
+    max-width: 200px;
+    border-radius: 5px 5px 0 0;;
 }
 
-.ProdName {
+.ProdInfo {
     background-color: $color0;
-    margin-top: 150px;
     color: $color2;
 }
 
-.ProdName h4, .ProdName p {
+.ProdInfo h4, .ProdInfo p {
     margin: 0;
-    padding: 5px;
+    padding: 6px;
+    font-weight: 100;
+}
+
+.ProdInfo p {
+    color: $color1;
+    font-size: 0.8em;
+}
+
+.ProdState {
+    background-color: $color3;
+    color: $color2;
+}
+
+.ProdState p {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.ProdState button {
+    border: solid 1px $color1;
+    background-color: transparent;
+    color: $color1;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.ProdState button:hover {
+    background-color: $color2;
+    color: $color3;
+}
+
+.ProdState input {
+    color: $color1;
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    text-align: center;
+}
+
+.ToCartBtn {
+    width: 100px;
+    color: red;
 }

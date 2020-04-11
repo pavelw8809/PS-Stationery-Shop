@@ -12,32 +12,63 @@
     Dodatkowe info:     {nazwa_zdjecia} ma korespondowac z numerem artykulu w bazie danych
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 import "./ArtCard.scss";                                                            // Import arkusza stylu dla dla komponentu
 
-const artcard = (props) => {
+const Artcard = (props) => {
+
+    const [counter, setCounter] = useState({
+        quantity: 0
+    })
 
     const Image = require('../../images/images/' + props.imagename + '.png');       // Ścieżka do zdjęcia
 
     let ProdImgStyle;
-
     ProdImgStyle = {                                                                // Stylizacja zdjęcia - zdjęcie jako tło karty
         backgroundImage: "url(" + Image + ")",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "200px 150px"
+        backgroundColor: 'white',
+    }
+
+    const increaseQuantity = () => {
+        setCounter({
+            quantity: counter.quantity+1
+        })
+    }
+    
+    const decreaseQuantity = () => {
+        if(counter.quantity > 0) {
+            setCounter({
+                quantity: counter.quantity-1
+            })
+        }
+    }
+
+    const handleQuantity = (event) => {
+        setCounter({
+            quantity: parseInt(event.target.value)
+        })
     }
 
     return(
-        <div style={ProdImgStyle} className="artCard">
-            <div className="ProdName">
-                <h4>{props.name}</h4>
-                <p>{props.description}</p>
+        <div className="artCard">
+            <div className="ProdImgContainer" style={ProdImgStyle}>
             </div>
-            <p>{props.price}</p>
+            <div className="ProdInfo">
+                <h4>{props.name}</h4>
+                <p>{props.shortdesc}</p>
+            </div>
+            <div className="ProdState">
+                <p>{props.price}</p>
+                <button onClick={increaseQuantity}>+</button>
+                <input type="number" value={counter.quantity} onChange={handleQuantity}/>
+                <button onClick={decreaseQuantity}>-</button>
+                <button className="ToCartB">DO KOSZYKA</button>
+            </div>
         </div>
     );
 }
 
-export default artcard;
+export default Artcard;
 
 //<img className="ProdImg" src={Image} alt={props.imagename}/>
+
