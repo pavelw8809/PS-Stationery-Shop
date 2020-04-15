@@ -4,3 +4,28 @@
     Opis:               N/A
     Przykład użycia:    import './Cart.scss' w pliku Cart.js
 */
+
+@import '../Main.scss';
+
+.Cart{
+}
+
+.CartContainer{
+    display: grid;
+    justify-content: center;
+}
+
+.CartSummaryInfo {
+    border: solid 1px $color3;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    background-color: $color2;
+}
+
+.CartSummaryLabel {
+    flex: 1;
+}

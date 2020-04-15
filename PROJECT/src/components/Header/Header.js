@@ -13,16 +13,17 @@
     Dodatkowe info:     <Navlink> - list przekierowujący do odpowiedniego kontenera w routingu - routing w pliku głównym App.js
 */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';                                                         // Import komponentu Navlick - element react-router-dom
+import { TotalContext } from '../../containers/App';
 import logo0 from '../../images/icons/pands.png';                                                   // Logo firmy duże
 import mglass from '../../images/icons/mg.png';                                                     // Ikona lupy
 import CartBtn from '../CartBtn/CartBtn';                                                           // Import komponentu przycisku koszyka
 import './Header.scss';
 
-const header = (props) => {
-
-    let total = parseFloat(props.totalprice).toFixed(2);                                            // Zaokrąglanie sumy do dwóch iejsc po przecinku
+const Header = () => {   
+    
+    const [initTotal, Total] = useContext(TotalContext);
 
     return(
         <div className="Banner">
@@ -55,7 +56,7 @@ const header = (props) => {
             <div className="UserZone">
                 <button className="LogBtn">ZALOGUJ</button>
                 <NavLink to="/cart">
-                    <CartBtn total={total}/>
+                    <CartBtn total={parseFloat(initTotal.total).toFixed(2)}/>
                 </NavLink>
             </div>
             <div className="ArtNav">
@@ -90,4 +91,4 @@ const header = (props) => {
                     </li>
 */
 
-export default header;
+export default Header;

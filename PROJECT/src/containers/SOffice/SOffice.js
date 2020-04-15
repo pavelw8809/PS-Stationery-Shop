@@ -17,12 +17,6 @@ class SOffice extends Component {
 
     state = ({
         products: [
-        {p_id: "6251", p_c_id: "ARTY", p_name: "Cienkopis PILOT V5", p_code: "ARTY62510", p_description: "czarny", p_price: 5.69},
-        {p_id: "2267", p_c_id: "ARTY", p_name: "Długopis TOMA 059/050", p_code: "ARTY22670", p_description: "niebieski", p_price: 1.21},
-        {p_id: "9571", p_c_id: "ARTY", p_name: "Długopis zwykły", p_code: "ARTY95710", p_description: "czarny", p_price: 0.41},
-        {p_id: "9571", p_c_id: "ARTY", p_name: "Długopis zwykły", p_code: "ARTY95711", p_description: "niebieski", p_price: 0.41},
-        {p_id: "1940", p_c_id: "ARTY", p_name: "Długopis automatyczny", p_code: "ARTY19400", p_description: "czerwony", p_price: 0.49},
-        {p_id: "1319", p_c_id: "ARTY", p_name: "Flamaster", p_code: "ARTY13190", p_description: "czarny", p_price: 1.06}
         ]
     });
 
@@ -45,7 +39,9 @@ class SOffice extends Component {
                     return(
                         <ArtCard
                             imagename={record.p_code}
+                            prodid = {record.p_id}
                             name={record.p_name}
+                            shortdesc={record.p_shortdescription}
                             description={record.p_description}
                             price={record.p_price}
                             key={index}
@@ -56,7 +52,7 @@ class SOffice extends Component {
         );
 
         return(
-            <div>
+            <div className="MainProductBox">
                 <h1>SHOP - OFFICE ARTICLES</h1>
                 {showCards}
             </div>     

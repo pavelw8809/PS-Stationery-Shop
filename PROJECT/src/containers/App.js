@@ -14,7 +14,8 @@ import React, {useState} from 'react';
 import './App.scss';                                                          // import arkusza dla głównego komponentu
 import './Main.scss';                                                         // import arkusza ze zmiennymi głównymi SASS
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    // import komponentów routingu
-import Header from '../components/Header/Header';                             // import komponentu bannera
+import Header from '../components/Header/Header';                             // import komponentu bannera                                                          // Import komponentu przycisku koszyka
+import '../components/Header/Header.scss';
 
 import Index from './Index/Index';                                            // Strona Główna
 import About from './About/About';                                            // O Nas
@@ -28,35 +29,63 @@ import SPaper from './SPaper/SPaper';                                         //
 import SEnvelopes from './SEnvelopes/SEnvelopes';                             // Sklep - Koperty
 import SPackages from './SPackages/SPackages';                                // Sklep - Materiały opakowaniowe
 import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
-import Cart from './Cart/Cart'                                                // Koszyk
+import SCart from './Cart/Cart'                                               // Koszyk
+
+export const CartContext = React.createContext();
+export const TotalContext = React.createContext();
 
 function App() {
+
   // Wartości początkowe aplikacji
-  const [initSum] = useState({
-    total: 0.00
-  });
+  const [initCart, Cart] = useState([
+    {id: 0, 
+    prodid: "500",
+    name: "Produkt testowy", 
+    desc: "fioletowy",
+    price: 16.29,
+    quantity: 5,
+    prodtotal: 16.29*5,
+    imagename: 'CC3'},
+    {id: 0, 
+    prodid: "501",
+    name: "Produkt testowy 2", 
+    desc: "buraczkowy",
+    price: 33.29,
+    quantity: 3,
+    prodtotal: 16.29*3,
+    imagename: 'CC3'}
+  ]
+  )
+
+  const total = initCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
+
+  const [initTotal, Total] = useState({total});
 
   return (
     <div className="App">
       <Router>
-            <Header totalprice={initSum.total}/>
-            <div className="Bodystyle">
-              <Switch>
-                  <Route exact path="/" component={Index}/>
-                  <Route path="/about" component={About}/>
-                  <Route path="/contact" component={Contact}/>
-                  <Route path="/offer" component={Offer}/>
-                  <Route path="/orders" component={Orders}/>
-                  <Route path="/service" component={ShopService}/>
-                  <Route path="/soffice" component={SOffice}/>
-                  <Route path="/spaper" component={SPaper}/>
-                  <Route path="/senvelopes" component={SEnvelopes}/>
-                  <Route path="/spackages" component={SPackages}/>
-                  <Route path="/shygienic" component={SHygienic}/>
-                  <Route path="/cart" component={Cart}/>
-                  <Route component={Notfound}/>
-              </Switch>
-            </div>
+        <CartContext.Provider value={[initCart, Cart]}>
+        <TotalContext.Provider value={[initTotal, Total]}>
+          <Header />
+          <div className="Bodystyle">
+            <Switch>
+                <Route exact path="/" component={Index}/>
+                <Route path="/about" component={About}/>
+                <Route path="/contact" component={Contact}/>
+                <Route path="/offer" component={Offer}/>
+                <Route path="/orders" component={Orders}/>
+                <Route path="/service" component={ShopService}/>
+                <Route path="/soffice" component={SOffice}/>
+                <Route path="/spaper" component={SPaper}/>
+                <Route path="/senvelopes" component={SEnvelopes}/>
+                <Route path="/spackages" component={SPackages}/>
+                <Route path="/shygienic" component={SHygienic}/>
+                <Route path="/cart" component={SCart}/>
+                <Route component={Notfound}/>
+            </Switch>
+          </div>
+        </TotalContext.Provider>
+        </CartContext.Provider>
             <div className="footer">
               <div className="contactbox">
                 <h3>DANE KONTAKTOWE</h3>
@@ -83,5 +112,61 @@ function App() {
   );
 
 }
+
+/*
+<div className="Banner">
+                <div className="Navbar">
+                    <ul>
+                        <li>
+                            <NavLink exact to="/">Strona główna</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/about">Firma</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/service">Usługi</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/orders">Zamówienia</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/contact">Kontakt</NavLink>
+                        </li>
+                    </ul>
+                </div>
+                <NavLink exact to="/">
+                    <img alt="PS Logo" className="Logo" src={logo0}></img>
+                </NavLink>
+                <div className="SearchBar">
+                    <input placeholder="szukaj"></input>
+                    <button type="submit"><img className="glassicon" src={mglass} alt="mg"/></button>
+                </div>
+                <div className="UserZone">
+                    <button className="LogBtn">ZALOGUJ</button>
+                    <NavLink to="/cart">
+                        <CartBtn total={parseFloat{total}.toFixed(2)}/>
+                    </NavLink>
+                </div>
+                <div className="ArtNav">
+                    <ul>
+                        <li>
+                            <NavLink to="/soffice">Art. biurowe</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/spaper">Papier</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/senvelopes">Koperty</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/shygienic">Art. higieniczne</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+*/
 
 export default App;

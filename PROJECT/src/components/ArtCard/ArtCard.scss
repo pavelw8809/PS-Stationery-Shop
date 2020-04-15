@@ -7,11 +7,15 @@
 
 @import "../../containers/Main.scss";
 
+.MainProductBox {
+    display: grid;
+    justify-content: center;
+}
+
 .ProdFlexbox {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    max-width: 1200px;
 }
 
 .artCard {
@@ -21,11 +25,13 @@
     border: solid 1px $color0;
     border-radius: 5px;    // zmienna radius
     box-shadow: 3px 3px 10px $color4;
+    display: flex;
+    flex-flow: column;
 }
 
 .artCard:hover {
-    transform: scale(1.08, 1.08); // zmienna cardHover
-    transition-duration: 1s; // zmienna cardHoverTime
+    transform: scale(1.04); // zmienna cardHover
+    transition-duration: 0.5s; // zmienna cardHoverTime
 }
 
 .ProdImgContainer {
@@ -47,6 +53,7 @@
 .ProdInfo {
     background-color: $color0;
     color: $color2;
+    flex: 1 1 auto;
 }
 
 .ProdInfo h4, .ProdInfo p {
@@ -70,7 +77,7 @@
     font-weight: bold;
 }
 
-.ProdState button {
+.qBtn {
     border: solid 1px $color1;
     background-color: transparent;
     color: $color1;
@@ -79,20 +86,34 @@
     height: 20px;
 }
 
-.ProdState button:hover {
+.qBtn:hover {
     background-color: $color2;
     color: $color3;
 }
 
-.ProdState input {
+.qInput {
     color: $color1;
     background-color: transparent;
     border: none;
     width: 30px;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .ToCartBtn {
-    width: 100px;
-    color: red;
+    background-color: $color1;
+    border: none;
+    height: 30px;
+    width: 100%;
+    border-bottom-left-radius: 4px; // zmienna radius - card border
+    border-bottom-right-radius: 4px; // zmienna radius - card border
+}
+
+.ToCartBtn:hover {
+    background-color: $color2;
+}
+
+.carticonBtn {
+    height: 15px;
+    margin-right: 4px;  
 }

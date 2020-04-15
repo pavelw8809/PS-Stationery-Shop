@@ -1,0 +1,81 @@
+@import "../../containers/Main.scss";
+@import "../ArtCard/ArtCard.scss";
+
+.CartItem {
+    border: solid 1px $color3; 
+    background-color: $color0;
+    color: $color2;
+    border-radius: 5px;
+    display: flex;
+    align-self: stretch;
+    align-items: stretch;
+    margin: 10px;
+} 
+
+.CartItemContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: stretch;
+    align-content: center;
+}
+
+.CartItemImg {
+    width: 100px;
+    border-radius: 4px;     // zmienna radius
+    height: 60px;
+}
+
+.CartItemName {
+    font-weight: 100;
+    min-width: 600px;
+}
+
+.CartItemPrice {
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.CartProdPrice {
+    color: $color1;
+    width: 50px;
+}
+
+.CartItemPanel {
+    display: flex;
+    margin-left: 15px;
+}
+
+.CartqInput {
+    color: $color1;
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    text-align: center;
+}
+
+.CartItemTotal {
+    font-size: 1.2em;
+    width: 60px;
+}
+
+.CartRemBtn {
+    border: none;
+    color: $color1;
+    background-color: $color3;
+    margin-left: 10px;
+}
+
+.CartRemBtn:hover {
+    color: $color2;
+}
+
+.RemBtn {
+    color: $color1;
+    vertical-align: middle;
+}
+
+.RemBtn:hover {
+    color: $color2;
+}
+
