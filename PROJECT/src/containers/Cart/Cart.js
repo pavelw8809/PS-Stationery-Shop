@@ -13,7 +13,7 @@
     Dodatkowe info:     <Navlink> - list przekierowujący do odpowiedniego kontenera w routingu - routing w pliku głównym App.js
 */
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartContext, TotalContext } from '../App';
 import CartItem from '../../components/CartItem/CartItem';
 import './Cart.scss';
@@ -23,12 +23,29 @@ const SCart = () => {
     const [initCart, Cart] = useContext(CartContext);
     const [initTotal, Total] = useContext(TotalContext);
 
-    const total = initCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
+    const removeItem = (index) => {
+        console.log(index);
+        let newCart = initCart.slice();
+        newCart.splice(index, 1);
+        Cart(newCart);
+        const total = newCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
+        Total({total});
+    }
+
+    const sendOrder = (orderdata) => {
+        console.log(orderdata);
+    }
 
     let ShowCartItems;
+    let OrderBtn;
 
     if (initCart.length === 0) {
-        ShowCartItems = "Twój koszyk jest pusty"
+        ShowCartItems = (
+            <div className="CartEmpty">
+                <p>Twój koszyk jest pusty</p>
+            </div>
+        )
+        OrderBtn = ("");
     } else {
         ShowCartItems = (
             <div className="CartItems">
@@ -42,16 +59,22 @@ const SCart = () => {
                             quantity={r.quantity}
                             prodtotal={r.prodtotal}
                             imagename={r.imagename}
-                            key={index}
+                            key={r.id}
+                            removeitem={removeItem.bind(this, index)}
                         />
                     )
                 })}
             </div>
         )
+        OrderBtn = (
+            <div className="CartSubmitContainer">
+                <button className="CartSubmit" onClick={sendOrder.bind(this, initCart)}>ZŁÓŻ ZAMÓWIENIE</button>
+            </div>
+        )
     }
 
     return(
-        <div className="Card">
+        <div className="Cart">
             <h1>CART</h1>
             <div className="CartContainer">
                 <div className="CartList">
@@ -61,8 +84,11 @@ const SCart = () => {
                 <div className="CartSummary">
                     <h4>PODSUMOWANIE</h4>
                     <div className="CartSummaryInfo">
-                        <p className="CartSummaryLabel">SUMA</p>
-                        <div>{total}</div>
+                        <div className="CartSummaryContainer">
+                            <p className="CartSummaryLabel">SUMA</p>
+                            <div className="CartSummaryTotal">{parseFloat(initTotal.total).toFixed(2)}</div>
+                        </div>
+                        {OrderBtn}
                     </div>
                 </div>
             </div>

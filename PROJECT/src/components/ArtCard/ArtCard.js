@@ -74,7 +74,7 @@ const Artcard = (props) =>{
                 prodid: prodid,
                 name: name, 
                 desc: desc,
-                price: parseInt(price),
+                price: parseFloat(price),
                 quantity: q, 
                 prodtotal: q*price,
                 imagename: imagename
@@ -91,9 +91,6 @@ const Artcard = (props) =>{
             quantity: 0
         })
     }
-    console.log(initCart);
-
-
 
     return(
         <div className="artCard">

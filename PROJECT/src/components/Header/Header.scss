@@ -18,6 +18,7 @@
                             'artnav artnav artnav';
     font-family: $font0;
     font-size: 1.0em;
+
 }
 
 // TOP BANNER - ROW 1
@@ -148,6 +149,7 @@
 .ArtNav {
     grid-area: artnav;
     justify-self: center;
+    top: 0;
 }
 
 // Top banner / Shop Navigation / list

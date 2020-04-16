@@ -10,7 +10,7 @@
     Dodatkowe info:     Główna strona wyświetlająca cały kontekt aplikacji oraz funkcję odpowiedzialne za zmianę stanu.
 */
 
-import React, {useState} from 'react';
+import React, {useState, withStore, useEffect} from 'react';
 import './App.scss';                                                          // import arkusza dla głównego komponentu
 import './Main.scss';                                                         // import arkusza ze zmiennymi głównymi SASS
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    // import komponentów routingu
@@ -34,10 +34,15 @@ import SCart from './Cart/Cart'                                               //
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
 
+const initialState = {count: 10};
+
 function App() {
+
+  const contextType = CartContext;
 
   // Wartości początkowe aplikacji
   const [initCart, Cart] = useState([
+    /*
     {id: 0, 
     prodid: "500",
     name: "Produkt testowy", 
@@ -46,7 +51,7 @@ function App() {
     quantity: 5,
     prodtotal: 16.29*5,
     imagename: 'CC3'},
-    {id: 0, 
+    {id: 1, 
     prodid: "501",
     name: "Produkt testowy 2", 
     desc: "buraczkowy",
@@ -54,12 +59,18 @@ function App() {
     quantity: 3,
     prodtotal: 16.29*3,
     imagename: 'CC3'}
+    */
   ]
   )
+
+  useEffect(() => {
+    
+  }, []);
 
   const total = initCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
 
   const [initTotal, Total] = useState({total});
+  console.log(initCart);
 
   return (
     <div className="App">

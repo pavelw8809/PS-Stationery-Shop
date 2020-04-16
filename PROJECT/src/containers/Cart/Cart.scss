@@ -7,25 +7,56 @@
 
 @import '../Main.scss';
 
-.Cart{
+.CartEmpty{
+    border: solid 1px $color0;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .CartContainer{
     display: grid;
+    grid-template-columns: minmax(300px, 1200px);
     justify-content: center;
 }
 
 .CartSummaryInfo {
     border: solid 1px $color3;
-    padding: 15px;
+    padding: 10px 15px;
     display: flex;
-    align-items: center;
+    flex-flow: column;
     margin: 10px;
     border-radius: 5px;
-    font-size: 1.2em;
+    font-size: 1.5em;
+    font-weight: bold;
     background-color: $color2;
+}
+
+.CartSummaryContainer {
+    display: flex;
+    align-items: center;
 }
 
 .CartSummaryLabel {
     flex: 1;
+    padding: 0px;
+}
+
+.CartSubmitContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.CartSubmit {
+    width: 250px;
+    height: 40px;
+    background-color: green;
+    color: $color1;
+    border: solid 1px $color3;
+    border-radius: 5px;
+    font-size: 1.0em;
+}
+
+.CartSubmit:hover{
+    background-color: darkgreen;
 }
