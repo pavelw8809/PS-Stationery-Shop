@@ -8,12 +8,48 @@
     Dodatkowe info:     Query + zwrócenie wyniku w kartach
 */
 
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import ArtCard from '../../components/ArtCard/ArtCard';
+import { CartContext } from '../App';
+import axios from 'axios';
+import "../../components/ArtCard/ArtCard.scss"
 
-const shoppkg = () => {
+const Shoppackages = () => {
+    const [Products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:80/WSB_SELCOR/SERVER/SPackages.php`)
+        .then(res => {
+            setProducts(res.data);
+        })
+    }, [])
+
+    let showCards;
+
+    showCards = (
+        <div className="ProdFlexbox">
+            {Products.map((r, index) => {
+                return(
+                    <ArtCard 
+                        imagename={r.p_code}
+                        prodid = {r.p_id}
+                        name = {r.p_name}
+                        shortdesc = {r.p_shortdescription}
+                        description = {r.p_description}
+                        price={r.p_price}
+                        key={index}
+                    />
+                )
+            })}
+        </div>
+    )
+
     return(
-        <h1>SHOP - PACKAGE ARTICLES</h1>
+        <div className="MainProductBox">
+            <h1>SHOP - PACKAGES</h1>
+            {showCards}
+        </div>
     )
 }
 
-export default shoppkg;
+export default Shoppackages;
