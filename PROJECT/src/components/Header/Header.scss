@@ -25,7 +25,7 @@
 
 .NavContainer {
     display: grid;
-    grid-template-columns: 390px 1fr 250px;
+    grid-template-columns: minmax(60px 390px) 1fr 1fr;
     grid-template-areas: 
                             'logo sbar uinfo'
                             'artnav artnav artnav';
@@ -79,12 +79,14 @@
 .Logo {
     width: auto;
     max-width: 390px;
+    max-height: 60px;
     margin: 0px;
     padding-left: 10px;
     grid-area: logo; // grid area name
-    position: sticky;
-    top: 0;
-    z-index: 1;
+}
+
+.LogoSmall {
+    display: none;
 }
 
 // Top banner / Searching Bar
@@ -162,7 +164,10 @@
 .ArtNav {
     grid-area: artnav;
     justify-self: center;
-    top: 0;
+}
+
+.ArtNavSmall {
+    display: none;
 }
 
 // Top banner / Shop Navigation / list
@@ -206,6 +211,7 @@
     top: 75px;
     opacity: 1;
     transition-duration: 0.5s;
+    z-index: 1;
 }
 
 .hidden {
@@ -213,3 +219,77 @@
     transition-duration: 0.5s;
 }
 
+@media only screen and (max-width: 800px) {
+    .SearchBar {
+        //visibility: hidden;
+    }
+
+    .Logo {
+        display: none;
+    }
+
+    .LogoSmall {
+        display: block;
+        max-height: 60px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .ArtNavSmall {
+        display: inline-block;
+        text-align: center;
+        background-color: $color0;
+        color: $color1;
+    }    
+
+    .ArtNavDropDown {
+        height: 0px;
+        z-index: 1;
+        overflow-y: hidden;
+        background-color: $color0;
+        transition-duration: 0.5s;
+    }
+
+    .unroll {
+        height: 120px;
+        transition-duration: 0.5s;
+    }
+
+    .ArtNavDropDown ul {
+        margin: 0;
+        padding: 5px 0;
+        list-style-type: none;
+    }
+
+    .ArtNavDropDown ul li a {
+        color: $color2;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        padding: 2px 0;
+    }
+
+    .ArtNavDropDown ul li a:hover {
+        background-color: $color2;
+        color: $color3;
+    }
+
+    .Navbar {
+        display: none;
+    }
+
+    .ArtNav {
+        display: none;
+    }
+
+    .DropdownArrow {
+        color: $color2;
+        font-size: 20px;
+        transition-duration: 0.5s;
+    }
+
+    .dunroll {
+        transform: rotate(180deg);
+        transition-duration: 0.5s;
+    }
+}

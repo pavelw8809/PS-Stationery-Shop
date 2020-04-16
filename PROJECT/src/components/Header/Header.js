@@ -17,8 +17,10 @@ import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';                                                         // Import komponentu Navlick - element react-router-dom
 import { TotalContext } from '../../containers/App';
 import logo0 from '../../images/icons/pands.png';                                                   // Logo firmy duże
+import logo1 from '../../images/icons/pands_small.png';
 import mglass from '../../images/icons/mg.png';                                                     // Ikona lupy
 import CartBtn from '../CartBtn/CartBtn';                                                           // Import komponentu przycisku koszyka
+import { FaChevronDown } from "react-icons/fa";
 import Login from '../Login/Login';
 import './Header.scss';
 
@@ -26,13 +28,13 @@ const Header = () => {
     
     const [initTotal, Total] = useContext(TotalContext);
     const [LogShow, setLogShow] = useState(false);
+    const [Dropdown, setDropdown] = useState(false);
 
     let LoginW;
 
     const loginWindow = () => {
         if (!LogShow) {
             setLogShow(true);
-            //console.log(LoginWClass);
         } else {
             setLogShow(false);
 
@@ -51,6 +53,25 @@ const Header = () => {
                 <Login/>
             </div>
         )
+    }
+
+    const dropDown = () => {
+        if (!Dropdown) {
+            setDropdown(true);
+        } else {
+            setDropdown(false);
+        }
+    }
+
+    let DropdownClass = "ArtNavDropDown";
+    let DropdownArrow = "DropdownArrow";
+
+    if (Dropdown) {
+        DropdownClass = "ArtNavDropDown unroll";
+        DropdownArrow = "DropdownArrow dunroll";
+    } else {
+        DropdownClass = "ArtNavDropDown";
+        DropdownArrow = "DropdownArrow";
     }
 
     return(
@@ -78,6 +99,7 @@ const Header = () => {
             <div className="NavContainer">
                 <NavLink exact to="/">
                     <img alt="PS Logo" className="Logo" src={logo0}></img>
+                    <img alt="PS Logo" className="LogoSmall" src={logo1}></img>
                 </NavLink>
                 <div className="SearchBar">
                     <input placeholder="szukaj"></input>
@@ -109,17 +131,30 @@ const Header = () => {
                     </ul>
                 </div>
             </div>
+            <div className="ArtNavSmall" onClick={dropDown}>
+                <FaChevronDown className={DropdownArrow}/>
+                <div className={DropdownClass}>
+                    <ul>
+                        <li>
+                            <NavLink to="/soffice">Art. biurowe</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/spaper">Papier</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/senvelopes">Koperty</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/shygienic">Art. higieniczne</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 }
-
-/*
-                    <li>
-                        <NavLink to="/offer">Oferta</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/catalog">Katalog</NavLink>
-                    </li>
-*/
 
 export default Header;
