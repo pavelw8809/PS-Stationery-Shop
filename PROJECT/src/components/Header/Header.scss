@@ -11,14 +11,24 @@
 .Banner {
     background-color: $color0;
     display: grid;
-    grid-template-columns: 390px 1fr 250px;
+    //grid-template-columns: 390px 1fr 250px;
     grid-template-areas: 
-                            'navbar navbar navbar'
-                            'logo sbar uinfo'
-                            'artnav artnav artnav';
+                            'navbar'
+                            'navc';
+                            //'navbar navbar navbar'
+                            //'navc navc navc';
+                            //'logo sbar uinfo'
+                            //'artnav artnav artnav';
     font-family: $font0;
     font-size: 1.0em;
+}
 
+.NavContainer {
+    display: grid;
+    grid-template-columns: 390px 1fr 250px;
+    grid-template-areas: 
+                            'logo sbar uinfo'
+                            'artnav artnav artnav';
 }
 
 // TOP BANNER - ROW 1
@@ -72,6 +82,9 @@
     margin: 0px;
     padding-left: 10px;
     grid-area: logo; // grid area name
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 // Top banner / Searching Bar
@@ -131,7 +144,7 @@
     padding: 5px 7px;
     border: 1px solid $color1;
     border-radius: 3px;
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin-right: 10px;
     align-items: center;
 }
@@ -185,5 +198,18 @@
 .ArtNav ul li a:hover {
     color: $color3;
     background-color: $color2;
+}
+
+.LoginW {
+    position: absolute;
+    right: 10px;
+    top: 75px;
+    opacity: 1;
+    transition-duration: 0.5s;
+}
+
+.hidden {
+    opacity: 0;
+    transition-duration: 0.5s;
 }
 

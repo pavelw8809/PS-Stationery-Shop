@@ -13,20 +13,49 @@
     Dodatkowe info:     <Navlink> - list przekierowujący do odpowiedniego kontenera w routingu - routing w pliku głównym App.js
 */
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';                                                         // Import komponentu Navlick - element react-router-dom
 import { TotalContext } from '../../containers/App';
 import logo0 from '../../images/icons/pands.png';                                                   // Logo firmy duże
 import mglass from '../../images/icons/mg.png';                                                     // Ikona lupy
 import CartBtn from '../CartBtn/CartBtn';                                                           // Import komponentu przycisku koszyka
+import Login from '../Login/Login';
 import './Header.scss';
 
 const Header = () => {   
     
     const [initTotal, Total] = useContext(TotalContext);
+    const [LogShow, setLogShow] = useState(false);
+
+    let LoginW;
+
+    const loginWindow = () => {
+        if (!LogShow) {
+            setLogShow(true);
+            //console.log(LoginWClass);
+        } else {
+            setLogShow(false);
+
+        }
+    }
+
+    if (LogShow) {
+        LoginW = (
+            <div className="LoginW">
+                <Login/>
+            </div>
+        )
+    } else {
+        LoginW = (
+            <div className="LoginW hidden">
+                <Login/>
+            </div>
+        )
+    }
 
     return(
         <div className="Banner">
+            {LoginW}
             <div className="Navbar">
                 <ul>
                     <li>
@@ -46,37 +75,39 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
-            <NavLink exact to="/">
-                <img alt="PS Logo" className="Logo" src={logo0}></img>
-            </NavLink>
-            <div className="SearchBar">
-                <input placeholder="szukaj"></input>
-                <button type="submit"><img className="glassicon" src={mglass} alt="mg"/></button>
-            </div>
-            <div className="UserZone">
-                <button className="LogBtn">ZALOGUJ</button>
-                <NavLink to="/cart">
-                    <CartBtn total={parseFloat(initTotal.total).toFixed(2)}/>
+            <div className="NavContainer">
+                <NavLink exact to="/">
+                    <img alt="PS Logo" className="Logo" src={logo0}></img>
                 </NavLink>
-            </div>
-            <div className="ArtNav">
-                <ul>
-                    <li>
-                        <NavLink to="/soffice">Art. biurowe</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/spaper">Papier</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/senvelopes">Koperty</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/shygienic">Art. higieniczne</NavLink>
-                    </li>
-                </ul>
+                <div className="SearchBar">
+                    <input placeholder="szukaj"></input>
+                    <button type="submit"><img className="glassicon" src={mglass} alt="mg"/></button>
+                </div>
+                <div className="UserZone">
+                    <button className="LogBtn" onClick={loginWindow}>ZALOGUJ</button>
+                    <NavLink to="/cart">
+                        <CartBtn total={parseFloat(initTotal.total).toFixed(2)}/>
+                    </NavLink>
+                </div>
+                <div className="ArtNav">
+                    <ul>
+                        <li>
+                            <NavLink to="/soffice">Art. biurowe</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/spaper">Papier</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/senvelopes">Koperty</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/shygienic">Art. higieniczne</NavLink>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );

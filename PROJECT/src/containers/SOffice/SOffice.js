@@ -23,6 +23,7 @@ class SOffice extends Component {
     componentDidMount() {
         axios.get(`http://localhost:80/WSB_SELCOR/SERVER/SOffice.php`)
             .then(res => {
+                    //res.header('Access-Control-Allow-Origin', "*");
                     this.setState({products: res.data});
                     console.log(res.data);
                 }

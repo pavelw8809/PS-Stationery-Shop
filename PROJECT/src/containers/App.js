@@ -29,16 +29,13 @@ import SPaper from './SPaper/SPaper';                                         //
 import SEnvelopes from './SEnvelopes/SEnvelopes';                             // Sklep - Koperty
 import SPackages from './SPackages/SPackages';                                // Sklep - Materiały opakowaniowe
 import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
-import SCart from './Cart/Cart'                                               // Koszyk
+import SCart from './Cart/Cart';                                              // Koszyk
+import Registration from './Registration/Registration';                       // Formularz rejestracyjny
 
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
 
-const initialState = {count: 10};
-
 function App() {
-
-  const contextType = CartContext;
 
   // Wartości początkowe aplikacji
   const [initCart, Cart] = useState([
@@ -62,10 +59,6 @@ function App() {
     */
   ]
   )
-
-  useEffect(() => {
-    
-  }, []);
 
   const total = initCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
 
@@ -92,6 +85,7 @@ function App() {
                 <Route path="/spackages" component={SPackages}/>
                 <Route path="/shygienic" component={SHygienic}/>
                 <Route path="/cart" component={SCart}/>
+                <Route path="/regform" component={Registration}/>
                 <Route component={Notfound}/>
             </Switch>
           </div>
@@ -123,61 +117,5 @@ function App() {
   );
 
 }
-
-/*
-<div className="Banner">
-                <div className="Navbar">
-                    <ul>
-                        <li>
-                            <NavLink exact to="/">Strona główna</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/about">Firma</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/service">Usługi</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/orders">Zamówienia</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/contact">Kontakt</NavLink>
-                        </li>
-                    </ul>
-                </div>
-                <NavLink exact to="/">
-                    <img alt="PS Logo" className="Logo" src={logo0}></img>
-                </NavLink>
-                <div className="SearchBar">
-                    <input placeholder="szukaj"></input>
-                    <button type="submit"><img className="glassicon" src={mglass} alt="mg"/></button>
-                </div>
-                <div className="UserZone">
-                    <button className="LogBtn">ZALOGUJ</button>
-                    <NavLink to="/cart">
-                        <CartBtn total={parseFloat{total}.toFixed(2)}/>
-                    </NavLink>
-                </div>
-                <div className="ArtNav">
-                    <ul>
-                        <li>
-                            <NavLink to="/soffice">Art. biurowe</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/spaper">Papier</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/senvelopes">Koperty</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/shygienic">Art. higieniczne</NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-*/
 
 export default App;

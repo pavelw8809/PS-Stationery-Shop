@@ -1,0 +1,59 @@
+@import "../../containers/Main.scss";
+
+.Login {
+    border: solid 1px $color1;
+    border-radius: 5px;
+    background-color: $color0;
+    display: grid;
+    padding: 10px;
+    font-size: 1.0em; 
+    box-shadow: 3px 3px 10px $color3;   
+}
+
+.Login label {
+    color: $color2
+}
+    
+.Login input {
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border: solid 1px $color3;
+    background-color: $color1;
+    padding: 2px 5px;
+}
+
+.RegBtnContainer {
+    display: flex;
+    text-decoration: none;
+    justify-self: center;
+}
+
+.LoginBtn, .RegBtn {
+    justify-self: center;
+    border-radius: 3px;
+    padding: 3px 10px;
+    border: solid 1px $color3;
+    color: $color1;
+    font-size: 0.9em;
+}
+
+.LoginBtn {
+    background-color: $color5;
+}
+
+.LoginBtn:hover {
+    background-color: $color6;
+}
+
+.RegBtn {
+    background-color: $color7;
+}
+
+.RegBtn:hover {
+    background-color: $color8;
+}
+
+.Login p {
+    padding: 10px 0 5px 0;
+    color: $color2;
+}
