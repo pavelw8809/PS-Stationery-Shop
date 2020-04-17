@@ -12,7 +12,7 @@
         die("Connection error");
     }
 
-    $sqlquery = "SELECT * FROM products WHERE p_c_id = 1";
+    $sqlquery = "SELECT * FROM products WHERE p_c_id = 4";
     $result = mysqli_query($con, $sqlquery);
     while ($r = mysqli_fetch_assoc($result)) {
         $output[] = $r;
