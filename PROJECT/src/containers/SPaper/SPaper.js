@@ -1,7 +1,7 @@
 /*
-    Plik:               SPaper.js
-    Funkcja:            SKLEP - PAPIER
-    Opis:               Strona sklepu wyświetlająca artykuły z kategorii papier.
+    Plik:               SPackages.js
+    Funkcja:            SKLEP - MATERIAŁY OPAKOWANIOWE
+    Opis:               Strona sklepu wyświetlająca artykuły z kategorii met. opakowaniowe.
     Elementy:           Product Query - ComponentDidMount(), 
                         Karta Produktu dla każdego z elementów (ArdCard)
     Przykład użycia:    N/A
@@ -14,7 +14,7 @@ import { CartContext } from '../App';
 import axios from 'axios';
 import "../../components/ArtCard/ArtCard.scss"
 
-const Shoppaper = () => {
+const SPaper = () => {
     const [Products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -46,10 +46,10 @@ const Shoppaper = () => {
 
     return(
         <div className="MainProductBox">
-            <h1>SHOP - PAPER ARTICLES</h1>
+            <h1>SHOP - PACKAGES</h1>
             {showCards}
         </div>
     )
 }
 
-export default Shoppaper;
+export default SPaper;

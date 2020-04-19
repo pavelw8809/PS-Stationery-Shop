@@ -17,6 +17,8 @@ const CartItem = (props) => {
         backgroundImage: "url(" + Image + ")"
     }
 
+
+
     const increaseQuantity = (index) => {
         let newCart = [...initCart];
         newCart[index].quantity = newCart[index].quantity+1;
@@ -34,7 +36,7 @@ const CartItem = (props) => {
     }
 
     const decreaseQuantity = (index) => {
-        if (counter.quantity > 0) {
+        if (counter.quantity > 1) {
             let newCart = [...initCart];
             newCart[index].quantity = newCart[index].quantity-1;
             newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) - parseFloat(newCart[index].price);
@@ -74,5 +76,3 @@ const CartItem = (props) => {
 }
 
 export default CartItem;
-
-//<img className="CartItemImg" src={Image} alt="prodimg"/>

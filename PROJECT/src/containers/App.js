@@ -10,7 +10,7 @@
     Dodatkowe info:     Główna strona wyświetlająca cały kontekt aplikacji oraz funkcję odpowiedzialne za zmianę stanu.
 */
 
-import React, {useState, withStore, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.scss';                                                          // import arkusza dla głównego komponentu
 import './Main.scss';                                                         // import arkusza ze zmiennymi głównymi SASS
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    // import komponentów routingu
@@ -24,13 +24,14 @@ import Offer from './Offer/Offer';                                            //
 import Orders from './Orders/Orders';                                         // Zamówienia
 import ShopService from './ShopService/Services';                             // Usługi
 import Notfound from './Notfound/Notfound';                                   // 404 - Not found
+import SStationary from './SStationary/SStationary';                          // Sklep - Art. piśmiennicze
 import SOffice from './SOffice/SOffice';                                      // Sklep - Art. biurowe
-import SPaper from './SPaper/SPaper';                                         // Sklep - Papier
 import SEnvelopes from './SEnvelopes/SEnvelopes';                             // Sklep - Koperty
-import SPackages from './SPackages/SPackages';                                // Sklep - Materiały opakowaniowe
+import SPaper from './SPaper/SPaper';                                         // Sklep - Art. papiernicze
 import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
 import SCart from './Cart/Cart';                                              // Koszyk
 import Registration from './Registration/Registration';                       // Formularz rejestracyjny
+import ArtDetails from '../components/ArtDetails/ArtDetails';                 // Karta produktu - szczegóły
 
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
@@ -79,13 +80,14 @@ function App() {
                 <Route path="/offer" component={Offer}/>
                 <Route path="/orders" component={Orders}/>
                 <Route path="/service" component={ShopService}/>
+                <Route path="/sstationary" component={SStationary}/>
                 <Route path="/soffice" component={SOffice}/>
-                <Route path="/spaper" component={SPaper}/>
                 <Route path="/senvelopes" component={SEnvelopes}/>
-                <Route path="/spackages" component={SPackages}/>
+                <Route path="/spaper" component={SPaper}/>
                 <Route path="/shygienic" component={SHygienic}/>
                 <Route path="/cart" component={SCart}/>
                 <Route path="/regform" component={Registration}/>
+                <Route path="/artdetails" component={ArtDetails}/>
                 <Route component={Notfound}/>
             </Switch>
           </div>

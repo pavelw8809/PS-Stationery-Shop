@@ -1,0 +1,153 @@
+@import "../../containers/Main.scss";
+
+.ArtDetails {
+    display: flex;
+    justify-content: center;
+}
+
+.ArtDContainer {
+    display: grid;
+    grid-template-columns: 400px minmax(100px, 800px);
+    grid-template-areas:
+                            //'arttitle arttitle'
+                            'artimg artinfo'
+                            'orderbtn orderbtn';
+    //text-align: center;
+    border: solid 2px $color0;
+    //max-width: 1200px;
+    border-radius: 5px;                                 // zmienna radius
+    box-shadow: 3px 3px 10px $color4;
+    margin: 10px;
+    background-color: white;
+    align-items: center;
+}
+
+.ArtImgContainer {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: white;
+    height: 300px;
+    width: 400px;
+    //border-radius: 5px;    // zmienna radius
+    grid-area: artimg;
+    border-top-left-radius: 4px; // zmienna radius - card border
+}
+
+.ArtDCard {
+    grid-area: artinfo;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ArtDMain {
+    grid-area: arttitle;
+    background-color: $color0;
+    color: $color2;
+    padding: 10px;
+    text-align: center;
+    //flex: 1 0 auto;
+}
+
+.ArtDTitle {
+    font-size: 1.2em;
+    font-weight: 100;
+    padding: 0;
+}
+
+.ArtDShortDesc {
+    padding: 0;
+    color: $color1;
+}
+
+.ArtDDesc {
+    flex: 1 0 auto;
+    background-color: $color0;
+}
+
+.ArtDDesc p {
+    color: $color1;
+    border-top: solid 1px $color1;
+}
+
+.ArtDPrice {
+    padding: 10px;
+    background-color: $color3;
+    color: $color2;
+}
+
+.NetPrice {
+    padding: 0;
+    text-align: right;
+}
+
+.GrossPriceContainer {
+    border-top: solid 1px $color2;
+    padding-top: 5px;
+}
+
+.GrossPrice {
+    font-size: 1.5em;
+    padding: 0;
+    text-align: right;
+    font-weight: bold;
+    //color: $color3;
+}
+
+.ArtDOrderBar {
+    display: flex;
+    //background-color: $color3;
+}
+
+.ArtDOrderPanel {
+    //background-color: $color1;
+    display: flex;
+    align-content: center;
+}
+
+.ArtDqBtn {
+    background-color: transparent;
+    border: solid 2px $color1;
+    border-radius: 17px;
+    height: 35px;
+    width: 35px;
+    margin: 5px;
+    color: $color1;
+    font-size: 1.5em;
+}
+
+.ArtDqBtn:hover {
+    background-color: $color2;
+    color: $color3
+}
+
+.ArtDqInput {
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    width: 30px;
+    color: $color1;
+    font-size: 1.0em;
+}
+
+.ArtDOrderBtn:hover {
+    background-color: $color2;
+}
+
+.ArtDOrderBtn {
+    grid-area: orderbtn;
+    background-color: $color1;
+    flex: 1 1 auto;
+    border: none;
+    font-size: 1.4em;
+    padding: 5px;
+    border-bottom-right-radius: 4px; // zmienna radius - card border
+    border-bottom-left-radius: 4px; // zmienna radius - card border
+}
+
+.carticonBtn {
+    height: 20px;
+    padding-right: 5px;
+    vertical-align: middle;
+}

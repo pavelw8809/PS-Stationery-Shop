@@ -16,6 +16,7 @@ import React, { useState, useContext } from 'react';
 import App, { CartContext, TotalContext } from '../../containers/App';
 import carticon from '../../images/icons/black_cart.png';
 import "./ArtCard.scss";                                                            // Import arkusza stylu dla dla komponentu
+import { NavLink } from 'react-router-dom';
 
 const Artcard = (props) =>{
 
@@ -52,15 +53,22 @@ const Artcard = (props) =>{
     }
 
     const handleQuantity = (event) => {
+        let regexp = /^[0-9\b]+$/
+        let input = event.target.value
+        if (regexp.test(input)) {
         setCounter({
-            quantity: parseInt(event.target.value)
+            quantity: parseInt(input)
         })
+        } else {
+            document.querySelector(".qInput").value = 0;
+        }
     }
 
     const addProd = (prodid, name, desc, q, price, imagename) => {
         let check = 0;
         let idToChange;
         let orSum = parseFloat((q*price));
+
         initCart.map((r, index) => {
             if (r.prodid === prodid) {
                 check = 1
@@ -68,38 +76,51 @@ const Artcard = (props) =>{
             }
         })
 
-        if (check === 0) {
-            Cart(prevCart => ([...initCart, {
-                id: initCart.length, 
-                prodid: prodid,
-                name: name, 
-                desc: desc,
-                price: parseFloat(price),
-                quantity: q, 
-                prodtotal: q*price,
-                imagename: imagename
-            }]))
-        } else {
-            let newCart = [...initCart];
-            newCart[idToChange].quantity = newCart[idToChange].quantity+q;
-            newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
+        if (q > 0) {
+            if (check === 0) {
+                Cart(prevCart => ([...initCart, {
+                    id: initCart.length, 
+                    prodid: prodid,
+                    name: name, 
+                    desc: desc,
+                    price: parseFloat(price),
+                    quantity: q, 
+                    prodtotal: q*price,
+                    imagename: imagename
+                }]))
+            } else {
+                let newCart = [...initCart];
+                newCart[idToChange].quantity = newCart[idToChange].quantity+q;
+                newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
+            }
+            Total({
+                total: parseFloat(initTotal.total+orSum)
+            })
+            setCounter({
+                quantity: 0
+            })
         }
-        Total({
-            total: parseFloat(initTotal.total+orSum)
-        })
-        setCounter({
-            quantity: 0
-        })
     }
 
     return(
         <div className="artCard">
-            <div className="ProdImgContainer" style={ProdImgStyle}>
+            <NavLink className="LinkToArtDetails" to={{
+                pathname: "/artdetails",
+                artProps: {
+                    name: props.name,
+                    shortdesc: props.shortdesc,
+                    description: props.description,
+                    price: props.price,
+                    imagename: props.imagename,
+                    prodid: props.prodid
+                }
+                }}>
+                <div className="ProdImgContainer" style={ProdImgStyle}></div>
+                <div className="ProdInfo">
+                    <h4>{props.name}</h4>
+                    <p>{props.shortdesc}</p>
             </div>
-            <div className="ProdInfo">
-                <h4>{props.name}</h4>
-                <p>{props.shortdesc}</p>
-            </div>
+            </NavLink>
             <div className="ProdState">
                 <div className="PriceOrder">
                     <p>{props.price}</p>

@@ -14,7 +14,8 @@
 
 h1, h4, p {
     margin: 0;
-    padding: 10px
+    padding: 10px;
+    //letter-spacing: 1px;
 }
 
 // APP PART 1 - HEADER
@@ -27,6 +28,7 @@ h1, h4, p {
 .Bodystyle {
     background-color: $color1;  // Background of the body components
     min-height: 800px;          // Min. height of the body components
+    padding-top: 10px;
 }
 
 // BODY / Displaying product cards in shop containers

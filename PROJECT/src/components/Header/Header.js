@@ -114,19 +114,16 @@ const Header = () => {
                 <div className="ArtNav">
                     <ul>
                         <li>
-                            <NavLink to="/soffice">Art. biurowe</NavLink>
+                            <NavLink to="/sstationary">Art. piśmiennicze</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/spaper">Papier</NavLink>
+                            <NavLink to="/soffice">Art. biurowe</NavLink>
                         </li>
                         <li>
                             <NavLink to="/senvelopes">Koperty</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/shygienic">Art. higieniczne</NavLink>
+                            <NavLink to="/spaper">Art. papiernicze</NavLink>
                         </li>
                     </ul>
                 </div>
@@ -136,19 +133,16 @@ const Header = () => {
                 <div className={DropdownClass}>
                     <ul>
                         <li>
-                            <NavLink to="/soffice">Art. biurowe</NavLink>
+                            <NavLink to="/sstationary">Art. piśmiennicze</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/spaper">Papier</NavLink>
+                            <NavLink to="/soffice">Art. Biurowe</NavLink>
                         </li>
                         <li>
                             <NavLink to="/senvelopes">Koperty</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/spackages">Materiały opakowaniowe</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/shygienic">Art. higieniczne</NavLink>
+                            <NavLink to="/spaper">Art. papiernicze</NavLink>
                         </li>
                     </ul>
                 </div>
