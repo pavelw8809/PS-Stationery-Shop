@@ -23,8 +23,8 @@ const Artcard = (props) =>{
     const [counter, setCounter] = useState({
         quantity: 0
     })
-    const [initCart, Cart] = useContext(CartContext);
-    const [initTotal, Total] = useContext(TotalContext);
+    const [Cart, setCart] = useContext(CartContext);
+    const [Total, setTotal] = useContext(TotalContext);
 
     const Image = require('../../images/images/' + props.imagename + '.png');       // Ścieżka do zdjęcia
 
@@ -69,7 +69,7 @@ const Artcard = (props) =>{
         let idToChange;
         let orSum = parseFloat((q*price));
 
-        initCart.map((r, index) => {
+        Cart.map((r, index) => {
             if (r.prodid === prodid) {
                 check = 1
                 idToChange = parseInt(index);
@@ -78,8 +78,8 @@ const Artcard = (props) =>{
 
         if (q > 0) {
             if (check === 0) {
-                Cart(prevCart => ([...initCart, {
-                    id: initCart.length, 
+                setCart(prevCart => ([...Cart, {
+                    id: Cart.length, 
                     prodid: prodid,
                     name: name, 
                     desc: desc,
@@ -89,12 +89,12 @@ const Artcard = (props) =>{
                     imagename: imagename
                 }]))
             } else {
-                let newCart = [...initCart];
+                let newCart = [...Cart];
                 newCart[idToChange].quantity = newCart[idToChange].quantity+q;
                 newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
             }
-            Total({
-                total: parseFloat(initTotal.total+orSum)
+            setTotal({
+                total: parseFloat(Total.total+orSum)
             })
             setCounter({
                 quantity: 0

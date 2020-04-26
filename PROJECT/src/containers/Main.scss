@@ -26,9 +26,21 @@
     src: url('../fonts/Gotu-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'LoraBold';
+    src: url('../fonts/Lora-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'LoraRegular';
+    src: url('../fonts/Lora-Regular.ttf');
+}
+
 // FONTS
 
 $font0: 'BS';
+$font1: 'LoraBold';
+$font2: 'LoraRegular';
 
 * {                                                         
     font-family: $font0; // Default font for all objects

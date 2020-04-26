@@ -31,15 +31,20 @@ import SPaper from './SPaper/SPaper';                                         //
 import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
 import SCart from './Cart/Cart';                                              // Koszyk
 import Registration from './Registration/Registration';                       // Formularz rejestracyjny
-import ArtDetails from '../components/ArtDetails/ArtDetails';                 // Karta produktu - szczegóły
+import ArtDetails from '../components/ArtDetails/ArtDetails';
+import ScrollBanner from '../components/ScrollBanner/ScrollBanner';                 // Karta produktu - szczegóły
+import Footer from '../components/Footer/Footer'
 
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
+export const UserContext = React.createContext();
 
 function App() {
 
-  // Wartości początkowe aplikacji
-  const [initCart, Cart] = useState([
+// *** S T A T E S ***
+  
+  // 1. Cart state
+  const [Cart, setCart] = useState([
     /*
     {id: 0, 
     prodid: "500",
@@ -61,60 +66,53 @@ function App() {
   ]
   )
 
-  const total = initCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
+  // 2. Total price state
+  
+  const total = Cart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
+  const [Total, setTotal] = useState({total});
 
-  const [initTotal, Total] = useState({total});
-  console.log(initCart);
+  // 3. User account state
+
+  const [User, setUser] = useState({name: 'Madgalena'});
+
+  // BACKGROUND IMAGE
+
+  const backgroundImg = require('../images/images/backgroud_main.jpg');
 
   return (
     <div className="App">
+      <img className="BackgroundImg" src={backgroundImg}/>
       <Router>
-        <CartContext.Provider value={[initCart, Cart]}>
-        <TotalContext.Provider value={[initTotal, Total]}>
-          <Header />
-          <div className="Bodystyle">
-            <Switch>
-                <Route exact path="/" component={Index}/>
-                <Route path="/about" component={About}/>
-                <Route path="/contact" component={Contact}/>
-                <Route path="/offer" component={Offer}/>
-                <Route path="/orders" component={Orders}/>
-                <Route path="/service" component={ShopService}/>
-                <Route path="/sstationary" component={SStationary}/>
-                <Route path="/soffice" component={SOffice}/>
-                <Route path="/senvelopes" component={SEnvelopes}/>
-                <Route path="/spaper" component={SPaper}/>
-                <Route path="/shygienic" component={SHygienic}/>
-                <Route path="/cart" component={SCart}/>
-                <Route path="/regform" component={Registration}/>
-                <Route path="/artdetails" component={ArtDetails}/>
-                <Route component={Notfound}/>
-            </Switch>
+        <UserContext.Provider value={[User, setUser]}>
+        <CartContext.Provider value={[Cart, setCart]}>
+        <TotalContext.Provider value={[Total, setTotal]}>
+          <div className="AppContainer">
+            <Header className="Header" />
+            <div className="Bodystyle">
+              <Switch>
+                  <Route exact path="/" component={Index}/>
+                  <Route path="/about" component={About}/>
+                  <Route path="/contact" component={Contact}/>
+                  <Route path="/offer" component={Offer}/>
+                  <Route path="/orders" component={Orders}/>
+                  <Route path="/service" component={ShopService}/>
+                  <Route path="/sstationary" component={SStationary}/>
+                  <Route path="/soffice" component={SOffice}/>
+                  <Route path="/senvelopes" component={SEnvelopes}/>
+                  <Route path="/spaper" component={SPaper}/>
+                  <Route path="/shygienic" component={SHygienic}/>
+                  <Route path="/cart" component={SCart}/>
+                  <Route path="/regform" component={Registration}/>
+                  <Route path="/artdetails" component={ArtDetails}/>
+                  <Route component={Notfound}/>
+              </Switch>
+            </div>
+            <Footer/>
           </div>
         </TotalContext.Provider>
         </CartContext.Provider>
-            <div className="footer">
-              <div className="contactbox">
-                <h3>DANE KONTAKTOWE</h3>
-                <div className="fcontact">
-                  <h4>Adres</h4>
-                  <p>ul. Św. Michała 100<br/>
-                  61-005 POZNAŃ</p>
-                  <h4>Telefon</h4>
-                  <p>tel. +48 61 652 00 00<br/>
-                  fax +48 61 654 36 10</p>
-                </div>
-              </div>
-              <div className="locbox">
-                <h3>LOKALIZACJA</h3>
-                <iframe title="locmap"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2433.333665118701!2d16.966105115803707!3d52.418751679795214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47045b7b7083fb67%3A0x18dc9444b19f6dac!2sSELCOR!5e0!3m2!1spl!2spl!4v1546602616421" 
-                  frameBorder="0"  
-                  allowFullScreen="">
-                </iframe>
-              </div>
-            </div>
-        </Router>
+        </UserContext.Provider>
+      </Router>
     </div>
   );
 

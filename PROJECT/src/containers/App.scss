@@ -8,6 +8,17 @@
 @import './Main.scss';
 
 // MAIN APPLICATION SETTINGS
+
+.App {
+
+}
+
+.AppContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .App, button {
     font-family: inherit;
 }
@@ -15,7 +26,14 @@
 h1, h4, p {
     margin: 0;
     padding: 10px;
-    //letter-spacing: 1px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li a {
+    text-decoration: none;
 }
 
 // APP PART 1 - HEADER
@@ -26,9 +44,22 @@ h1, h4, p {
 
 // BODY / Body style
 .Bodystyle {
-    background-color: $color1;  // Background of the body components
-    min-height: 800px;          // Min. height of the body components
+    //background-color: $color1;  // Background of the body components
+    flex: 1;
     padding-top: 10px;
+}
+
+.BackgroundImg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.MainProductBox {
+    display: grid;
+    justify-content: center;
 }
 
 // BODY / Displaying product cards in shop containers
@@ -37,45 +68,3 @@ h1, h4, p {
 // APP PART 3 - FOOTER
 
 // Footer
-.footer {
-    background-color: $color3;
-    color: $color1;
-    padding-right: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    justify-items: center;
-}
-
-// Footer / children - common settings
-.contactbox, .locbox {
-    margin: 10px 0px;
-    width: 250px;
-    justify-content: start;
-}
-
-// Footer / ContactBox - Contact information
-.contactbox {
-    display: inline-flex;
-}
-
-// Footer / LocBox - Box with localization map
-.locbox {
-    display: inline-flex;
-}
-
-// Footer / LocBox / iFrame - Localization map
-.locbox iframe{ 
-    width: 220px;
-}
-
-// Footer / ContactBox, LocBox / h3
-
-.contactbox h3, .locbox h3 {
-    writing-mode: vertical-rl;
-    margin: 0;
-    padding-right: 10px;
-    text-align: center;
-    color: $color0;
-    letter-spacing: 3px;
-}

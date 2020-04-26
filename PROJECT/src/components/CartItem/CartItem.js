@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { CartContext, TotalContext } from '../../containers/App';
 import './CartItem.scss';
 import { TiDelete } from "react-icons/ti";
+import { NavLink } from 'react-router-dom';
 
 const CartItem = (props) => {
 
@@ -55,7 +56,18 @@ const CartItem = (props) => {
 
     return(
         <div className="CartItem">
-            <div className="CartItemImg" style={ProdImgStyle}></div>
+        <NavLink className="CartItemImg" style={ProdImgStyle} to={{
+            pathname: "/artdetails",
+            artProps: {
+                name: props.name,
+                shortdesc: props.shortdesc,
+                description: props.description,
+                price: props.price,
+                imagename: props.imagename,
+                prodid: props.prodid
+            }
+            }}>
+        </NavLink>
             <div className="CartItemContainer">
                 <h4 className="CartItemName">{props.name} - {props.desc}</h4>
                 <div className="CartItemPrice">

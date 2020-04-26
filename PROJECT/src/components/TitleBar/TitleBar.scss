@@ -1,0 +1,28 @@
+@import "../../containers/Main.scss";
+
+.TitleBar {
+    display: flex;
+    background-color: $color2;
+    align-items: center;
+    line-height: 40px;
+    position: sticky;
+    top: 10px;
+}
+
+.FirstLetter {
+    font-family: 'LoraBold';
+    font-weight: bold;
+    border: solid 4px $color0;
+    border-radius: 5px;
+    width: 40px;
+    margin: 5px;
+    text-align: center;
+    font-size: 3.0em;
+    padding: 0px;
+}
+
+.TitleRest {
+    font-family: 'LoraRegular';
+    font-weight: 100;
+    padding: 0;
+}

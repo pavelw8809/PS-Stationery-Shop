@@ -5,11 +5,10 @@ import carticon from '../../images/icons/black_cart.png';
 
 const Artdetails = (props) => {
 
-    const [initCart, Cart] = useContext(CartContext);                               // stan globalny - stan koszyka
-    const [initTotal, Total] = useContext(TotalContext);                            // stan globalny - suma do zapłaty
+    const [Cart, setCart] = useContext(CartContext);                               // stan globalny - stan koszyka
+    const [Total, setTotal] = useContext(TotalContext);                            // stan globalny - suma do zapłaty
     const [counter, setCounter] = useState({quantity: 0})              // stan lokalny - wyświetla ilość produktu
-    const [totalPrice, setTotalPrice] = useState({totalprice: props.prodtotal})     // stan lokalny - wyświetla sumę do zapłaty
-
+    
     const Image = require('../../images/images/' + props.location.artProps.imagename + '.png');       // Ścieżka do zdjęcia
 
     let ProdImgStyle;
@@ -53,7 +52,7 @@ const Artdetails = (props) => {
         let idToChange;
         let orSum = parseFloat((q*price));
 
-        initCart.map((r, index) => {
+        Cart.map((r, index) => {
             if (r.prodid === prodid) {
                 check = 1
                 idToChange = parseInt(index);
@@ -62,8 +61,8 @@ const Artdetails = (props) => {
 
         if (q > 0) {
             if (check === 0) {
-                Cart(prevCart => ([...initCart, {
-                    id: initCart.length, 
+                setCart(prevCart => ([...Cart, {
+                    id: Cart.length, 
                     prodid: prodid,
                     name: name, 
                     desc: desc,
@@ -73,12 +72,12 @@ const Artdetails = (props) => {
                     imagename: imagename
                 }]))
             } else {
-                let newCart = [...initCart];
+                let newCart = [...Cart];
                 newCart[idToChange].quantity = newCart[idToChange].quantity+q;
                 newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
             }
-            Total({
-                total: parseFloat(initTotal.total+orSum)
+            setTotal({
+                total: parseFloat(Total.total+orSum)
             })
             setCounter({
                 quantity: 0

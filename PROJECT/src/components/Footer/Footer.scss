@@ -1,0 +1,66 @@
+@import "../../containers/Main.scss";
+
+.footer {
+    background-color: $color3;
+    color: $color1;
+    padding-right: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+}
+
+// Footer / children - common settings
+.contactbox, .locbox, .offerbox {
+    margin: 10px;
+    padding: 0 10px;
+    width: 250px;
+    height: 210px;
+    justify-content: start;
+    display: inline-flex;
+    align-items: center;
+}
+
+.fcontact, .locmap, .foffer {
+    margin-left: 10px;
+}
+
+// Footer / LocBox / iFrame - Localization map
+.locbox iframe { 
+    width: 220px;
+}
+
+// Footer / ContactBox, LocBox / h3
+
+.contactbox h3, .locbox h3, .offerbox h3{
+    writing-mode: vertical-rl;
+    margin: 0;
+    padding-right: 5px;
+    text-align: center;
+    color: $color4;
+    letter-spacing: 1px;
+    align-self: stretch;
+    border-right: solid 1px $color4;
+}
+
+.contactbox p {
+    padding: 5px 0;
+}
+
+.contactbox h4 {
+    padding: 10px 0;
+}
+
+.foffer ul {
+    padding: 0;
+} 
+
+.foffer ul li a {
+    color: $color1;
+    padding: 5px 0;
+}
+
+.copyright {
+    flex-basis: 100%;
+    color: $color4;
+}

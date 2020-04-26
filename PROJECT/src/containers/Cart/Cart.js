@@ -20,16 +20,16 @@ import './Cart.scss';
 
 const SCart = () => {
 
-    const [initCart, Cart] = useContext(CartContext);
-    const [initTotal, Total] = useContext(TotalContext);
+    const [Cart, setCart] = useContext(CartContext);
+    const [Total, setTotal] = useContext(TotalContext);
 
     const removeItem = (index) => {
         console.log(index);
-        let newCart = initCart.slice();
+        let newCart = Cart.slice();
         newCart.splice(index, 1);
-        Cart(newCart);
+        setCart(newCart);
         const total = newCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
-        Total({total});
+        setTotal({total});
     }
 
     const sendOrder = (orderdata) => {
@@ -39,7 +39,7 @@ const SCart = () => {
     let ShowCartItems;
     let OrderBtn;
 
-    if (initCart.length === 0) {
+    if (Cart.length === 0) {
         ShowCartItems = (
             <div className="CartEmpty">
                 <p>Twój koszyk jest pusty</p>
@@ -49,11 +49,12 @@ const SCart = () => {
     } else {
         ShowCartItems = (
             <div className="CartItems">
-                {initCart.map((r, index) => {
+                {Cart.map((r, index) => {
                     return(
                         <CartItem 
                             id={r.id}
                             name={r.name}
+                            shortdesc={r.shortdesc}
                             desc={r.desc}
                             price={r.price}
                             quantity={r.quantity}
@@ -68,7 +69,7 @@ const SCart = () => {
         )
         OrderBtn = (
             <div className="CartSubmitContainer">
-                <button className="CartSubmit" onClick={sendOrder.bind(this, initCart)}>ZŁÓŻ ZAMÓWIENIE</button>
+                <button className="CartSubmit" onClick={sendOrder.bind(this, Cart)}>ZŁÓŻ ZAMÓWIENIE</button>
             </div>
         )
     }
@@ -86,7 +87,7 @@ const SCart = () => {
                     <div className="CartSummaryInfo">
                         <div className="CartSummaryContainer">
                             <p className="CartSummaryLabel">SUMA</p>
-                            <div className="CartSummaryTotal">{parseFloat(initTotal.total).toFixed(2)}</div>
+                            <div className="CartSummaryTotal">{parseFloat(Total.total).toFixed(2)}</div>
                         </div>
                         {OrderBtn}
                     </div>

@@ -11,16 +11,14 @@
 .Banner {
     background-color: $color0;
     display: grid;
-    //grid-template-columns: 390px 1fr 250px;
     grid-template-areas: 
                             'navbar'
                             'navc';
-                            //'navbar navbar navbar'
-                            //'navc navc navc';
-                            //'logo sbar uinfo'
-                            //'artnav artnav artnav';
     font-family: $font0;
     font-size: 1.0em;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .NavContainer {
@@ -29,6 +27,14 @@
     grid-template-areas: 
                             'logo sbar uinfo'
                             'artnav artnav artnav';
+    align-content: center;
+}
+
+.NavContainerScroll {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-areas: 'logo sbar uinfo';
+    align-items: center;
 }
 
 // TOP BANNER - ROW 1
@@ -44,7 +50,7 @@
 .Navbar ul {
     margin-right: 10px;
     padding: 0;
-    list-style-type: none;
+    //list-style-type: none;
 }
 
 // Top banner / Top Navigation / list item
@@ -56,7 +62,7 @@
 // Top banner / Top Navigation / list item / link
 .Navbar ul li a {
     color: $color1;
-    text-decoration: none;
+    //text-decoration: none;
     padding: 8px;
     border-radius: 3px;
 }
@@ -75,9 +81,13 @@
 
 // TOP BANNER - ROW 2
 
+.LogoContainer {
+    display: flex;
+    align-content: center;
+}
+
 // Top banner / Logo
 .Logo {
-    width: auto;
     max-width: 390px;
     max-height: 60px;
     margin: 0px;
@@ -177,7 +187,7 @@
 .ArtNav ul {
     margin: 0px;
     padding: 0;
-    list-style-type: none;
+    //list-style-type: none;
 }
 
 // Top banner / Shop Navigation / list item
@@ -190,7 +200,7 @@
 // Top banner / Shop Navigation / list item / link
 .ArtNav ul li a {
     color: $color2;
-    text-decoration: none;
+    //text-decoration: none;
     border-radius: 3px;
     padding: 5px;
 }
@@ -221,6 +231,8 @@
     opacity: 0;
     transition-duration: 0.5s;
 }
+
+// SCROLLING BANNER
 
 @media only screen and (max-width: 800px) {
     .SearchBar {
@@ -261,13 +273,13 @@
     .ArtNavDropDown ul {
         margin: 0;
         padding: 5px 0;
-        list-style-type: none;
+        //list-style-type: none;
         letter-spacing: 2px;
     }
 
     .ArtNavDropDown ul li a {
         color: $color2;
-        text-decoration: none;
+        //text-decoration: none;
         display: inline-block;
         width: 100%;
         padding: 2px 0;
