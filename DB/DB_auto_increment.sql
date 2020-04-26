@@ -89,10 +89,10 @@ use shop;
 CREATE TABLE orders
 (
 o_id             INT NOT NULL AUTO_INCREMENT, /* klucz główny */
-o_ci_id          INT NOT NULL, /* klucz obcy do tabeli client_individual */
-o_cc_id          INT NOT NULL, /* klucz obcy do tabeli client_company */
-o_number         int not null, /* numer zamówienia */
-o_status         varchar(150) not null, /* status zamówienia czy w trakcie czy zrealizowane */
+o_ci_id          INT, /* klucz obcy do tabeli client_individual */
+o_cc_id          INT, /* klucz obcy do tabeli client_company */
+o_number         INT not null UNIQUE, /* numer zamówienia */
+o_status         varchar(150) not null, /* status zamówienia czy NOWE, czy W TRAKCIE czy ZREALIZOWANE */
 o_price          numeric(6,2) not null, /* cena za całe zamówienie - ostateczna cena do zapłaty za wszytskie produkty w koszyku */
 Constraint fk_orders FOREIGN KEY (o_ci_id)
 references client_individual (ci_id),
