@@ -1,0 +1,30 @@
+@import "../../containers//Main.scss";
+
+.AccountMenu {
+    border: solid 1px $color1;
+    border-radius: 5px;
+    background-color: $color0;
+    color: $color2;
+    box-shadow: 3px 3px 10px $color3;
+}
+
+.AccountMenu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.AccountMenu li {
+    border-radius: 5px;
+}
+
+.AccountMenu a {
+    color: $color2;
+    display: block;
+    width: auto;
+    padding: 5px 10px;
+}
+
+.AccountMenu li a:hover {
+    color: $color3;
+    background-color: $color2;
+}

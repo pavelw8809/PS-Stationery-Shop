@@ -16,7 +16,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext, TotalContext } from '../App';
 import CartItem from '../../components/CartItem/CartItem';
+import TitleBar from '../../components/TitleBar/TitleBar';
 import './Cart.scss';
+import { FaRegFrownOpen } from 'react-icons/fa';
 
 const SCart = () => {
 
@@ -42,6 +44,7 @@ const SCart = () => {
     if (Cart.length === 0) {
         ShowCartItems = (
             <div className="CartEmpty">
+                <FaRegFrownOpen className="EmptyCartIcon" size={50}/>
                 <p>Twój koszyk jest pusty</p>
             </div>
         )
@@ -76,7 +79,7 @@ const SCart = () => {
 
     return(
         <div className="Cart">
-            <h1>CART</h1>
+            <TitleBar title="koszyk"/>
             <div className="CartContainer">
                 <div className="CartList">
                     <h4>TWÓJ KOSZYK</h4>

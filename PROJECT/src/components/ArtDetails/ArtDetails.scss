@@ -3,6 +3,7 @@
 .ArtDetails {
     display: flex;
     justify-content: center;
+    align-self: flex-start;
 }
 
 .ArtDContainer {
@@ -19,7 +20,7 @@
     box-shadow: 3px 3px 10px $color4;
     margin: 10px;
     background-color: white;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .ArtImgContainer {
@@ -38,6 +39,7 @@
     grid-area: artinfo;
     display: flex;
     flex-direction: column;
+    //min-height: 200px;
     height: 100%;
 }
 

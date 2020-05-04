@@ -10,7 +10,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
-import { CartContext } from '../App';
+import { ServerPath, CartContext } from '../App';
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss"
@@ -19,7 +19,7 @@ const SPaper = () => {
     const [Products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/WSB_SELCOR/SERVER/SPaper.php`)
+        axios.get(ServerPath + 'SPaper.php')
         .then(res => {
             setProducts(res.data);
         })

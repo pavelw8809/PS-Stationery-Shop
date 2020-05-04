@@ -9,6 +9,7 @@
 
 .CartEmpty{
     border: solid 1px $color0;
+    background-color: rgba(255, 255, 255, 0.5);
     margin: 10px;
     border-radius: 5px;
     text-align: center;
@@ -34,7 +35,7 @@
 
 .CartSummaryContainer {
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 .CartSummaryLabel {
@@ -59,4 +60,9 @@
 
 .CartSubmit:hover{
     background-color: $color6;
+}
+
+.EmptyCartIcon {
+    color: $color0;
+    padding-top: 10px;
 }

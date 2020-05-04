@@ -16,6 +16,7 @@ import './Main.scss';                                                         //
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    // import komponentów routingu
 import Header from '../components/Header/Header';                             // import komponentu bannera                                                          // Import komponentu przycisku koszyka
 import '../components/Header/Header.scss';
+import Cookies from 'js-cookie';
 
 import Index from './Index/Index';                                            // Strona Główna
 import About from './About/About';                                            // O Nas
@@ -31,40 +32,28 @@ import SPaper from './SPaper/SPaper';                                         //
 import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
 import SCart from './Cart/Cart';                                              // Koszyk
 import Registration from './Registration/Registration';                       // Formularz rejestracyjny
-import ArtDetails from '../components/ArtDetails/ArtDetails';
-import ScrollBanner from '../components/ScrollBanner/ScrollBanner';                 // Karta produktu - szczegóły
+import ArtDetails from '../components/ArtDetails/ArtDetails';                 // Karta produktu - szczegóły
+import Account from './Account/Account';
+import UserOrders from './UserOrders/UserOrders';
+import SearchResult from './SearchResult/SearchResult';             
 import Footer from '../components/Footer/Footer'
 
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
 export const UserContext = React.createContext();
+export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
 
 function App() {
+
+// *** C O O K I E S ***
+
+  //const [Cookie, setCookie] = useCookies('pstest');
+  Cookies.set('pstest', 'aaa');
 
 // *** S T A T E S ***
   
   // 1. Cart state
-  const [Cart, setCart] = useState([
-    /*
-    {id: 0, 
-    prodid: "500",
-    name: "Produkt testowy", 
-    desc: "fioletowy",
-    price: 16.29,
-    quantity: 5,
-    prodtotal: 16.29*5,
-    imagename: 'CC3'},
-    {id: 1, 
-    prodid: "501",
-    name: "Produkt testowy 2", 
-    desc: "buraczkowy",
-    price: 33.29,
-    quantity: 3,
-    prodtotal: 16.29*3,
-    imagename: 'CC3'}
-    */
-  ]
-  )
+  const [Cart, setCart] = useState([]);
 
   // 2. Total price state
   
@@ -73,7 +62,38 @@ function App() {
 
   // 3. User account state
 
-  const [User, setUser] = useState({name: 'Madgalena'});
+  const [User, setUser] = useState({
+    userinfo: {
+      /*
+      id: 223,                        // u_id,
+      login: 'KrolJanusz1',           // u_login
+      mail: 'janusz.nosacz@wp.pl',    // u_mail
+      name: 'Janusz',                 // cc_name, ci_name
+      surname: 'Nosacz',              // ci_surname
+      street: 'Betonowa',             // cc_street, ci_street
+      streetno: '36',                 // cc_number, ci_number
+      city: 'Sosnowiec',              // cc_city, ci_city
+      zipcode: '42-200'               // cc_zip, ci_zip
+      */
+    },
+    searchmemo: []
+  });
+
+  useEffect(() => {
+    let UserId = Cookies.get('psid');
+    let DecodedUserId = decodeURIComponent(UserId);
+    let UserName = Cookies.get('psname');
+    let DecodedUserName = decodeURIComponent(UserName);
+    if (DecodedUserId !== 'undefined' && DecodedUserName !== 'undefined') {
+      setUser({
+        userinfo: {
+          id: DecodedUserId,
+          login: DecodedUserName
+        }
+      })
+    }
+  }, [])
+
 
   // BACKGROUND IMAGE
 
@@ -104,6 +124,9 @@ function App() {
                   <Route path="/cart" component={SCart}/>
                   <Route path="/regform" component={Registration}/>
                   <Route path="/artdetails" component={ArtDetails}/>
+                  <Route path="/account" component={Account}/>
+                  <Route path="/myorders" component={UserOrders}/>
+                  <Route path="/search" component={SearchResult}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>

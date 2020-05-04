@@ -8,11 +8,12 @@
 */
 
 import React from 'react';
+import TitleBar from '../../components/TitleBar/TitleBar';
 
 const about = () => {
     return (
-        <div>
-            <h1>o Firmie</h1>
+        <div className="SiteContainer">
+            <TitleBar title="O firmie"/>
             <p>
             PAPER&SCISORS to firma, która z powodzeniem działa na rynku od ponad 5 lat. 
             </p>

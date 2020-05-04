@@ -15,13 +15,14 @@
 
 import React, { useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';                                                         // Import komponentu Navlick - element react-router-dom
-import { TotalContext, UserContext } from '../../containers/App';
+import { TotalContext } from '../../containers/App';
 import logo0 from '../../images/icons/pands.png';                                                   // Logo firmy duże
 import logo1 from '../../images/icons/pands_small.png';
-import mglass from '../../images/icons/mg.png';                                                     // Ikona lupy
+import { FaSearch } from 'react-icons/fa';                                                   // Ikona lupy
 import CartBtn from '../CartBtn/CartBtn';                                                           // Import komponentu przycisku koszyka
 import { FaChevronDown } from "react-icons/fa";
-import Login from '../Login/Login';
+import UserBtn from '../UserBtn/UserBtn';
+import SearchBar from '../SearchBar/SearchBar';
 import './Header.scss';
 
 const Header = () => {   
@@ -29,11 +30,8 @@ const Header = () => {
     // STATES
     
     const [Total, setTotal] = useContext(TotalContext);
-    const [User, setUser] = useContext(UserContext);
-    const [LogShow, setLogShow] = useState(false);
     const [Dropdown, setDropdown] = useState(false);
     const [StyleNavBar, setStyleNavBar] = useState();
-    const [NavContainer, setNavContainer] = useState("NavContainer");
     const [StyleArtNav, setStyleArtNav] = useState();
     const [StyleLogo, setStyleLogo] = useState();
 
@@ -59,32 +57,6 @@ const Header = () => {
         window.addEventListener('scroll', listenScrollEvent);
     }, [])
 
-    // LOG IN POP UP
-
-    let LoginW;
-
-    const loginWindow = () => {
-        if (!LogShow) {
-            setLogShow(true);
-        } else {
-            setLogShow(false);
-
-        }
-    }
-
-    if (LogShow) {
-        LoginW = (
-            <div className="LoginW">
-                <Login/>
-            </div>
-        )
-    } else {
-        LoginW = (
-            <div className="LoginW hidden">
-                <Login/>
-            </div>
-        )
-    }
 
     const dropDown = () => {
         if (!Dropdown) {
@@ -105,19 +77,8 @@ const Header = () => {
         DropdownArrow = "DropdownArrow";
     }
 
-    // USER BTN SETUP
-
-    let UserInfoBtn;
-
-    if (User.name === null) {
-        UserInfoBtn = <button className="LogBtn" onClick={loginWindow}>ZALOGUJ</button>
-    } else {
-        UserInfoBtn = <button className="LogBtn">{User.name}</button>
-    }
-
     return(
         <div className="Banner">
-            {LoginW}
             <div className="Navbar" style={StyleNavBar}>
                 <ul>
                     <li>
@@ -142,12 +103,9 @@ const Header = () => {
                     <img alt="PS Logo" className="Logo" src={logo0} style={StyleLogo}></img>
                     <img alt="PS Logo" className="LogoSmall" src={logo1}></img>
                 </NavLink>
-                <div className="SearchBar">
-                    <input placeholder="szukaj"></input>
-                    <button type="submit"><img className="glassicon" src={mglass} alt="mg"/></button>
-                </div>
+                <SearchBar/>
                 <div className="UserZone">
-                    {UserInfoBtn}
+                    <UserBtn />
                     <NavLink to="/cart">
                         <CartBtn total={parseFloat(Total.total).toFixed(2)}/>
                     </NavLink>

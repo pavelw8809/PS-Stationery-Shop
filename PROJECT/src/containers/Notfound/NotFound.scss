@@ -4,3 +4,35 @@
     Opis:               N/A
     Przykład użycia:    import './Login.scss' w pliku Login.js
 */
+
+@import '../Main.scss';
+
+.NotFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.NotFound p {
+    text-align: center;
+}
+
+.NotFound button {
+    width: 250px;
+    height: 40px;
+    background-color: $color5;
+    color: $color1;
+    border: solid 1px $color3;
+    border-radius: 5px;
+    font-size: 1.0em;
+}
+
+.NotFound button:hover {
+    background-color: $color6;
+}
+
+.ReturnBtnContainer {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}

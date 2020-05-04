@@ -10,13 +10,12 @@
 // MAIN APPLICATION SETTINGS
 
 .App {
-
 }
 
 .AppContainer {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;          // minimum height of the whole page
 }
 
 .App, button {
@@ -36,6 +35,10 @@ ul li a {
     text-decoration: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 // APP PART 1 - HEADER
 
 // Settings in the Header.scss file
@@ -45,16 +48,25 @@ ul li a {
 // BODY / Body style
 .Bodystyle {
     //background-color: $color1;  // Background of the body components
-    flex: 1;
+    flex: 1 1 auto;
     padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.SiteContainer {
+    max-width: 1200px;
+    width: 100%
 }
 
 .BackgroundImg {
     position: fixed;
+    width: 100%;
+    min-height: 100vh;
     top: 0;
     left: 0;
     z-index: -1;
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 .MainProductBox {

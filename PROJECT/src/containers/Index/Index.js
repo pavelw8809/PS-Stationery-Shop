@@ -7,12 +7,28 @@
     Dodatkowe info:     Treści statyczne + slider z ofertą + randomowe karty z ofertami
 */
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../App';
 
-const index = () => {
+const Index = () => {
+    const [User, setUser] = useContext(UserContext);
+
+    let UserWelcome;
+
+    if (User.name) {
+        UserWelcome = (
+            <div>
+                Miło Cię znowu widzieć, {User.name}
+            </div>
+        )
+    }
+
     return(
-        <h1>INDEX</h1>
+        <div className="SiteContainer">
+            <h1>INDEX</h1>
+            {UserWelcome}
+        </div>
     )
 }
 
-export default index;
+export default Index;

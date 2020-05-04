@@ -8,11 +8,12 @@
 */
 
 import React from 'react';
+import TitleBar from '../../components/TitleBar/TitleBar';
 
 const contact = () => {
     return (
-        <div>
-            <h1>DANE KONTAKTOWE</h1>
+        <div className="SiteContainer">
+            <TitleBar title="Dane kontaktowe"/>
             <h4>Biuro Obsługi Klienta</h4>
             <p> 
             darmowa infolinie - 100 707 100 
