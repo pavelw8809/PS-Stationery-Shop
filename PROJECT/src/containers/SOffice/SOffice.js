@@ -12,6 +12,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
 import { CartContext } from '../App';
 import axios from 'axios';
+import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss"
 
 const SOffice = () => {
@@ -46,7 +47,7 @@ const SOffice = () => {
 
     return(
         <div className="MainProductBox">
-            <h1>SHOP - PAPER ARTICLES</h1>
+            <TitleBar title="ARTYKUŁY BIUROWE"/>
             {showCards}
         </div>
     )

@@ -11,6 +11,7 @@
 import React, { Component } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';             // import komponentu karty produktu
 import axios from 'axios';
+import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss";
 
 class SOffice extends Component {
@@ -54,7 +55,7 @@ class SOffice extends Component {
 
         return(
             <div className="MainProductBox">
-                <h1>SHOP - OFFICE ARTICLES</h1>
+                <TitleBar title="ARTYKUŁY PIŚMIENNICZE"/>
                 {showCards}
             </div>     
         )
