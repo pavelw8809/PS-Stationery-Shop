@@ -8,6 +8,7 @@
 */
 
 import React, { useContext } from 'react';
+import TitleBar from '../../components/TitleBar/TitleBar';
 import { UserContext } from '../App';
 
 const Index = () => {
@@ -25,7 +26,7 @@ const Index = () => {
 
     return(
         <div className="SiteContainer">
-            <h1>INDEX</h1>
+            <TitleBar title= "Zapraszamy do skorzystania z naszej oferty"/>
             {UserWelcome}
         </div>
     )
