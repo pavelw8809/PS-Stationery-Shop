@@ -17,6 +17,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    //
 import Header from '../components/Header/Header';                             // import komponentu bannera                                                          // Import komponentu przycisku koszyka
 import '../components/Header/Header.scss';
 import Cookies from 'js-cookie';
+import Axios from 'axios';
 
 import Index from './Index/Index';                                            // Strona Główna
 import About from './About/About';                                            // O Nas
@@ -45,11 +46,6 @@ export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
 
 function App() {
 
-// *** C O O K I E S ***
-
-  //const [Cookie, setCookie] = useCookies('pstest');
-  Cookies.set('pstest', 'aaa');
-
 // *** S T A T E S ***
   
   // 1. Cart state
@@ -63,36 +59,26 @@ function App() {
   // 3. User account state
 
   const [User, setUser] = useState({
-    userinfo: {
-      /*
-      id: 223,                        // u_id,
-      login: 'KrolJanusz1',           // u_login
-      mail: 'janusz.nosacz@wp.pl',    // u_mail
-      name: 'Janusz',                 // cc_name, ci_name
-      surname: 'Nosacz',              // ci_surname
-      street: 'Betonowa',             // cc_street, ci_street
-      streetno: '36',                 // cc_number, ci_number
-      city: 'Sosnowiec',              // cc_city, ci_city
-      zipcode: '42-200'               // cc_zip, ci_zip
-      */
-    },
+    userinfo: {},
+    accinfo: {},
     searchmemo: []
   });
 
   useEffect(() => {
-    let UserId = Cookies.get('psid');
-    let DecodedUserId = decodeURIComponent(UserId);
-    let UserName = Cookies.get('psname');
-    let DecodedUserName = decodeURIComponent(UserName);
-    if (DecodedUserId !== 'undefined' && DecodedUserName !== 'undefined') {
-      setUser({
-        userinfo: {
-          id: DecodedUserId,
-          login: DecodedUserName
-        }
+    let SessionId = Cookies.get('pssession');
+    let DecodedSessionId = decodeURIComponent(SessionId);
+    if (DecodedSessionId !== 'undefined') {
+      Axios.post(ServerPath + 'Session.php', SessionId)
+        .then(function(res) {
+          console.log(res.data);
+          setUser((prevState) => ({...prevState, userinfo: res.data}));
       })
+    } else {
+      
     }
   }, [])
+
+  //console.log(User);
 
 
   // BACKGROUND IMAGE

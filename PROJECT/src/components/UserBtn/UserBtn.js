@@ -40,14 +40,19 @@ const UserBtn = (props) => {
     const handleLogin = () => {
         Axios.post(ServerPath + "Login.php", LoginData)
         .then(function(res) {
+            console.log(res.data);
+            Cookies.set('pssession', res.data.sessionid);
+            setUser({...User, userinfo: res.data});
+            /*
             if (res.data.u_id) {
                 console.log(res.data);
                 setUser({
-                userinfo: {
-                    id: res.data.u_id,
-                    login: res.data.u_login
-                } 
+                    userinfo: {
+                        id: res.data.u_id,
+                        login: res.data.u_login
+                    } 
                 })
+            
                 Cookies.set('psid', res.data.u_id);
                 Cookies.set('psname', res.data.u_login);
                 setLogShow(false);
@@ -64,14 +69,31 @@ const UserBtn = (props) => {
                 )
                 setErrorInfo(errordata);
             }
+            */
         })
+        //let sessionid = Cookies.get('pssession');
+        //Axios.post(ServerPath + "Session.php", sessionid)
+        //.then(function(res) {
+            //console.log(User);
+        //    console.log(res.data);
+        //})
     }
 
     // hadle logout action
     const handleLogout = () => {
-        Cookies.remove('psid');
-        Cookies.remove('psname');
-        setUser({userinfo: {}})
+        let sessionid = Cookies.get('pssession');
+        Axios.post(ServerPath + 'Logout.php', sessionid)
+        .then(function(res) {
+            if (res.data === "success") {
+                Cookies.remove('pssession');
+                setUser({userinfo: {}})
+                setLogShow(false);
+            }
+        })
+    }
+
+    // hide account menu
+    const hideMenu = () => {
         setLogShow(false);
     }
 
@@ -105,7 +127,7 @@ const UserBtn = (props) => {
                         errorinfo={ErrorInfo} />
     } else {
         UserInfoBtn = <button className="LogBtn AccountBtn" onClick={loginWindow}><FaRegUserCircle size={20} className="UserIcon"/>{User.userinfo.login}</button>
-        UserMenu = <AccountMenu logout={handleLogout}/>
+        UserMenu = <AccountMenu logout={handleLogout} hidemenu={hideMenu}/>
     }
 
     return(
