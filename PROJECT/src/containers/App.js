@@ -36,8 +36,11 @@ import Registration from './Registration/Registration';                       //
 import ArtDetails from '../components/ArtDetails/ArtDetails';                 // Karta produktu - szczegóły
 import Account from './Account/Account';
 import UserOrders from './UserOrders/UserOrders';
-import SearchResult from './SearchResult/SearchResult';             
+import SearchResult from './SearchResult/SearchResult';            
+import ExtLoginSite from './ExtLoginSite/ExtLoginSite'; 
+import LoginSite from './LoginSite/LoginSite';
 import Footer from '../components/Footer/Footer'
+import Login from '../components/Login/Login';
 
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
@@ -59,7 +62,9 @@ function App() {
   // 3. User account state
 
   const [User, setUser] = useState({
+    usercontrol: false,
     userinfo: {},
+    acccontrol: false,
     accinfo: {},
     searchmemo: []
   });
@@ -71,14 +76,14 @@ function App() {
       Axios.post(ServerPath + 'Session.php', SessionId)
         .then(function(res) {
           console.log(res.data);
-          setUser((prevState) => ({...prevState, userinfo: res.data}));
+          setUser((prevState) => ({...prevState, usercontrol: true, userinfo: res.data}));
       })
     } else {
-      
+
     }
   }, [])
 
-  //console.log(User);
+  console.log(User);
 
 
   // BACKGROUND IMAGE
@@ -113,6 +118,8 @@ function App() {
                   <Route path="/account" component={Account}/>
                   <Route path="/myorders" component={UserOrders}/>
                   <Route path="/search" component={SearchResult}/>
+                  <Route path="/extlogin" component={ExtLoginSite}/>
+                  <Route path="/login" component={LoginSite}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>

@@ -58,9 +58,9 @@ if ($con->connect_error) {
 		$uid = $r->u_id;
 		$output->uid = $r->u_id;
 		$output->login = $r->u_login;
-		$output->sessionid = $sessioncode;
+		$output->sessionid = $sessioncode; 
 		//echo($sessioncode);
-		$addsession = "INSERT INTO sessions VALUES(null, $uid, '$sessioncode')";
+		$addsession = "INSERT INTO sessions VALUES(null, $uid, '$sessioncode', FALSE, now())";
 		if ($con->query($addsession) === true) {
 			echo json_encode($output);
 			//echo $sessioncode;

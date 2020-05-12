@@ -13,6 +13,7 @@ import ArtCard from '../../components/ArtCard/ArtCard';             // import ko
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss";
+import { ServerPath } from '../App';
 
 class SOffice extends Component {
 
@@ -22,7 +23,7 @@ class SOffice extends Component {
     });
 
     componentDidMount() {
-        axios.get(`http://localhost:80/WSB_SELCOR/SERVER/SStationary.php`)
+        axios.get(ServerPath + "SStationary.php")
             .then(res => {
                     //res.header('Access-Control-Allow-Origin', "*");
                     this.setState({products: res.data});

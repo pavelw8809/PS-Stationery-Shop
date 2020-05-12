@@ -10,7 +10,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
-import { CartContext } from '../App';
+import { ServerPath } from '../App';
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss"
@@ -19,7 +19,7 @@ const Shopenvelopes = () => {
     const [Products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/WSB_SELCOR/SERVER/SEnvelopes.php`)
+        axios.get(ServerPath + "SEnvelopes.php")
         .then(res => {
             setProducts(res.data);
         })

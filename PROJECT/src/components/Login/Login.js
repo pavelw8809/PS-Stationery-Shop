@@ -1,9 +1,6 @@
 import React, { useState, useContext} from 'react';
 import './Login.scss'
-import { NavLink, useHistory } from 'react-router-dom';
-import Axios from 'axios';
-import { ServerPath, UserContext } from '../../containers/App';
-import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 const Login = (props) => {
 /*

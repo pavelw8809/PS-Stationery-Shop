@@ -15,7 +15,7 @@ const UserBtn = (props) => {
     const [User, setUser] = useContext(UserContext);    // User State
     const [LogShow, setLogShow] = useState(false);      // Show loggin button
     const [LoginData, setLoginData] = useState();       // Temporary state for sending login data
-    const [ErrorInfo, setErrorInfo] = useState();               // Error container    
+    const [ErrorInfo, setErrorInfo] = useState();       // Error container    
 
     // check content in username field and update LoginData state
     const handleUsername = (event) => {
@@ -40,21 +40,12 @@ const UserBtn = (props) => {
     const handleLogin = () => {
         Axios.post(ServerPath + "Login.php", LoginData)
         .then(function(res) {
-            console.log(res.data);
-            Cookies.set('pssession', res.data.sessionid);
-            setUser({...User, userinfo: res.data});
-            /*
-            if (res.data.u_id) {
-                console.log(res.data);
-                setUser({
-                    userinfo: {
-                        id: res.data.u_id,
-                        login: res.data.u_login
-                    } 
-                })
+            //console.log(res.data);
             
-                Cookies.set('psid', res.data.u_id);
-                Cookies.set('psname', res.data.u_login);
+            if (res.data.uid) {
+                //console.log(res.data);
+                setUser({...User, userinfo: res.data});
+                Cookies.set('pssession', res.data.sessionid);
                 setLogShow(false);
             } else {
                 let errordata = (
@@ -69,7 +60,6 @@ const UserBtn = (props) => {
                 )
                 setErrorInfo(errordata);
             }
-            */
         })
         //let sessionid = Cookies.get('pssession');
         //Axios.post(ServerPath + "Session.php", sessionid)
@@ -86,7 +76,8 @@ const UserBtn = (props) => {
         .then(function(res) {
             if (res.data === "success") {
                 Cookies.remove('pssession');
-                setUser({userinfo: {}})
+                Cookies.remove('psacc');
+                setUser({userinfo: {}});
                 setLogShow(false);
             }
         })

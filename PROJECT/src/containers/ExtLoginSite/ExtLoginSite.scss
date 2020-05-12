@@ -1,0 +1,45 @@
+/*
+    Plik:               LoginSite.scss
+    Funkcja:            STRONA Z FORMULARZEM REJESTRACYJNYM - ARKUSZ STYLI
+    Opis:               N/A
+    Przykład użycia:    import './Login.scss' w pliku Login.js
+*/
+
+@import '../Main.scss';
+
+.AuthWindow {
+    background-color: $color2;
+    padding: 15px;
+    text-align: center;
+    border: solid 2px $color0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+.AuthWindow input {
+    color: $color0;
+    border: solid 1px $color0;
+    width: 70%;
+    padding: 5px;
+}
+
+.AuthWindow p {
+    padding: 0 0 15px 0;
+}
+
+.AuthWindow button {
+    background-color: $color5;
+    border: solid 1px $color0;
+    border-radius: 5px;
+    color: $color1;
+    font-size: 0.9em;
+    padding: 5px;
+    width: 70%;
+}
+
+.AuthWindow button:hover {
+    background-color: $color6;
+}
