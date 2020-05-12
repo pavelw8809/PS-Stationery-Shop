@@ -126,6 +126,8 @@ CREATE TABLE sessions
 s_id        INT NOT NULL AUTO_INCREMENT, /* klucz główny */
 s_u_id      INT NOT NULL, /* klucz obcy do tabeli products */
 s_token     varchar(150), /* token/sesja */
+s_special   BOOLEAN, /* 1 - token aktywny, 0 - token nieaktywny*/
+s_date      DATE, /* data */
 Constraint fk_sessions FOREIGN KEY (s_u_id)
 references users (u_id),
 PRIMARY KEY (s_id)
