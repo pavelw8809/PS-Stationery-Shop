@@ -21,15 +21,20 @@ const ExtLoginSite = (props) => {
     const [Login, setLogin] = useState();
     const [User, setUser] = useContext(UserContext);
 
-    const UserNo = JSON.stringify(User.userinfo.login);
-    console.log(UserNo);
+    const UserID = Cookies.get('pssession');
+
+    //const UserNo = JSON.stringify(User.userinfo.login);
+    //console.log(UserNo);
 
     useEffect(() => {
-        //setLogin({...Login, userid: UserNo});
+        if (!UserID) {
+            History.push("/login");
+        }
     }, [])
 
     const handleLogin = (event) => {
         if (event.keyCode === 13) {
+            console.log("A");
             submitCredentials();
         } else {
             setLogin({...Login, user: event.target.value});
@@ -45,8 +50,6 @@ const ExtLoginSite = (props) => {
     }
 
     const History = useHistory();
-
-    console.log(User.userinfo.login);
 
     const submitCredentials = () => {
         setLogin({...Login, userid: User.userinfo.login});
@@ -81,10 +84,11 @@ const ExtLoginSite = (props) => {
                 //let sessionID = Cookies.get('pssession');
                 let cookietime = 1/48;
                 Cookies.set('psacc', res.data.sessionid, {expires: cookietime});
+                //setUser((prevState => ({...prevState, acccontrol: true})));
                 History.push('/account');
             } else {
                 let errordata = (
-                    <div className="ErrorInfo">
+                    <div className="ExtLoginErrInfo">
                         {res.data.map((r, index) => {
                             return(
                                 <p key={index}>{r}</p>
@@ -98,7 +102,7 @@ const ExtLoginSite = (props) => {
         })
     }
 
-    console.log(Login);
+    //console.log(Login);
 
     return(
         <div className = "AuthWindow">
@@ -106,11 +110,11 @@ const ExtLoginSite = (props) => {
             <h3>Dostęp do informacji: {props.feature}<br/>wymaga dodatkowego uwierzytelnienia.</h3>
             <p>Proszę zaloguj się ponownie</p>
             <label htmlFor="mail">Nazwa użytkownika</label>
-            <input type="text" name="mail" onChange={handleLogin}></input><br/>
+            <input type="text" name="mail" onChange={handleLogin} onKeyDown={handleLogin}></input><br/>
             <label htmlFor="password">Hasło</label>
-            <input type="text" name="password" onChange={handlePassword}></input><br/>
+            <input type="text" name="password" onChange={handlePassword} onKeyDown={handlePassword}></input><br/>
             <button type="submit" onClick={submitCredentials}>ZALOGUJ</button>
-            <div>{ErrorInfo}</div>
+            {ErrorInfo}
         </div>
     )
 }

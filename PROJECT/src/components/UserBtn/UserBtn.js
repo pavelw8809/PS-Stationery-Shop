@@ -77,7 +77,7 @@ const UserBtn = (props) => {
             if (res.data === "success") {
                 Cookies.remove('pssession');
                 Cookies.remove('psacc');
-                setUser({userinfo: {}});
+                setUser({userinfo: {}})
                 setLogShow(false);
             }
         })

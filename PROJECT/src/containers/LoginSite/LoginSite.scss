@@ -7,7 +7,7 @@
 
 @import '../Main.scss';
 
-.AuthWindow {
+.LoginAuthWindow {
     background-color: $color2;
     padding: 15px;
     text-align: center;
@@ -17,21 +17,22 @@
     flex-direction: column;
     align-items: center;
     align-self: center;
+    min-width: 300px;
 }
 
-.AuthWindow input {
+.LoginAuthWindow input {
     color: $color0;
     border: solid 1px $color0;
     width: 70%;
     padding: 5px;
 }
 
-.AuthWindow p {
-    padding: 0 0 15px 0;
+.LoginAuthWindow p {
+    padding: 0;
 }
 
-.AuthWindow button {
-    background-color: $color5;
+.LoginAuthWindow button {
+    //background-color: $color5;
     border: solid 1px $color0;
     border-radius: 5px;
     color: $color1;
@@ -40,14 +41,39 @@
     width: 70%;
 }
 
-.AuthWindow button:hover {
-    background-color: $color6;
-}
-
 .LoginRegP {
     margin-top: 15px;
 }
 
+.LoginLogBtn {
+    background-color: $color5;
+}
+
+.LoginLogBtn:hover {
+    background-color: $color6;
+}
+
+.LoginRegBtnContainer {
+    width: 100%;
+}
+
 .LoginRegBtn {
-    background-color: $color2;
+    background-color: $color7;
+    margin-top: 10px;
+}
+
+.LoginRegBtn:hover {
+    background-color: $color8;
+}
+
+.LoginErrInfo {
+    //padding: 10px;
+    color: maroon;
+}
+
+.separator {
+    border: inset 0.5px $color0;
+    display: block;
+    width: 100%;
+    //margin: 5px;
 }

@@ -43,3 +43,12 @@
 .AuthWindow button:hover {
     background-color: $color6;
 }
+
+.ExtLoginErrInfo {
+    margin-top: 10px;
+    color: maroon; 
+}
+
+.ExtLoginErrInfo p {
+    padding: 0;
+}

@@ -11,8 +11,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import './LoginSite.scss'
 import Axios from 'axios';
 import { UserContext, ServerPath } from '../App';
-import { useHistory } from 'react-router-dom';
-import { MdErrorOutline } from "react-icons/md";
+import { useHistory, NavLink } from 'react-router-dom';
+import { IoMdLogIn } from "react-icons/io";
 import Cookies from 'js-cookie';
 
 const LoginSite = (props) => {
@@ -52,7 +52,7 @@ const LoginSite = (props) => {
                 History.push('/');
             } else {
                 let errordata = (
-                    <div className="ErrorInfo">
+                    <div className="LoginErrInfo">
                         {res.data.map((r, index) => {
                             return(
                                 <p key={index}>{r}</p>
@@ -73,17 +73,18 @@ const LoginSite = (props) => {
     }
 
     return(
-        <div className = "AuthWindow">
-            <MdErrorOutline size={70}/>
-            <h3>LOGOWANIE</h3>
+        <div className = "LoginAuthWindow">
+            <IoMdLogIn size={70}/>
+            <h3>OKNO LOGOWANIA</h3>
             <label htmlFor="mail">Nazwa użytkownika</label>
-            <input type="text" name="mail" onChange={handleUsername}></input><br/>
+            <input type="text" name="mail" onChange={handleUsername} onKeyDown={handleUsername}></input><br/>
             <label htmlFor="password">Hasło</label>
-            <input type="text" name="password" onChange={handlePassword}></input><br/>
-            <button type="submit" onClick={handleLogin}>ZALOGUJ</button>
-            <div>{ErrorInfo}</div>
+            <input type="text" name="password" onChange={handlePassword} onKeyDown={handlePassword}></input><br/>
+            <button className="LoginLogBtn" type="submit" onClick={handleLogin}>ZALOGUJ</button>
+            {ErrorInfo}
+            <hr className="separator"/>
             <p className="LoginRegP">Nie masz konta?</p>
-            <button className="LoginRegBtn" type="submit">ZAREJESTRUJ KONTO</button>
+            <NavLink className="LoginRegBtnContainer" to="/"><button className="LoginRegBtn" type="submit">ZAREJESTRUJ KONTO</button></NavLink>
         </div>
     )
 }

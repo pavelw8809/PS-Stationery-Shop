@@ -39,6 +39,7 @@ import UserOrders from './UserOrders/UserOrders';
 import SearchResult from './SearchResult/SearchResult';            
 import ExtLoginSite from './ExtLoginSite/ExtLoginSite'; 
 import LoginSite from './LoginSite/LoginSite';
+import AccountEdit from './AccountEdit/AccountEdit';
 import Footer from '../components/Footer/Footer'
 import Login from '../components/Login/Login';
 
@@ -120,6 +121,7 @@ function App() {
                   <Route path="/search" component={SearchResult}/>
                   <Route path="/extlogin" component={ExtLoginSite}/>
                   <Route path="/login" component={LoginSite}/>
+                  <Route path="/accountedit" component={AccountEdit}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>
