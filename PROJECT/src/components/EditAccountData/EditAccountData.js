@@ -123,7 +123,6 @@ const EditAccountData = (props) => {
                     </div>
                 </div>
                 <hr className="separator"/>
-                {errordata}
             </div>
         )
     }
@@ -131,6 +130,7 @@ const EditAccountData = (props) => {
     return (
         <div>
             {AccFormData}
+            {errordata}
             <div className="AccountPanel">
                 <button onClick={props.submitdatachange}>ZAPISZ ZMIANY</button>
                 <button onClick={props.changetab}>POWRÓT</button>

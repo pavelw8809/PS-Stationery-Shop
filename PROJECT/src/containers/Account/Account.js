@@ -30,14 +30,14 @@ const Account = () => {
     //});
     let History = useHistory();
 
-    console.log(ExtSession);
+    console.log(User);
 
     useEffect(() => {
         if (!ExtSession) {
             History.push('/extlogin');
         } else {
             if (SessionId !== null) {
-                console.log(User.accinfo);
+                //console.log(User.accinfo);
                 if (!User.acccontrol) {
                     
                     console.log("loading...");
@@ -58,52 +58,64 @@ const Account = () => {
                                     zipB = r.cc_zip.substring(3,6);
                                 }
                                 setUser((prevState) => ({...prevState, accinfo: {
-                                    mail: r.u_mail,
-                                    cname: r.cc_name,
-                                    ccity: r.cc_city,
-                                    cstreet: r.cc_street,
-                                    chouse: r.cc_number,
-                                    cflat: r.cc_number_flat,
-                                    czip: r.cc_zip,
-                                    cnip: r.cc_NIP,
-                                    cregon: r.cc_REGON,
-                                    iname: r.ci_name,
-                                    isurname: r.ci_surname,
-                                    icity: r.ci_city,
-                                    istreet: r.ci_street,
-                                    ihouse: r.ci_number,
-                                    iflat: r.ci_number_flat,
-                                    izip: r.ci_zip,
-                                    izip1: zipA,
-                                    izip2: zipB,
-                                    czip1: zipA,
-                                    czip2: zipB
+                                    main: {
+                                        login: r.u_login,
+                                        mail: r.u_mail
+                                    },
+                                    comp: {
+                                        cname: r.cc_name,
+                                        ccity: r.cc_city,
+                                        cstreet: r.cc_street,
+                                        chouse: r.cc_number,
+                                        cflat: r.cc_number_flat,
+                                        czip: r.cc_zip,
+                                        cnip: r.cc_NIP,
+                                        cregon: r.cc_REGON,
+                                        czip1: zipA,
+                                        czip2: zipB
+                                    },
+                                    priv: {
+                                        iname: r.ci_name,
+                                        isurname: r.ci_surname,
+                                        icity: r.ci_city,
+                                        istreet: r.ci_street,
+                                        ihouse: r.ci_number,
+                                        iflat: r.ci_number_flat,
+                                        izip: r.ci_zip,
+                                        izip1: zipA,
+                                        izip2: zipB,
+                                    }
                                 },
                                     acccontrol: true
                                 }));
                                 setFormData((prevState) => ({...prevState, 
-                                    mail: r.u_mail,
-                                    cname: r.cc_name,
-                                    ccity: r.cc_city,
-                                    cstreet: r.cc_street,
-                                    chouse: r.cc_number,
-                                    cflat: r.cc_number_flat,
-                                    czip: r.cc_zip,
-                                    cnip: r.cc_NIP,
-                                    cregon: r.cc_REGON,
-                                    iname: r.ci_name,
-                                    isurname: r.ci_surname,
-                                    icity: r.ci_city,
-                                    istreet: r.ci_street,
-                                    ihouse: r.ci_number,
-                                    iflat: r.ci_number_flat,
-                                    izip: r.ci_zip,
-                                    izip1: zipA,
-                                    izip2: zipB,
-                                    czip1: zipA,
-                                    czip2: zipB
-                                    //zip2: r.ci_zip.substring(3,6)
-                                
+                                    main: {
+                                        login: r.u_login,
+                                        mail: r.u_mail
+                                    },
+                                    comp: {
+                                        cname: r.cc_name,
+                                        ccity: r.cc_city,
+                                        cstreet: r.cc_street,
+                                        chouse: r.cc_number,
+                                        cflat: r.cc_number_flat,
+                                        czip: r.cc_zip,
+                                        cnip: r.cc_NIP,
+                                        cregon: r.cc_REGON,
+                                        czip1: zipA,
+                                        czip2: zipB
+                                    },
+                                    priv: {
+                                        iname: r.ci_name,
+                                        isurname: r.ci_surname,
+                                        icity: r.ci_city,
+                                        istreet: r.ci_street,
+                                        ihouse: r.ci_number,
+                                        iflat: r.ci_number_flat,
+                                        izip: r.ci_zip,
+                                        izip1: zipA,
+                                        izip2: zipB,
+                                    }
                                 }));
                             })
                             //console.log(res.data);
@@ -115,28 +127,33 @@ const Account = () => {
                     console.log("We still have it");
                     setAccountFound(true);
                     setFormData((prevState) => ({...prevState, 
-                        mail: User.accinfo.mail,
-                        cname: User.accinfo.cname,
-                        ccity: User.accinfo.ccity,
-                        cstreet: User.accinfo.cstreet,
-                        chouse: User.accinfo.chouse,
-                        cflat: User.accinfo.cflat,
-                        czip: User.accinfo.czip,
-                        cnip: User.accinfo.cnip,
-                        cregon: User.accinfo.cregon,
-                        iname: User.accinfo.iname,
-                        isurname: User.accinfo.isurname,
-                        icity: User.accinfo.icity,
-                        istreet: User.accinfo.istreet,
-                        ihouse: User.accinfo.ihouse,
-                        iflat: User.accinfo.iflat,
-                        izip: User.accinfo.izip,
-                        izip1: User.accinfo.izip1,
-                        izip2: User.accinfo.izip2,
-                        czip1: User.accinfo.czip1,
-                        czip2: User.accinfo.czip2
-                        //zip2: r.ci_zip.substring(3,6)
-                    
+                        main: {
+                            login: User.userinfo.login,
+                            mail: User.accinfo.main.mail
+                        },
+                        comp: {
+                            cname: User.accinfo.comp.cname,
+                            ccity: User.accinfo.comp.ccity,
+                            cstreet: User.accinfo.comp.cstreet,
+                            chouse: User.accinfo.comp.chouse,
+                            cflat: User.accinfo.comp.cflat,
+                            czip: User.accinfo.comp.czip,
+                            cnip: User.accinfo.comp.cnip,
+                            cregon: User.accinfo.comp.cregon,
+                            czip1: User.accinfo.comp.czip1,
+                            czip2: User.accinfo.comp.czip2
+                        },
+                        priv: {
+                            iname: User.accinfo.priv.iname,
+                            isurname: User.accinfo.priv.isurname,
+                            icity: User.accinfo.priv.icity,
+                            istreet: User.accinfo.priv.istreet,
+                            ihouse: User.accinfo.priv.ihouse,
+                            iflat: User.accinfo.priv.iflat,
+                            izip: User.accinfo.priv.izip,
+                            izip1: User.accinfo.priv.izip1,
+                            izip2: User.accinfo.priv.izip2,
+                        }
                     }));
                 }
             }
@@ -176,25 +193,24 @@ const Account = () => {
     const handleFormData = (data, event) => {
 
         switch(data) {
-            case "LOG": setFormData({...FormData, login: event.target.value}); break;
-            case "CNM": setFormData({...FormData, cname: event.target.value}); break;
-            case "CST": setFormData({...FormData, cstreet: event.target.value}); break;
-            case "CCT": setFormData({...FormData, ccity: event.target.value}); break;
-            case "CHO": setFormData({...FormData, chouse: event.target.value}); break;
-            case "CFL": setFormData({...FormData, cflat: event.target.value}); break;
-            //case "CZP": setFormData({...FormData, czip: event.target.value}); break;
-            case "CNP": setFormData({...FormData, cnip: event.target.value}); break;
-            case "CRG": setFormData({...FormData, cregon: event.target.value}); break;
-            case "INM": setFormData({...FormData, iname: event.target.value}); break;
-            case "ISN": setFormData({...FormData, isurname: event.target.value}); break;
-            case "ICT": setFormData({...FormData, icity: event.target.value}); break;
-            case "IST": setFormData({...FormData, istreet: event.target.value}); break;
-            case "IHO": setFormData({...FormData, ihouse: event.target.value}); break;
-            case "IFL": setFormData({...FormData, iflat: event.target.value}); break;
-            case "IZ1": setFormData({...FormData, izip1: event.target.value}); break;
-            case "IZ2": setFormData({...FormData, izip2: event.target.value}); break;
-            case "CZ1": setFormData({...FormData, czip1: event.target.value}); break;
-            case "CZ2": setFormData({...FormData, czip2: event.target.value}); break;
+            case "LOG": setFormData({...FormData, main: {login: event.target.value}}); break;
+            case "CNM": setFormData({...FormData, comp: {cname: event.target.value}}); break;
+            case "CST": setFormData({...FormData, comp: {cstreet: event.target.value}}); break;
+            case "CCT": setFormData({...FormData, comp: {ccity: event.target.value}}); break;
+            case "CHO": setFormData({...FormData, comp: {chouse: event.target.value}}); break;
+            case "CFL": setFormData({...FormData, comp: {cflat: event.target.value}}); break;
+            case "CNP": setFormData({...FormData, comp: {cnip: event.target.value}}); break;
+            case "CRG": setFormData({...FormData, comp: {cregon: event.target.value}}); break;
+            case "CZ1": setFormData({...FormData, comp: {czip1: event.target.value}}); break;
+            case "CZ2": setFormData({...FormData, comp: {czip2: event.target.value}}); break;
+            case "INM": setFormData({...FormData, priv: {iname: event.target.value}}); break;
+            case "ISN": setFormData({...FormData, priv: {isurname: event.target.value}}); break;
+            case "ICT": setFormData({...FormData, priv: {icity: event.target.value}}); break;
+            case "IST": setFormData({...FormData, priv: {istreet: event.target.value}}); break;
+            case "IHO": setFormData({...FormData, priv: {ihouse: event.target.value}}); break;
+            case "IFL": setFormData({...FormData, priv: {iflat: event.target.value}}); break;
+            case "IZ1": setFormData({...FormData, priv: {izip1: event.target.value}}); break;
+            case "IZ2": setFormData({...FormData, priv: {izip2: event.target.value}}); break;
         }
 
         console.log(FormData);
@@ -202,18 +218,18 @@ const Account = () => {
 
     const changeAccountData = () => {
         let valid = 0;
+        let check = 0;
         let info1 = 'BŁĄD: Kod pocztowy powinien zawierać tylko cyfry';
         let info2 = 'BŁĄD: Numer REGON powinien zawierać wyłącznie cyfry';
-        if (isNaN(FormData.izip1) || isNaN(FormData.izip1) || isNaN(FormData.czip1) || isNaN(FormData.czip2)) {
+        if (isNaN(FormData.priv.izip1) || isNaN(FormData.priv.izip2) || isNaN(FormData.comp.czip1) || isNaN(FormData.comp.czip2)) {
             if (!ErrorInfo.includes(info1)) {
-            setErrorInfo([...ErrorInfo, "BŁĄD: Kod pocztowy powinien zawierać tylko cyfry"]);
-            //console.log(FormData.zip1);
+            setErrorInfo([...ErrorInfo, info1]);
             valid++;
             }
         }
-        if (isNaN(FormData.cregon) && FormData.cregon !== null) {
+        if (isNaN(FormData.comp.cregon) && FormData.comp.cregon !== null) {
             if (!ErrorInfo.includes(info2)) {
-            setErrorInfo([...ErrorInfo, 'BŁĄD: Numer REGON powinien zawierać wyłącznie cyfry']);
+            setErrorInfo([...ErrorInfo, info2]);
             valid++;
             }
         }
@@ -221,21 +237,47 @@ const Account = () => {
         if (valid > 0) {
             setIsError(true);
         } else {
-            let izipcode = FormData.izip1 + "-" + FormData.izip2;
-            let czipcode = FormData.czip1 + "-" + FormData.czip2;
-            if (User.accinfo.login !== FormData.login) {
+            setIsError(false);
+            setErrorInfo("");
+            let izipcode = FormData.priv.izip1 + "-" + FormData.priv.izip2;
+            let czipcode = FormData.comp.czip1 + "-" + FormData.comp.czip2;
+            //console.log("Userdata: " + User.accinfo.izip + " / FormData: " + izipcode);
+            if (User.userinfo.login !== FormData.main.login) {
                 setFormData({...FormData, mainquery: true});
+                check++;
             } else {
                 setFormData({...FormData, mainquery: false});
+                check--;
             }
 
+            if (User.accinfo.comp !== FormData.comp) {
+                setFormData({...FormData, compquery: true});
+                check++;
+            } else {
+                setFormData({...FormData, compquery: false});
+                check--;
+            }
+
+            if (User.accinfo.priv !== FormData.priv) {
+                setFormData({...FormData, privquery: true});
+                check++;                
+            } else {
+                setFormData({...FormData, privquery: false})
+                check--
+            }
+
+            console.log("check: " + check)
+
+            /*
             if (User.accinfo.cname !== FormData.cname || User.accinfo.cstreet !== FormData.cstreet || 
                 User.accinfo.ccity !== FormData.ccity || User.accinfo.chouse !== FormData.chouse ||
                 User.accinfo.cflat !== FormData.cflat || User.accinfo.cnip !== FormData.cnip || 
                 User.accinfo.cregon !== FormData.cregon || User.accinfo.czip !== czipcode) {
                     setFormData({...FormData, compquery: true});
+                    check++;
             } else {
                 setFormData({...FormData, compquery: false});
+                check--;
             }
 
             if (User.accinfo.iname !== FormData.iname || User.accinfo.isurname !== FormData.isurname ||
@@ -243,11 +285,13 @@ const Account = () => {
                 User.accinfo.ihouse !== FormData.ihouse || User.accinfo.iflat !== FormData.iflat || 
                 User.accinfo.izip !== izipcode) {
                     setFormData({...FormData, privquery: true});
+                    check++;
             } else {
                 setFormData({...FormData, privquery: false})
+                check--
             }
-
-            if (FormData.mainquery || FormData.compquery || FormData.privquery) {
+            */
+            if (check > 0) {
                 console.log("SENDING DATA");
                 console.log(FormData);
                 /*
@@ -264,14 +308,14 @@ const Account = () => {
     }
 
     if (AccountFound) {
-        if (User.accinfo.cname === null) {
+        if (User.accinfo.comp.cname === null) {
             AccountType = "indywidualne";
-            fullname = User.accinfo.iname + " " + User.accinfo.isurname;
-            address = User.accinfo.istreet + " " + User.accinfo.ihouse + "/" + User.accinfo.iflat;
+            fullname = User.accinfo.priv.iname + " " + User.accinfo.priv.isurname;
+            address = User.accinfo.priv.istreet + " " + User.accinfo.priv.ihouse + "/" + User.accinfo.priv.iflat;
         } else {
             AccountType = "firmowe";
-            fullname = User.accinfo.cname;
-            address = User.accinfo.cstreet + " " + User.accinfo.chouse + "/" + User.accinfo.cflat;
+            fullname = User.accinfo.comp.cname;
+            address = User.accinfo.comp.cstreet + " " + User.accinfo.comp.chouse + "/" + User.accinfo.comp.cflat;
         }
         AccountData = (
             <div>
@@ -285,17 +329,17 @@ const Account = () => {
                 </div>
                 <ShowAccountData
                     login={User.userinfo.login}
-                    mail={User.accinfo.mail}
-                    iname={User.accinfo.iname}
-                    isurname={User.accinfo.isurname}
+                    mail={User.accinfo.main.mail}
+                    iname={User.accinfo.priv.iname}
+                    isurname={User.accinfo.priv.isurname}
                     address={address}
-                    izip={User.accinfo.izip}
-                    icity={User.accinfo.icity}
-                    cname={User.accinfo.cname}
-                    cnip={User.accinfo.cnip}
-                    cregon={User.accinfo.cregon}
-                    czip={User.accinfo.czip}
-                    ccity={User.accinfo.ccity}
+                    izip={User.accinfo.priv.izip}
+                    icity={User.accinfo.priv.icity}
+                    cname={User.accinfo.comp.cname}
+                    cnip={User.accinfo.comp.cnip}
+                    cregon={User.accinfo.comp.cregon}
+                    czip={User.accinfo.comp.czip}
+                    ccity={User.accinfo.comp.ccity}
                     changetab={changeTab.bind(this, 0)}
                 />
             </div>
@@ -309,25 +353,24 @@ const Account = () => {
                 </div>
                 <EditAccountData
                     login={User.userinfo.login}
-                    mail={User.accinfo.mail}
-                    iname={User.accinfo.iname}
-                    isurname={User.accinfo.isurname}
-                    //address={address}
-                    istreet={User.accinfo.istreet}
-                    ihouse={User.accinfo.ihouse}
-                    iflat={User.accinfo.iflat}
-                    izip1={User.accinfo.izip1}
-                    izip2={User.accinfo.izip2}
-                    icity={User.accinfo.icity}
-                    cname={User.accinfo.cname}
-                    cnip={User.accinfo.cnip}
-                    cregon={User.accinfo.cregon}
-                    ccity={User.accinfo.ccity}
-                    cstreet={User.accinfo.cstreet}
-                    chouse={User.accinfo.chouse}
-                    cflat={User.accinfo.cflat}
-                    czip1={User.accinfo.czip1}
-                    czip2={User.accinfo.czip2}
+                    mail={User.accinfo.main.mail}
+                    iname={User.accinfo.priv.iname}
+                    isurname={User.accinfo.priv.isurname}
+                    istreet={User.accinfo.priv.istreet}
+                    ihouse={User.accinfo.priv.ihouse}
+                    iflat={User.accinfo.priv.iflat}
+                    izip1={User.accinfo.priv.izip1}
+                    izip2={User.accinfo.priv.izip2}
+                    icity={User.accinfo.priv.icity}
+                    cname={User.accinfo.comp.cname}
+                    cnip={User.accinfo.comp.cnip}
+                    cregon={User.accinfo.comp.cregon}
+                    ccity={User.accinfo.comp.ccity}
+                    cstreet={User.accinfo.comp.cstreet}
+                    chouse={User.accinfo.comp.chouse}
+                    cflat={User.accinfo.comp.cflat}
+                    czip1={User.accinfo.comp.czip1}
+                    czip2={User.accinfo.comp.czip2}
                     changetab={changeTab}
                     submitdatachange={changeAccountData}
                     iserror={IsError}

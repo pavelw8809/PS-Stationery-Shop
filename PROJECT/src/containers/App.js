@@ -66,8 +66,8 @@ function App() {
     usercontrol: false,
     userinfo: {},
     acccontrol: false,
-    accinfo: {},
-    searchmemo: []
+    accinfo: {}
+    //searchmemo: []
   });
 
   useEffect(() => {

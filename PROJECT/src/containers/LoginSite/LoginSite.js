@@ -46,7 +46,7 @@ const LoginSite = (props) => {
             
             if (res.data.uid) {
                 //console.log(res.data);
-                setUser({...User, userinfo: res.data});
+                setUser({...User, userinfo: res.data, usercontrol: true});
                 Cookies.set('pssession', res.data.sessionid);
                 //setLogShow(false);
                 History.push('/');
