@@ -3,6 +3,7 @@ import { CartContext, TotalContext } from '../../containers/App';
 import './CartItem.scss';
 import { TiDelete } from "react-icons/ti";
 import { NavLink } from 'react-router-dom';
+import { MdSettingsBackupRestore } from 'react-icons/md';
 
 const CartItem = (props) => {
 
@@ -18,13 +19,29 @@ const CartItem = (props) => {
         backgroundImage: "url(" + Image + ")"
     }
 
-
+    let CartStorage = JSON.parse(localStorage.getItem('pscart'));
 
     const increaseQuantity = (index) => {
         let newCart = [...initCart];
         newCart[index].quantity = newCart[index].quantity+1;
         newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) + parseFloat(newCart[index].price);
         
+        console.log(index);
+        let CartStorageN = [...CartStorage];
+        CartStorageN[index].quantity = CartStorageN[index].quantity+1;
+        CartStorageN[index].prodtotal = CartStorageN[index].price*CartStorageN[index].quantity;
+        localStorage.setItem('pscart', JSON.stringify(CartStorageN));
+        //Cart({...initCart, CartStorageN});
+        
+        //const cartarray = [];
+    
+        //const sum = Object.values(CartStorageN)
+        //  .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
+        //})
+        //  .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+    
+        //Total({total: sum});
+
         setCounter({
             quantity: newCart[index].quantity
         })
@@ -42,17 +59,36 @@ const CartItem = (props) => {
             newCart[index].quantity = newCart[index].quantity-1;
             newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) - parseFloat(newCart[index].price);
 
+            let CartStorageN = [...CartStorage];
+            console.log(CartStorageN);
+            CartStorageN[index].quantity = CartStorageN[index].quantity-1;
+            CartStorageN[index].prodtotal = CartStorageN[index].price*CartStorageN[index].quantity;
+            localStorage.setItem('pscart', JSON.stringify(CartStorageN));
+            //Cart({...initCart, CartStorageN});
+
+            const cartarray = [];
+    
+            const sum = Object.values(CartStorageN)
+              .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
+            })
+              .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+        
+            Total({total: sum});
+
             setCounter({
                 quantity: newCart[index].quantity
             })
-            setTotalPrice({
-                totalprice: newCart[index].prodtotal
-            })
-            Total({
-                total: parseFloat(initTotal.total) - parseFloat(newCart[index].price)
-            })
+            //setTotalPrice({
+            //    totalprice: newCart[index].prodtotal
+            //})
+            //Total({
+            //    total: parseFloat(initTotal.total) - parseFloat(newCart[index].price)
+            //})
         }
     }
+
+    //localStorage.setItem('pscart', JSON.stringify(Cart));
+    //localStorage.setItem('pstotal', Total.total);
 
     return(
         <div className="CartItem">
@@ -73,12 +109,12 @@ const CartItem = (props) => {
                 <div className="CartItemPrice">
                     <div className="CartProdPrice">{parseFloat(props.price).toFixed(2)}</div>
                     <div className="CartItemPanel">
-                        <button className="qBtn" onClick={increaseQuantity.bind(this, props.id)}>+</button>
+                        <button className="qBtn" onClick={increaseQuantity.bind(this, props.keyid)}>+</button>
                         <input className="CartqInput" type="text" value={counter.quantity}/>
-                        <button className="qBtn" onClick={decreaseQuantity.bind(this, props.id)}>-</button>
+                        <button className="qBtn" onClick={decreaseQuantity.bind(this, props.keyid)}>-</button>
                     </div>
                     <div className="CartItemTotal">
-                        {parseFloat(totalPrice.totalprice).toFixed(2)}
+                        {parseFloat(props.prodtotal).toFixed(2)}
                     </div>
                 </div>
             </div>

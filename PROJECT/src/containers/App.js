@@ -50,6 +50,29 @@ export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
 
 function App() {
 
+  //const [IsCS, setIsCS] = useState();
+
+  let CartStorage;
+
+  if (localStorage.getItem('pscart') === null) {
+    //setIsCS(false);
+    localStorage.setItem('pscart', []);
+  } else {
+    //setIsCS(true);
+    let CartData = localStorage.getItem('pscart');
+    if (CartData.length > 3) {
+      CartStorage = JSON.parse(CartData);
+    } else {
+      CartStorage = [];
+    }
+    
+    console.log(CartStorage);
+    console.log("FOUND");
+  }
+
+  const [CartList, setCartList] = useState({products: CartStorage});
+  console.log(CartList);
+
 // *** S T A T E S ***
   
   // 1. Cart state
@@ -57,8 +80,7 @@ function App() {
 
   // 2. Total price state
   
-  const total = Cart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
-  const [Total, setTotal] = useState({total});
+  const [Total, setTotal] = useState(0);
 
   // 3. User account state
 
@@ -82,9 +104,26 @@ function App() {
     } else {
 
     }
+    setCart(CartStorage);
+
+    const cartmap = {
+      ...CartList.products
+    };
+
+    const cartarray = [];
+    
+    const sum = Object.values(cartmap)
+      .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
+    })
+      .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+
+    setTotal({total: sum});
+
   }, [])
 
-  console.log(User);
+  console.log(Cart);
+
+  
 
 
   // BACKGROUND IMAGE

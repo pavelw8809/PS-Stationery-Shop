@@ -12,7 +12,7 @@
     Dodatkowe info:     {nazwa_zdjecia} ma korespondowac z numerem artykulu w bazie danych
 */
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import App, { CartContext, TotalContext } from '../../containers/App';
 import carticon from '../../images/icons/black_cart.png';
 import "./ArtCard.scss";                                                            // Import arkusza stylu dla dla komponentu
@@ -25,7 +25,9 @@ const Artcard = (props) =>{
     })
     const [Cart, setCart] = useContext(CartContext);
     const [Total, setTotal] = useContext(TotalContext);
+    const [CartTemp, setCartTemp] = useState([]);
 
+    //let CartStorage
     const Image = require('../../images/images/' + props.imagename + '.png');       // Ścieżka do zdjęcia
 
     let ProdImgStyle;
@@ -34,7 +36,15 @@ const Artcard = (props) =>{
         backgroundColor: 'white',
     }
 
+    useEffect(() => {
+        //CartStorage = JSON.parse(localStorage.getItem('pscart'));
+        //setCartTemp(CartStorage);
+        //console.log(CartTemp);
+    }, []);
+
     //console.log(initCart);
+
+    let CartStorage = JSON.parse(localStorage.getItem('pscart'));
 
     const increaseQuantity = () => {
         if (counter.quantity < 100) {
@@ -68,6 +78,7 @@ const Artcard = (props) =>{
         let check = 0;
         let idToChange;
         let orSum = parseFloat((q*price));
+        //let CartStorage;
 
         Cart.map((r, index) => {
             if (r.prodid === prodid) {
@@ -78,8 +89,9 @@ const Artcard = (props) =>{
 
         if (q > 0) {
             if (check === 0) {
+                
                 setCart(prevCart => ([...Cart, {
-                    id: Cart.length, 
+                    //id: Cart.length, 
                     prodid: prodid,
                     name: name, 
                     desc: desc,
@@ -88,10 +100,28 @@ const Artcard = (props) =>{
                     prodtotal: q*price,
                     imagename: imagename
                 }]))
+                
+                let CartStorageN = ([...CartStorage, {
+                    //id: CartStorage.length,
+                    prodid: prodid,
+                    name: name, 
+                    desc: desc,
+                    price: parseFloat(price),
+                    quantity: q,                                                                               
+                    prodtotal: q*price,                             
+                    imagename: imagename
+                }]);
+                localStorage.setItem('pscart', JSON.stringify(CartStorageN))
+        
+                //console.log(newCartStorage);
             } else {
                 let newCart = [...Cart];
                 newCart[idToChange].quantity = newCart[idToChange].quantity+q;
                 newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
+                let CartStorageN = [...CartStorage];
+                CartStorageN[idToChange].quantity = CartStorageN[idToChange].quantity+q;
+                CartStorageN[idToChange].prodtotal = CartStorageN[idToChange].price*CartStorageN[idToChange].quantity;
+                localStorage.setItem('pscart', JSON.stringify(CartStorageN))
             }
             setTotal({
                 total: parseFloat(Total.total+orSum)
@@ -101,6 +131,8 @@ const Artcard = (props) =>{
             })
         }
     }
+
+    console.log(CartTemp);
 
     return(
         <div className="artCard">

@@ -25,13 +25,35 @@ const SCart = () => {
     const [Cart, setCart] = useContext(CartContext);
     const [Total, setTotal] = useContext(TotalContext);
 
+    let CartStorage = JSON.parse(localStorage.getItem('pscart'));
+    //setCart(CartStorage)
+
     const removeItem = (index) => {
-        console.log(index);
+        //console.log(index);
         let newCart = Cart.slice();
         newCart.splice(index, 1);
         setCart(newCart);
-        const total = newCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
-        setTotal({total});
+        //const total = newCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
+
+
+        console.log(index);
+        let CartStorageN = CartStorage.slice();
+        CartStorageN.splice(index, 1);
+        localStorage.setItem('pscart', JSON.stringify(CartStorageN));
+
+        const cartarray = [];
+    
+        const sum = Object.values(CartStorageN)
+          .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
+        })
+          .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+    
+          CartStorage = CartStorageN;
+          console.log(CartStorage);
+          //localStorage.setItem('pscart', JSON.stringify(CartStorageN))
+        setTotal({total: sum});
+        setCart(CartStorageN);
+        //setTotal({total});
     }
 
     const sendOrder = (orderdata) => {
@@ -53,6 +75,7 @@ const SCart = () => {
         ShowCartItems = (
             <div className="CartItems">
                 {Cart.map((r, index) => {
+                    console.log(r.prodtotal)
                     return(
                         <CartItem 
                             id={r.id}
@@ -63,7 +86,8 @@ const SCart = () => {
                             quantity={r.quantity}
                             prodtotal={r.prodtotal}
                             imagename={r.imagename}
-                            key={r.id}
+                            keyid={index}
+                            key={index}
                             removeitem={removeItem.bind(this, index)}
                         />
                     )
@@ -76,6 +100,17 @@ const SCart = () => {
             </div>
         )
     }
+
+    //useEffect(() => {
+        //let LocalStorage = JSON.parse(localStorage.getItem('pscart'));
+        //setCart(LocalStorage);
+        //localStorage.setItem('pscart', JSON.stringify(Cart));
+        //localStorage.setItem('pstotal', Total.total);
+        //let LocalStorage = localStorage.getItem('pstotal');
+    //}, []);
+
+    //localStorage.setItem('pscart', JSON.stringify(Cart));
+    //localStorage.setItem('pstotal', Total.total);
 
     return(
         <div className="Cart">

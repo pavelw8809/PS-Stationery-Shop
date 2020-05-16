@@ -15,7 +15,7 @@
 
 import React, { useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';                                                         // Import komponentu Navlick - element react-router-dom
-import { TotalContext } from '../../containers/App';
+import { TotalContext, CartContext } from '../../containers/App';
 import logo0 from '../../images/icons/pands.png';                                                   // Logo firmy duże
 import logo1 from '../../images/icons/pands_small.png';
 import { FaSearch } from 'react-icons/fa';                                                   // Ikona lupy
@@ -30,6 +30,7 @@ const Header = () => {
     // STATES
     
     const [Total, setTotal] = useContext(TotalContext);
+    const [Cart, setCart] = useContext(CartContext);
     const [Dropdown, setDropdown] = useState(false);
     const [StyleNavBar, setStyleNavBar] = useState();
     const [StyleArtNav, setStyleArtNav] = useState();
@@ -37,8 +38,11 @@ const Header = () => {
 
     // SCROLLING LISTENER FOR BANNER
 
+    //let CartStorage = localStorage.getItem('pscart');
+    //let TotalStorage = localStorage.getItem('pstotal');
+
     const listenScrollEvent = (event) => {
-        console.log(window.scrollY);
+        //console.log(window.scrollY);
         if (window.scrollY >= 100) {
             setStyleNavBar({maxHeight: 0, overflow: 'hidden', transitionDuration: '1s'});
             setStyleArtNav({maxHeight: 0, overflow: 'hidden', transitionDuration: '1s'});

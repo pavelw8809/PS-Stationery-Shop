@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const EditAccountData = (props) => {
 
-    const [ErrorInfo, setErrorInfo] = useState([]);
     let AccFormData, errordata;
 
     console.log(props.errorinfo)
@@ -10,11 +9,8 @@ const EditAccountData = (props) => {
     if (props.iserror === true) {
         errordata = (
             <div className="EAErrorInfo">
-                {props.errorinfo.map((r, index) => {
-                    return(
-                        <p key={index}>{r}</p>
-                    )
-                })}
+                <p>{props.errorinfo.info1}</p>
+                <p>{props.errorinfo.info2}</p>
             </div>
         )
     }

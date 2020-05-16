@@ -19,6 +19,8 @@ const Artdetails = (props) => {
 
     let NetPrice = (props.location.artProps.price/1.23).toFixed(2);
 
+    let CartStorage = JSON.parse(localStorage.getItem('pscart'));
+
     const increaseQuantity = () => {
         if (counter.quantity < 100) {
             setCounter({
@@ -71,10 +73,24 @@ const Artdetails = (props) => {
                     prodtotal: q*price,
                     imagename: imagename
                 }]))
+                let CartStorageN = ([...CartStorage, {
+                    id: CartStorage.length,
+                    prodid: prodid,
+                    name: name, 
+                    desc: desc,
+                    price: parseFloat(price),
+                    quantity: q,                                                                               
+                    prodtotal: q*price,                             
+                    imagename: imagename
+                }]);
+                localStorage.setItem('pscart', JSON.stringify(CartStorageN))
             } else {
                 let newCart = [...Cart];
                 newCart[idToChange].quantity = newCart[idToChange].quantity+q;
                 newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
+                let CartStorageN = [...CartStorage];
+                CartStorageN[idToChange].quantity = CartStorageN[idToChange].quantity+q;
+                CartStorageN[idToChange].prodtotal = CartStorageN[idToChange].price*CartStorageN[idToChange].quantity;
             }
             setTotal({
                 total: parseFloat(Total.total+orSum)
@@ -84,6 +100,9 @@ const Artdetails = (props) => {
             })
         }
     }
+
+    localStorage.setItem('pscart', JSON.stringify(Cart));
+    localStorage.setItem('pstotal', Total.total);
 
     return(
         <div className="ArtDetails">

@@ -47,6 +47,7 @@ const UserBtn = (props) => {
                 setUser({...User, userinfo: res.data, usercontrol: true});
                 Cookies.set('pssession', res.data.sessionid);
                 setLogShow(false);
+                setErrorInfo();
             } else {
                 let errordata = (
                     <div className="ErrorInfo">
