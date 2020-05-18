@@ -21,9 +21,6 @@
     display: flex;
 }
 
-.AccountName h1{
-}
-
 .AccountType {
     text-transform: uppercase;
     font-size: 1.2em;
@@ -63,6 +60,12 @@
 
 .separator:last-of-type {
     margin: 5px 0 0 0;
+}
+
+.passseparator {
+    border: solid 0.5px $color0;
+    width: 100%;
+    margin: 10px 0 0 0;
 }
 
 .AccountPanel {
@@ -113,6 +116,39 @@
 }
 
 .EAErrorInfo p {
-    padding: 4px;
+    padding: 0px;
+}
+
+.PassInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.PassPanelContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.PassPanel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    //min-width: 300px;;
+}
+
+.PassPanel h3 {
+    text-align: center;
+}
+
+.PassPanel input {
+    margin: 5px;
+}
+
+.PassError {
+    text-align: center;
+    color: maroon;
 }
 

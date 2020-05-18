@@ -9,10 +9,11 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
-import { CartContext } from '../App';
+//import { CartContext } from '../App';
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss";
+import { ServerPath } from '../App';
 
 const Index = () => {
    /* const [User, setUser] = useContext(UserContext);
@@ -29,7 +30,7 @@ const Index = () => {
     const [Products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/WSB_SELCOR/SERVER/Index.php`)
+        axios.get(ServerPath + `Index.php`)
         .then(res => {
             setProducts(res.data);
         })
@@ -63,13 +64,13 @@ const Index = () => {
     )*/
     return(
         <div className="SiteContainer">
-            <TitleBar title= "Zapraszamy do skorzystania z naszej oferty"/>
+            <TitleBar title="Zapraszamy do skorzystania z naszej oferty"/>
             <p></p>
             <p></p>
             <p></p>
             <p></p>
             <p></p>
-            <TitleBar title= "Top 5 najczęściej kupwanych produktów w naszym sklepie"/>
+            <TitleBar title="Top 5 najczęściej kupowanych produktów w naszym sklepie"/>
 
             {showCards}
         </div>

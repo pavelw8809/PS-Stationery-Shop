@@ -26,9 +26,9 @@ if (empty($data->password)) {
 }
 //file_put_contents("log.txt", $data->userid);
 
-if (count($errors) == 0) {
-	$username = $data->user;
-  	$password = md5($data->password);
+if (count($errors) === 0) {
+	$username = mysqli_real_escape_string($con, $data->user);
+  	$password = mysqli_real_escape_string($con, md5($data->password));
   	$query = "SELECT u_id, u_login FROM users WHERE u_login='$username' AND u_password='$password'";
   	$result = mysqli_query($con, $query);
   	if (mysqli_num_rows($result) === 1) {

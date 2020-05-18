@@ -34,7 +34,7 @@ const ExtLoginSite = (props) => {
 
     const handleLogin = (event) => {
         if (event.keyCode === 13) {
-            console.log("A");
+            //console.log("A");
             submitCredentials();
         } else {
             setLogin({...Login, user: event.target.value});
@@ -52,6 +52,7 @@ const ExtLoginSite = (props) => {
     const History = useHistory();
 
     const submitCredentials = () => {
+        //console.log(User.userinfo);
         setLogin({...Login, userid: User.userinfo.login});
         Axios.post(ServerPath + 'ExtLogin.php', Login)
         .then(res => {
@@ -112,7 +113,7 @@ const ExtLoginSite = (props) => {
             <label htmlFor="mail">Nazwa użytkownika</label>
             <input type="text" name="mail" onChange={handleLogin} onKeyDown={handleLogin}></input><br/>
             <label htmlFor="password">Hasło</label>
-            <input type="text" name="password" onChange={handlePassword} onKeyDown={handlePassword}></input><br/>
+            <input type="password" name="password" onChange={handlePassword} onKeyDown={handlePassword}></input><br/>
             <button type="submit" onClick={submitCredentials}>ZALOGUJ</button>
             {ErrorInfo}
         </div>

@@ -6,8 +6,10 @@ import TitleBar from '../../components/TitleBar/TitleBar';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 import { FaRegUserCircle } from 'react-icons/fa';
+//import AccountPanel from '../../components/AccountPanel/AccountPanel';
 import ShowAccountData from '../../components/ShowAccountData/ShowAccountData';
 import EditAccountData from '../../components/EditAccountData/EditAccountData';
+import ChangePassword from '../../components/ChangePassword/ChangePassword';
 
 const Account = () => {
     const [User, setUser] = useContext(UserContext);
@@ -18,7 +20,7 @@ const Account = () => {
     const [FormData, setFormData] = useState();
     const [IsError, setIsError] = useState(false);
     const [ErrorInfo, setErrorInfo] = useState([]);
-    const [InfoType] = useState(["mail", "cname", "ccity", "cstreet"]);
+    //const [InfoType] = useState(["mail", "cname", "ccity", "cstreet"]);
     //let UserId = Cookies.get('psid');
     //let DecodedUserId = decodeURIComponent(UserId);
     let SessionId = Cookies.get('pssession');
@@ -119,6 +121,7 @@ const Account = () => {
                     console.log("We still have it");
                     setAccountFound(true);
                     setFormData((prevState) => ({...prevState, 
+                        userid: User.userinfo.uid,
                         login: User.userinfo.login,
                         mail: User.accinfo.mail,
                         cname: User.accinfo.cname,
@@ -163,6 +166,11 @@ const Account = () => {
         EAStyle = {display: 'block'};
         CPStyle = {display: 'none'};
     }
+    if (TabDisp.accpass) {
+        ACStyle = {display: 'none'};
+        EAStyle = {display: 'none'};
+        CPStyle = {display: 'block'};
+    }
 
     const changeTab = (option) => {
         if (option === 0) {
@@ -185,7 +193,6 @@ const Account = () => {
             case "CCT": setFormData({...FormData, ccity: event.target.value}); break;
             case "CHO": setFormData({...FormData, chouse: event.target.value}); break;
             case "CFL": setFormData({...FormData, cflat: event.target.value}); break;
-            //case "CZP": setFormData({...FormData, czip: event.target.value}); break;
             case "CNP": setFormData({...FormData, cnip: event.target.value}); break;
             case "CRG": setFormData({...FormData, cregon: event.target.value}); break;
             case "INM": setFormData({...FormData, iname: event.target.value}); break;
@@ -199,37 +206,148 @@ const Account = () => {
             case "CZ1": setFormData({...FormData, czip1: event.target.value}); break;
             case "CZ2": setFormData({...FormData, czip2: event.target.value}); break;
         }
-
-        console.log(FormData);
     }
 
+    console.log(FormData);
+
+    const addError = (info) => {
+        console.log("arg: " + info);
+        let checkErr = 0
+        if (ErrorInfo.length > 0) {
+            ErrorInfo.map((r, index) => {
+                console.log(r);
+                if (r === info) {
+                    checkErr = 1;
+                }
+                console.log(checkErr);
+            })
+            if (checkErr === 0) {
+                console.log("B: " + info);
+                setErrorInfo((prevState) =>[...prevState, info]);
+            }
+        } else {
+            console.log(info);
+            setErrorInfo((prevState) =>[...prevState, info]);
+        }
+    }
+
+    //console.log(ErrorInfo);
+
+    const remError = (info) => {
+        
+        console.log("Removing: " + info);
+        let newErrorList = ErrorInfo.slice();
+        newErrorList.map((r, index) => {
+            console.log(r + " / " + info);
+            if (r === info) {
+                console.log("slicing")
+                newErrorList.splice(index, 1);
+                setErrorInfo(newErrorList);
+            }
+        });
+        
+    }
 
     const changeAccountData = () => {
         //let errorlist = new Array;
         let valid = 0;
-        let info1 = 'BŁĄD: Kod pocztowy powinien zawierać tylko cyfry';
-        let info2 = 'BŁĄD: Numer REGON powinien zawierać wyłącznie cyfry';
+        let EmptyFields = false;
+        let NotANumber = false;
+        let InvalidRegon = false;
+        let InvalidNip = false;
+        let info1 = 'BŁĄD: Kod pocztowy powinien zawierać tylko cyfry w formacie XX-XXX';
+        let info2 = 'BŁĄD: Format nr REGON jest niepoprawny (9 cyfr).';
+        let info3 = 'BŁĄD: Format nr NIP jest niepoprawny (10 cyfr).';
+        let info8 = 'BŁĄD: Pola nie mogą być puste';
 
-        if (isNaN(FormData.czip1) || isNaN(FormData.czip2)) {
-
-                setIsError(true);
-                setErrorInfo((prevState) => ({...prevState, info1: info1}))
-                valid = 1 
+        console.log(FormData.login.length);
+/*
+        if (FormData.login.length === 0) {
+            console.log("A");
+            //setIsError(true);
+            addError(info8);
+            valid = 1;
         } else {
-            setErrorInfo((prevState) => ({...prevState, info1: ""}))
+            remError(info8);
         }
+*/
+        let isPropEmpty = false;
 
-        if (isNaN(FormData.cregon) && FormData.cregon !== null) {
-                setIsError(true);
-                setErrorInfo((prevState) => ({...prevState, info2: info2}))
+        if (AccountType === "indywidualne") {
+            let propArray = [FormData.login, FormData.iname, FormData.isurname, FormData.istreet, FormData.icity, 
+                            FormData.ihouse];
+
+
+            propArray.map((r, index) => {
+                if (r.length === 0) {
+                    console.log("isEmpty");
+                    //setIsError(true);
+                    //addError(info8);
+                    isPropEmpty = true;
+                    //setErrorInfo((prevState) => ({...prevState, info8}))
+                    valid = 1;
+                }
+            })
+            if (isPropEmpty === true) {
+                console.log("A");
+                EmptyFields = true;
+                //addError(info8);
+            } else {
+                //remError(info8);
+            }
+
+            if (isNaN(FormData.izip1) || FormData.izip1 === null || FormData.izip1.length !== 2 ||
+                isNaN(FormData.izip2) || FormData.izip2 === null || FormData.izip2.length !== 3) {
+                    NotANumber = true;
+            }
+
+        } else {
+            let propArray = [FormData.login, FormData.cname, FormData.cstreet, FormData.ccity, FormData.chouse];
+ 
+            propArray.map((r, index) => {
+                console.log(r);
+                if (r.length === 0) {
+                    isPropEmpty = true;
+                    //setIsError(true);
+                    //setErrorInfo((prevState) => ({...prevState, info8}))
+                    valid = 1;
+                }
+            })
+            if (isPropEmpty === true) {
+                EmptyFields = true;
+                //addError(info8);
+            } else {
+                //remError(info8);
+            }
+
+            if (isNaN(FormData.czip1) || FormData.czip1 === null || FormData.czip1.length !== 2 ||
+            isNaN(FormData.czip2) || FormData.czip2 === null || FormData.czip2.length !== 3) {
+                NotANumber = true;
                 valid = 1;
-        } else {
-            setErrorInfo((prevState) => ({...prevState, info2: ""}))
+            }
+
+            if (isNaN(FormData.cregon) || FormData.cregon === null || FormData.cregon.length !== 9) {
+                InvalidRegon = true;
+                valid = 1;
+            }
+
+            if (isNaN(FormData.cnip) || FormData.cnip === null || FormData.cnip.length !== 10) {
+                InvalidNip = true;
+                valid = 1;
+            }
         }
+
+        if (EmptyFields) { addError(info8); } else { remError(info8); }
+        if (NotANumber) { addError(info1); } else { remError(info1); }
+        if (InvalidRegon) { addError(info2); } else { remError(info2); }
+        if (InvalidNip) { addError(info3); } else { remError(info3); }
 
         if (valid === 0) {
             let check = 0;
-            setIsError(false);
+            let mainquery = false; 
+            let compquery = false; 
+            let privquery = false;
+            //setIsError(false);
             let izipcode, czipcode;
             if (FormData.izip1 === null) {
                 izipcode = null
@@ -241,40 +359,54 @@ const Account = () => {
             } else {
                 czipcode = FormData.czip1 + "-" + FormData.czip2;
             }
-            
-            //console.log("Userdata: " + User.accinfo.czip + " / FormData: " + czipcode);
+
             if (User.accinfo.login !== FormData.login) {
-                setFormData((prevState) => ({...prevState, mainquery: true}));
+                mainquery = true;
                 check = 1
             } else {
-                setFormData((prevState) => ({...prevState, mainquery: false}));
+                mainquery = false;
             }
-
 
             if (User.accinfo.cname !== FormData.cname || User.accinfo.cstreet !== FormData.cstreet || 
                 User.accinfo.ccity !== FormData.ccity || User.accinfo.chouse !== FormData.chouse ||
                 User.accinfo.cflat !== FormData.cflat || User.accinfo.cnip !== FormData.cnip || 
                 User.accinfo.cregon !== FormData.cregon || User.accinfo.czip !== czipcode) {
-                    setFormData((prevState) => ({...prevState, compquery: true}));
+                    compquery = true;
                     check = 1
             } else {
-                setFormData((prevState) => ({...prevState, compquery: false}));
+                compquery = false;
             }
 
             if (User.accinfo.iname !== FormData.iname || User.accinfo.isurname !== FormData.isurname ||
                 User.accinfo.istreet !== FormData.istreet || User.accinfo.icity !== FormData.icity || 
                 User.accinfo.ihouse !== FormData.ihouse || User.accinfo.iflat !== FormData.iflat || 
                 User.accinfo.izip !== izipcode) {
+                    privquery = true;
                     check = 1
-                    setFormData((prevState) => ({...prevState, privquery: true}));
             } else {
-                setFormData((prevState) => ({...prevState, privquery: false}));
+                privquery = false;
+                //setFormData((prevState) => ({...prevState, privquery: false}));
             }
+
+            let fullFormData = {...FormData, mainquery: mainquery, compquery: compquery, privquery: privquery, izip: izipcode, czip: czipcode};
 
 
             if (check > 0) {
                 console.log("SENDING DATA");
-                console.log(FormData);
+                let fullAccData = {...fullFormData, userid: User.userinfo.uid};
+                console.log(fullAccData);
+                Axios.post(ServerPath + "EditAccount.php", fullAccData)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data === "success") {
+                            setUser((prevState) => ({...prevState,
+                                accinfo: fullAccData, userinfo: {uid: fullAccData.userid, login: fullAccData.login}
+                            }));
+                            changeTab(2);
+                        } else {
+                            setErrorInfo(res.data);
+                        }
+                    });
             } else {
                 console.log("NOTHING CHANGED");
             }
@@ -293,83 +425,98 @@ const Account = () => {
         }
         AccountData = (
             <div>
-            <div className="AccountData" style={ACStyle}>
-                <div className="AccountNameContainer">
-                    <div className="AccountName">
-                        <FaRegUserCircle size={50}/>
-                        <h1>{fullname}</h1>
+                <div className="AccountData" style={ACStyle}>
+                    <div className="AccountNameContainer">
+                        <div className="AccountName">
+                            <FaRegUserCircle size={50}/>
+                            <h1>{fullname}</h1>
+                        </div>
+                        <div className="AccountType">Konto {AccountType}</div>
                     </div>
-                    <div className="AccountType">Konto {AccountType}</div>
+                    <ShowAccountData
+                        login={User.userinfo.login}
+                        mail={User.accinfo.mail}
+                        iname={User.accinfo.iname}
+                        isurname={User.accinfo.isurname}
+                        address={address}
+                        izip={User.accinfo.izip}
+                        icity={User.accinfo.icity}
+                        cname={User.accinfo.cname}
+                        cnip={User.accinfo.cnip}
+                        cregon={User.accinfo.cregon}
+                        czip={User.accinfo.czip}
+                        ccity={User.accinfo.ccity}
+                        changetabshow={changeTab.bind(this, 0)}
+                        changetabpass={changeTab.bind(this, 1)}
+                    />
                 </div>
-                <ShowAccountData
-                    login={User.userinfo.login}
-                    mail={User.accinfo.mail}
-                    iname={User.accinfo.iname}
-                    isurname={User.accinfo.isurname}
-                    address={address}
-                    izip={User.accinfo.izip}
-                    icity={User.accinfo.icity}
-                    cname={User.accinfo.cname}
-                    cnip={User.accinfo.cnip}
-                    cregon={User.accinfo.cregon}
-                    czip={User.accinfo.czip}
-                    ccity={User.accinfo.ccity}
-                    changetab={changeTab.bind(this, 0)}
-                />
+                <div className="AccountData" style={EAStyle}>
+                    <div className="AccountNameContainer">
+                        <div className="AccountName">
+                            <FaRegUserCircle size={50}/>
+                            <h1>{fullname}</h1>
+                        </div>
+                        <div className="AccountType">Konto {AccountType}</div>
+                    </div>
+                    <EditAccountData
+                        login={User.userinfo.login}
+                        mail={User.accinfo.mail}
+                        iname={User.accinfo.iname}
+                        isurname={User.accinfo.isurname}
+                        istreet={User.accinfo.istreet}
+                        ihouse={User.accinfo.ihouse}
+                        iflat={User.accinfo.iflat}
+                        izip1={User.accinfo.izip1}
+                        izip2={User.accinfo.izip2}
+                        icity={User.accinfo.icity}
+                        cname={User.accinfo.cname}
+                        cnip={User.accinfo.cnip}
+                        cregon={User.accinfo.cregon}
+                        ccity={User.accinfo.ccity}
+                        cstreet={User.accinfo.cstreet}
+                        chouse={User.accinfo.chouse}
+                        cflat={User.accinfo.cflat}
+                        czip1={User.accinfo.czip1}
+                        czip2={User.accinfo.czip2}
+                        changetab={changeTab.bind(this, 2)}
+                        submitdatachange={changeAccountData}
+                        iserror={IsError}
+                        errorinfo={ErrorInfo}
+                        log={handleFormData.bind(this, "LOG")}
+                        cnm={handleFormData.bind(this, "CNM")}                  
+                        cst={handleFormData.bind(this, "CST")}
+                        cct={handleFormData.bind(this, "CCT")}
+                        cho={handleFormData.bind(this, "CHO")}
+                        cfl={handleFormData.bind(this, "CFL")}
+                        czp={handleFormData.bind(this, "CZP")}
+                        cnp={handleFormData.bind(this, "CNP")}
+                        crg={handleFormData.bind(this, "CRG")}
+                        inm={handleFormData.bind(this, "INM")}
+                        isn={handleFormData.bind(this, "ISN")}
+                        ict={handleFormData.bind(this, "ICT")}
+                        ist={handleFormData.bind(this, "IST")}
+                        iho={handleFormData.bind(this, "IHO")}
+                        ifl={handleFormData.bind(this, "IFL")}
+                        iz1={handleFormData.bind(this, "IZ1")}
+                        iz2={handleFormData.bind(this, "IZ2")}
+                        cz1={handleFormData.bind(this, "CZ1")}
+                        cz2={handleFormData.bind(this, "CZ2")}
+                    />
+                </div>
+                <div className="AccountData" style={CPStyle}>
+                    <div className="AccountNameContainer">
+                        <div className="AccountName">
+                            <FaRegUserCircle size={50}/>
+                            <h1>{fullname}</h1>
+                        </div>
+                        <div className="AccountType">Konto {AccountType}</div>
+                    </div>
+                    <ChangePassword
+                        uid={User.userinfo.uid}
+                        changetab={changeTab.bind(this, 2)}
+                    />
+                </div>
             </div>
-            <div className="AccountData" style={EAStyle}>
-                <div className="AccountNameContainer">
-                    <div className="AccountName">
-                        <FaRegUserCircle size={50}/>
-                        <h1>{fullname}</h1>
-                    </div>
-                    <div className="AccountType">Konto {AccountType}</div>
-                </div>
-                <EditAccountData
-                    login={User.userinfo.login}
-                    mail={User.accinfo.mail}
-                    iname={User.accinfo.iname}
-                    isurname={User.accinfo.isurname}
-                    istreet={User.accinfo.istreet}
-                    ihouse={User.accinfo.ihouse}
-                    iflat={User.accinfo.iflat}
-                    izip1={User.accinfo.izip1}
-                    izip2={User.accinfo.izip2}
-                    icity={User.accinfo.icity}
-                    cname={User.accinfo.cname}
-                    cnip={User.accinfo.cnip}
-                    cregon={User.accinfo.cregon}
-                    ccity={User.accinfo.ccity}
-                    cstreet={User.accinfo.cstreet}
-                    chouse={User.accinfo.chouse}
-                    cflat={User.accinfo.cflat}
-                    czip1={User.accinfo.czip1}
-                    czip2={User.accinfo.czip2}
-                    changetab={changeTab.bind(this, 2)}
-                    submitdatachange={changeAccountData}
-                    iserror={IsError}
-                    errorinfo={ErrorInfo}
-                    log={handleFormData.bind(this, "LOG")}
-                    cnm={handleFormData.bind(this, "CNM")}                  
-                    cst={handleFormData.bind(this, "CST")}
-                    cct={handleFormData.bind(this, "CCT")}
-                    cho={handleFormData.bind(this, "CHO")}
-                    cfl={handleFormData.bind(this, "CFL")}
-                    czp={handleFormData.bind(this, "CZP")}
-                    cnp={handleFormData.bind(this, "CNP")}
-                    crg={handleFormData.bind(this, "CRG")}
-                    inm={handleFormData.bind(this, "INM")}
-                    isn={handleFormData.bind(this, "ISN")}
-                    ict={handleFormData.bind(this, "ICT")}
-                    ist={handleFormData.bind(this, "IST")}
-                    iho={handleFormData.bind(this, "IHO")}
-                    ifl={handleFormData.bind(this, "IFL")}
-                    iz1={handleFormData.bind(this, "IZ1")}
-                    iz2={handleFormData.bind(this, "IZ2")}
-                    cz1={handleFormData.bind(this, "CZ1")}
-                    cz2={handleFormData.bind(this, "CZ2")}
-                />
-            </div></div>
         )
     } else if (!UserLogged) {
         AccountData = (

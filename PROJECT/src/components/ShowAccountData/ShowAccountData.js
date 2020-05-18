@@ -58,9 +58,9 @@ const ShowAccountData = (props) => {
         <div>
             {AccountData}
             <div className="AccountPanel">
-                <button onClick={props.changetab}>EDYCJA KONTA</button>
+                <button onClick={props.changetabshow}>EDYCJA KONTA</button>
                 <button>MOJE ZAMÓWIENIA</button>
-                <button>ZMIEŃ HASŁO</button>
+                <button onClick={props.changetabpass}>ZMIEŃ HASŁO</button>
             </div>
         </div>
     )

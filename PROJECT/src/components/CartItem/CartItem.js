@@ -7,7 +7,7 @@ import { MdSettingsBackupRestore } from 'react-icons/md';
 
 const CartItem = (props) => {
 
-    const [initCart, Cart] = useContext(CartContext);                               // stan globalny - stan koszyka
+    //const [initCart, Cart] = useContext(CartContext);                               // stan globalny - stan koszyka
     const [initTotal, Total] = useContext(TotalContext);                            // stan globalny - suma do zapłaty
     const [counter, setCounter] = useState({quantity: props.quantity})              // stan lokalny - wyświetla ilość produktu
     const [totalPrice, setTotalPrice] = useState({totalprice: props.prodtotal})     // stan lokalny - wyświetla sumę do zapłaty
@@ -22,9 +22,9 @@ const CartItem = (props) => {
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
 
     const increaseQuantity = (index) => {
-        let newCart = [...initCart];
-        newCart[index].quantity = newCart[index].quantity+1;
-        newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) + parseFloat(newCart[index].price);
+        //let newCart = [...initCart];
+        //newCart[index].quantity = newCart[index].quantity+1;
+        //newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) + parseFloat(newCart[index].price);
         
         console.log(index);
         let CartStorageN = [...CartStorage];
@@ -43,24 +43,29 @@ const CartItem = (props) => {
         //Total({total: sum});
 
         setCounter({
-            quantity: newCart[index].quantity
+            quantity: CartStorageN[index].quantity
         })
-        setTotalPrice({
-            totalprice: newCart[index].prodtotal
+        //setTotalPrice({
+        //    totalprice: newCart[index].prodtotal
+        //})
+        const cartarray = [];
+    
+        const sum = Object.values(CartStorageN)
+          .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
         })
-        Total({
-            total: parseFloat(initTotal.total) + parseFloat(newCart[index].price)
-        })
+          .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+    
+        Total({total: sum});
     }
 
     const decreaseQuantity = (index) => {
         if (counter.quantity > 1) {
-            let newCart = [...initCart];
-            newCart[index].quantity = newCart[index].quantity-1;
-            newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) - parseFloat(newCart[index].price);
+            //let newCart = [...initCart];
+            //newCart[index].quantity = newCart[index].quantity-1;
+            //newCart[index].prodtotal = parseFloat(newCart[index].prodtotal) - parseFloat(newCart[index].price);
 
             let CartStorageN = [...CartStorage];
-            console.log(CartStorageN);
+            //console.log(CartStorageN);
             CartStorageN[index].quantity = CartStorageN[index].quantity-1;
             CartStorageN[index].prodtotal = CartStorageN[index].price*CartStorageN[index].quantity;
             localStorage.setItem('pscart', JSON.stringify(CartStorageN));
@@ -76,7 +81,7 @@ const CartItem = (props) => {
             Total({total: sum});
 
             setCounter({
-                quantity: newCart[index].quantity
+                quantity: CartStorageN[index].quantity
             })
             //setTotalPrice({
             //    totalprice: newCart[index].prodtotal
@@ -90,6 +95,8 @@ const CartItem = (props) => {
     //localStorage.setItem('pscart', JSON.stringify(Cart));
     //localStorage.setItem('pstotal', Total.total);
 
+    console.log(props.prodid);
+
     return(
         <div className="CartItem">
         <NavLink className="CartItemImg" style={ProdImgStyle} to={{
@@ -97,10 +104,10 @@ const CartItem = (props) => {
             artProps: {
                 name: props.name,
                 shortdesc: props.shortdesc,
-                description: props.description,
+                description: props.desc,
                 price: props.price,
                 imagename: props.imagename,
-                prodid: props.prodid
+                prodid: props.id
             }
             }}>
         </NavLink>

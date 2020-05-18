@@ -13,7 +13,7 @@
 */
 
 import React, { useState, useContext, useEffect } from 'react';
-import App, { CartContext, TotalContext } from '../../containers/App';
+import App, { TotalContext } from '../../containers/App';
 import carticon from '../../images/icons/black_cart.png';
 import "./ArtCard.scss";                                                            // Import arkusza stylu dla dla komponentu
 import { NavLink } from 'react-router-dom';
@@ -23,9 +23,9 @@ const Artcard = (props) =>{
     const [counter, setCounter] = useState({
         quantity: 0
     })
-    const [Cart, setCart] = useContext(CartContext);
+    //const [Cart, setCart] = useContext(CartContext);
     const [Total, setTotal] = useContext(TotalContext);
-    const [CartTemp, setCartTemp] = useState([]);
+    //const [CartTemp, setCartTemp] = useState([]);
 
     //let CartStorage
     const Image = require('../../images/images/' + props.imagename + '.png');       // Ścieżka do zdjęcia
@@ -80,7 +80,7 @@ const Artcard = (props) =>{
         let orSum = parseFloat((q*price));
         //let CartStorage;
 
-        Cart.map((r, index) => {
+        CartStorage.map((r, index) => {
             if (r.prodid === prodid) {
                 check = 1
                 idToChange = parseInt(index);
@@ -90,21 +90,22 @@ const Artcard = (props) =>{
         if (q > 0) {
             if (check === 0) {
                 
-                setCart(prevCart => ([...Cart, {
+                //setCart(prevCart => ([...Cart, {
                     //id: Cart.length, 
-                    prodid: prodid,
-                    name: name, 
-                    desc: desc,
-                    price: parseFloat(price),
-                    quantity: q, 
-                    prodtotal: q*price,
-                    imagename: imagename
-                }]))
+                //    prodid: prodid,
+                //    name: name, 
+                //    desc: desc,
+                //    price: parseFloat(price),
+                //   quantity: q, 
+                //    prodtotal: q*price,
+                //    imagename: imagename
+                //}]))
                 
                 let CartStorageN = ([...CartStorage, {
                     //id: CartStorage.length,
                     prodid: prodid,
                     name: name, 
+                    shortdesc: props.shortdesc,
                     desc: desc,
                     price: parseFloat(price),
                     quantity: q,                                                                               
@@ -112,27 +113,42 @@ const Artcard = (props) =>{
                     imagename: imagename
                 }]);
                 localStorage.setItem('pscart', JSON.stringify(CartStorageN))
+
+                const cartarray = [];
+    
+                const sum = Object.values(CartStorageN)
+                  .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
+                })
+                  .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+
+                setTotal({total: sum});
         
                 //console.log(newCartStorage);
             } else {
-                let newCart = [...Cart];
-                newCart[idToChange].quantity = newCart[idToChange].quantity+q;
-                newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
+                //let newCart = [...Cart];
+                //newCart[idToChange].quantity = newCart[idToChange].quantity+q;
+                //newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
                 let CartStorageN = [...CartStorage];
+                console.log(CartStorageN[idToChange]);
                 CartStorageN[idToChange].quantity = CartStorageN[idToChange].quantity+q;
                 CartStorageN[idToChange].prodtotal = CartStorageN[idToChange].price*CartStorageN[idToChange].quantity;
                 localStorage.setItem('pscart', JSON.stringify(CartStorageN))
+            
+                const cartarray = [];
+    
+                const sum = Object.values(CartStorageN)
+                  .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
+                })
+                  .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+
+                setTotal({total: sum});
             }
-            setTotal({
-                total: parseFloat(Total.total+orSum)
-            })
+
             setCounter({
                 quantity: 0
             })
         }
     }
-
-    console.log(CartTemp);
 
     return(
         <div className="artCard">

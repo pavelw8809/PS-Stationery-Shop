@@ -22,17 +22,18 @@ import { FaRegFrownOpen } from 'react-icons/fa';
 
 const SCart = () => {
 
-    const [Cart, setCart] = useContext(CartContext);
+    //const [Cart, setCart] = useContext(CartContext);
     const [Total, setTotal] = useContext(TotalContext);
+
 
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
     //setCart(CartStorage)
 
     const removeItem = (index) => {
         //console.log(index);
-        let newCart = Cart.slice();
-        newCart.splice(index, 1);
-        setCart(newCart);
+        //let newCart = Cart.slice();
+        //newCart.splice(index, 1);
+        //setCart(newCart);
         //const total = newCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
 
 
@@ -52,7 +53,7 @@ const SCart = () => {
           console.log(CartStorage);
           //localStorage.setItem('pscart', JSON.stringify(CartStorageN))
         setTotal({total: sum});
-        setCart(CartStorageN);
+        //setCart(CartStorageN);
         //setTotal({total});
     }
 
@@ -63,7 +64,7 @@ const SCart = () => {
     let ShowCartItems;
     let OrderBtn;
 
-    if (Cart.length === 0) {
+    if (CartStorage.length === 0) {
         ShowCartItems = (
             <div className="CartEmpty">
                 <FaRegFrownOpen className="EmptyCartIcon" size={50}/>
@@ -74,11 +75,11 @@ const SCart = () => {
     } else {
         ShowCartItems = (
             <div className="CartItems">
-                {Cart.map((r, index) => {
-                    console.log(r.prodtotal)
+                {CartStorage.map((r, index) => {
+                    //console.log(r.id)
                     return(
                         <CartItem 
-                            id={r.id}
+                            id={r.prodid}
                             name={r.name}
                             shortdesc={r.shortdesc}
                             desc={r.desc}
@@ -96,7 +97,7 @@ const SCart = () => {
         )
         OrderBtn = (
             <div className="CartSubmitContainer">
-                <button className="CartSubmit" onClick={sendOrder.bind(this, Cart)}>ZŁÓŻ ZAMÓWIENIE</button>
+                <button className="CartSubmit" onClick={sendOrder.bind(this, CartStorage)}>ZŁÓŻ ZAMÓWIENIE</button>
             </div>
         )
     }

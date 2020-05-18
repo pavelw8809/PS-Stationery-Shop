@@ -30,7 +30,7 @@ const Header = () => {
     // STATES
     
     const [Total, setTotal] = useContext(TotalContext);
-    const [Cart, setCart] = useContext(CartContext);
+    //const [Cart, setCart] = useContext(CartContext);
     const [Dropdown, setDropdown] = useState(false);
     const [StyleNavBar, setStyleNavBar] = useState();
     const [StyleArtNav, setStyleArtNav] = useState();

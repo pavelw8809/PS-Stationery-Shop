@@ -40,8 +40,9 @@ import SearchResult from './SearchResult/SearchResult';
 import ExtLoginSite from './ExtLoginSite/ExtLoginSite'; 
 import LoginSite from './LoginSite/LoginSite';
 import AccountEdit from './AccountEdit/AccountEdit';
+import Info from './Info/Info';
 import Footer from '../components/Footer/Footer'
-import Login from '../components/Login/Login';
+//import Login from '../components/Login/Login';
 
 export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
@@ -50,15 +51,11 @@ export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
 
 function App() {
 
-  //const [IsCS, setIsCS] = useState();
-
   let CartStorage;
 
   if (localStorage.getItem('pscart') === null) {
-    //setIsCS(false);
-    localStorage.setItem('pscart', []);
+    localStorage.setItem('pscart', JSON.stringify([]));
   } else {
-    //setIsCS(true);
     let CartData = localStorage.getItem('pscart');
     if (CartData.length > 3) {
       CartStorage = JSON.parse(CartData);
@@ -76,7 +73,7 @@ function App() {
 // *** S T A T E S ***
   
   // 1. Cart state
-  const [Cart, setCart] = useState([]);
+  //const [Cart, setCart] = useState([]);
 
   // 2. Total price state
   
@@ -88,8 +85,8 @@ function App() {
     usercontrol: false,
     userinfo: {},
     acccontrol: false,
-    accinfo: {}
-    //searchmemo: []
+    accinfo: {},
+    searchmemo: []
   });
 
   useEffect(() => {
@@ -104,7 +101,7 @@ function App() {
     } else {
 
     }
-    setCart(CartStorage);
+
 
     const cartmap = {
       ...CartList.products
@@ -121,10 +118,6 @@ function App() {
 
   }, [])
 
-  console.log(Cart);
-
-  
-
 
   // BACKGROUND IMAGE
 
@@ -135,7 +128,6 @@ function App() {
       <img className="BackgroundImg" src={backgroundImg}/>
       <Router>
         <UserContext.Provider value={[User, setUser]}>
-        <CartContext.Provider value={[Cart, setCart]}>
         <TotalContext.Provider value={[Total, setTotal]}>
           <div className="AppContainer">
             <Header className="Header" />
@@ -161,13 +153,13 @@ function App() {
                   <Route path="/extlogin" component={ExtLoginSite}/>
                   <Route path="/login" component={LoginSite}/>
                   <Route path="/accountedit" component={AccountEdit}/>
+                  <Route path="/info" component={Info}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>
             <Footer/>
           </div>
         </TotalContext.Provider>
-        </CartContext.Provider>
         </UserContext.Provider>
       </Router>
     </div>
@@ -176,3 +168,6 @@ function App() {
 }
 
 export default App;
+
+//        <CartContext.Provider value={[Cart, setCart]}>
+//        </CartContext.Provider>

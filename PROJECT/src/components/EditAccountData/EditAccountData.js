@@ -4,16 +4,34 @@ const EditAccountData = (props) => {
 
     let AccFormData, errordata;
 
-    console.log(props.errorinfo)
+    console.log(props.errorinfo);
+
+    if (props.errorinfo.length > 0) {
+        errordata = (
+            <div className="EAErrorInfo">
+                {props.errorinfo.map((r, index) => {
+                    return(
+                        <p key={index}>{r}</p>
+                    )
+                })}
+            </div>
+        )
+    } else {
+        errordata = null;
+    }
     
+    /*
     if (props.iserror === true) {
         errordata = (
             <div className="EAErrorInfo">
                 <p>{props.errorinfo.info1}</p>
                 <p>{props.errorinfo.info2}</p>
+                <p>{props.errorinfo.info8}</p>
+                <p>{props.errorinfo.info9}</p>
             </div>
         )
     }
+    */
     
 
     if (props.cname === null) {
@@ -50,7 +68,7 @@ const EditAccountData = (props) => {
                     </div>
                     <div>
                         <input type="text" name="addressno" className="addressno" defaultValue={props.iflat} onChange={props.ifl}></input><br/>
-                        <label htmlFor="streetno">Nr lokalu</label>
+                        <label htmlFor="streetno">Nr lokalu (pole nieobowiązowe)</label>
                     </div>
                 </div>
                 <div className="addressline">
@@ -105,7 +123,7 @@ const EditAccountData = (props) => {
                     </div>
                     <div>
                         <input type="text" name="flatno" defaultValue={props.cflat} onChange={props.cfl} className="addressno"></input><br/>
-                        <label htmlFor="flatno">Nr lokalu</label>
+                        <label htmlFor="flatno">Nr lokalu (pole nieobowiązkowe)</label>
                     </div>
                 </div>
                 <div className="addressline">

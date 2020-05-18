@@ -1,0 +1,14 @@
+@import '../Main.scss';
+
+.InfoContainer {
+    display: flex;
+    //flex-direction: column;
+    align-items: center;
+}
+
+.InfoTitle {
+    display: flex;
+    border-right: solid 4px $color3;
+    min-height: 150px;
+    align-items: center;
+}

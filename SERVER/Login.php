@@ -20,6 +20,7 @@ if ($con->connect_error) {
 	die("Connection failed: " . $con->connect_error);
 }
 
+
 //$username = $data->user;
 //$password = $data->password;
 //$username = mysqli_real_escape_string($data[0]->user);
@@ -41,8 +42,8 @@ if ($con->connect_error) {
   }
 
   if (count($errors) == 0) {
-	$username = $data->user;
-  	$password = md5($data->password);
+	$username = mysqli_real_escape_string($con, $data->user);
+  	$password = mysqli_real_escape_string($con, md5($data->password));
   	$query = "SELECT u_id, u_login FROM users WHERE u_login='$username' AND u_password='$password'";
   	$results = mysqli_query($con, $query);
   	if (mysqli_num_rows($results) === 1) {
