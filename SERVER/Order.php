@@ -29,9 +29,12 @@ if (empty($data->privid)) {
     $privid = null;
 }
 
+$e = 0;
+$epos;
+
 // SET THE LAST ORDER NUMBER
 
-$checkordno = "SELECT MAX(o_number) FROM orders";
+$checkordno = "SELECT MAX(o_number), MAX(o_id) FROM orders";
 
 $checknumber = mysqli_query($con, $checkordno);
 
@@ -39,13 +42,11 @@ if (mysqli_num_rows($checknumber) === 1) {
     //$lastnumber = new \stdClass();
     $r = mysqli_fetch_array($checknumber);
     $orderno = $r["MAX(o_number)"]+1;
+    $orderkey = $r["MAX(o_id)"]+1;
 } else {
-    echo("Błąd połączenia z bazą danych - error ".$con->error);
+    $e++;
+    $epos = 1;
 }
-
-//echo $orderno;
-
-//echo $lastnumber;
 
 // REGISTER A NEW ORDER
 
@@ -58,23 +59,28 @@ if ($AT === 1) {
                 VALUES (NULL, $privid, NULL, $orderno, 'NOWE', CURDATE(), $total)";
 }
 
-if ($con->query($neworder) === true) {
-    echo "success";
-    
-    //echo $sessioncode;
-} else {
-    echo("Błąd połączenia z bazą danych - error ".$con->error);
+if ($con->query($neworder) === false) {
+    $e++;
+    $epos = 2;
 }
-/*
-function saveOrderItem() {
 
-}
+// ADD NEW PRODUCTS
 
 foreach($data->articles as $item) {
     $prodid = $item->prodid;
-        echo $item->name;
+    $quantity = $item->quantity;
+    $itemquery = "INSERT INTO order_details VALUES (NULL, $orderkey, $prodid, $quantity)";
+    if ($con->query($itemquery) === false) {
+        $e++;
+        $epos = 3;
+    }
 }
-*/
+
+if ($e > 0) {
+    echo("Błąd połączenia z bazą danych - error ".$con->error." - segment ".$epos);
+} else {
+    echo("success");
+}
 
 $con -> close();
 
