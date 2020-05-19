@@ -122,6 +122,8 @@ const UserBtn = (props) => {
         UserMenu = <AccountMenu logout={handleLogout} hidemenu={hideMenu}/>
     }
 
+    //console.log(User);
+
     return(
         <div className="UserBtnContainer">
             {UserInfoBtn}

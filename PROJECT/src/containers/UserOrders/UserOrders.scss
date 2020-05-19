@@ -1,0 +1,36 @@
+@import '../Main.scss';
+
+.Order {
+
+}
+
+.OrderContainer {
+    display: flex;
+    //flex-wrap: wrap;
+    justify-content: center;
+}
+
+.OrderList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.NoOrders {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px $color0;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    min-height: 300px;
+}
+
+.OrderList {
+    display: flex;
+
+}

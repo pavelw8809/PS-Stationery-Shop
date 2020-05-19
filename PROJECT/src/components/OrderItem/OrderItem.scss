@@ -1,0 +1,26 @@
+@import '../../containers/Main.scss';
+
+.OrderComponent {
+    border: solid 1px $color1;
+    margin: 5px;
+    border-radius: 5px;
+    min-width: 230px;
+    background-color: $color0;
+    color: $color1;
+    padding: 10px;
+}
+
+.OrderComponent:hover {
+    background-color: $color3;
+    transform: scale(1.04);
+    transition-duration: 0.5s;
+}
+
+.OrderComponent p {
+    padding: 0;
+}
+
+.OrderComponent p:nth-of-type(2n) {
+    color: $color2;
+    text-align: end;
+}

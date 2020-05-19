@@ -12,12 +12,13 @@ const Artdetails = (props) => {
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
     console.log(props.location.artProps);
 
-    let Image, Price, NetPrice, ProdId, Name, ShortDesc, Desc, ImageName;
+    let Image, InitPrice, Price, NetPrice, ProdId, Name, ShortDesc, Desc, ImageName;
     if (typeof(props.location.artProps) !== 'undefined') {
         ImageName = props.location.artProps.imagename;
         Image = require('../../images/images/' + props.location.artProps.imagename + '.png');       // Ścieżka do zdjęcia
-        Price = props.location.artProps.price;
-        NetPrice = (props.location.artProps.price/1.23).toFixed(2);
+        InitPrice = parseFloat(props.location.artProps.price);
+        Price = InitPrice.toFixed(2)
+        NetPrice = (InitPrice/1.23).toFixed(2);
         ProdId = props.location.artProps.prodid;
         Name = props.location.artProps.name;
         ShortDesc = props.location.artProps.shortdesc;
@@ -30,8 +31,9 @@ const Artdetails = (props) => {
         if (ArtStorage !== null) {
             ImageName = ArtStorage.imagename;
             Image = require('../../images/images/' + ImageName + '.png'); 
-            Price = ArtStorage.price;
-            NetPrice = (Price/1.23).toFixed(2);
+            InitPrice = parseFloat(ArtStorage.price);
+            Price = InitPrice.toFixed(2);
+            NetPrice = (InitPrice/1.23).toFixed(2);
             ProdId = ArtStorage.prodid;
             Name = ArtStorage.name;
             ShortDesc = ArtStorage.shortdesc;

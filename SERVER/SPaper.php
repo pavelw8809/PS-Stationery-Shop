@@ -8,7 +8,7 @@
     $con = new mysqli($dbserv, $dbuser, $dbpass, $dbname);
     $con -> set_charset("utf8");
 
-    if ($con -> connect_error) {
+    if ($con->connect_error) {
         die("Connection error");
     }
 

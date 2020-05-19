@@ -14,30 +14,26 @@
 */
 
 import React, { useContext, useEffect, useState } from 'react';
-import { CartContext, TotalContext } from '../App';
+import { UserContext, TotalContext, ServerPath } from '../App';
 import CartItem from '../../components/CartItem/CartItem';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import './Cart.scss';
 import { FaRegFrownOpen } from 'react-icons/fa';
+import Axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const SCart = () => {
 
-    //const [Cart, setCart] = useContext(CartContext);
+    const [User, setUser] = useContext(UserContext);
     const [Total, setTotal] = useContext(TotalContext);
+    const [CartError, setCartError] = useState();
 
 
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
+    const [Cart, setCart] = useState({articles: [CartStorage], uid: User.userinfo.id})
     //setCart(CartStorage)
 
     const removeItem = (index) => {
-        //console.log(index);
-        //let newCart = Cart.slice();
-        //newCart.splice(index, 1);
-        //setCart(newCart);
-        //const total = newCart.reduce((previousState, currentState) => previousState + currentState.prodtotal, 0);
-
-
-        console.log(index);
         let CartStorageN = CartStorage.slice();
         CartStorageN.splice(index, 1);
         localStorage.setItem('pscart', JSON.stringify(CartStorageN));
@@ -49,16 +45,35 @@ const SCart = () => {
         })
           .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
     
-          CartStorage = CartStorageN;
-          console.log(CartStorage);
-          //localStorage.setItem('pscart', JSON.stringify(CartStorageN))
+        CartStorage = CartStorageN;
         setTotal({total: sum});
-        //setCart(CartStorageN);
-        //setTotal({total});
     }
 
-    const sendOrder = (orderdata) => {
-        console.log(orderdata);
+    const History = useHistory();
+
+    const sendOrder = () => {
+        if (typeof(User.userinfo.uid) === 'undefined') {
+            console.log("Użytkownik nie jest zalogowany")
+        } else {
+            let OrderData = {
+                                articles: CartStorage, 
+                                uid: User.userinfo.uid, 
+                                compid: User.userinfo.compid, 
+                                privid: User.userinfo.privid,
+                                total: parseFloat(Total.total).toFixed(2)
+                            };
+            console.log(OrderData);
+            Axios.post(ServerPath + 'Order.php', OrderData)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data === "success") {
+                        localStorage.setItem('pscart', JSON.stringify([]));
+                        History.push('/thankyou');
+                    } else {
+                        setCartError("BŁĄD: Problem z połączeniem. Sprawdź połączenie internetowe lub spróbuj później.");
+                    }
+                })
+        }
     }
 
     let ShowCartItems;
@@ -97,7 +112,7 @@ const SCart = () => {
         )
         OrderBtn = (
             <div className="CartSubmitContainer">
-                <button className="CartSubmit" onClick={sendOrder.bind(this, CartStorage)}>ZŁÓŻ ZAMÓWIENIE</button>
+                <button className="CartSubmit" onClick={sendOrder.bind(this, Cart)}>ZŁÓŻ ZAMÓWIENIE</button>
             </div>
         )
     }
@@ -129,6 +144,7 @@ const SCart = () => {
                             <div className="CartSummaryTotal">{parseFloat(Total.total).toFixed(2)}</div>
                         </div>
                         {OrderBtn}
+                        <div className="CartError">{CartError}</div>
                     </div>
                 </div>
             </div>

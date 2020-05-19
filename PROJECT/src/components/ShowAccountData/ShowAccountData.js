@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 const ShowAccountData = (props) => {
 
@@ -59,7 +60,7 @@ const ShowAccountData = (props) => {
             {AccountData}
             <div className="AccountPanel">
                 <button onClick={props.changetabshow}>EDYCJA KONTA</button>
-                <button>MOJE ZAMÓWIENIA</button>
+                <NavLink to="/myorders"><button>MOJE ZAMÓWIENIA</button></NavLink>
                 <button onClick={props.changetabpass}>ZMIEŃ HASŁO</button>
             </div>
         </div>

@@ -44,7 +44,9 @@ if ($con->connect_error) {
   if (count($errors) == 0) {
 	$username = mysqli_real_escape_string($con, $data->user);
   	$password = mysqli_real_escape_string($con, md5($data->password));
-  	$query = "SELECT u_id, u_login FROM users WHERE u_login='$username' AND u_password='$password'";
+  	$query = "SELECT u_id, u_login, cc_u_id, ci_u_id FROM users 
+	  			LEFT JOIN client_company ON u_id=cc_u_id LEFT JOIN client_individual ON u_id=ci_u_id
+	  			WHERE u_login='$username' AND u_password='$password'";
   	$results = mysqli_query($con, $query);
   	if (mysqli_num_rows($results) === 1) {
 		$output = new \stdClass();
@@ -59,6 +61,8 @@ if ($con->connect_error) {
 		$uid = $r->u_id;
 		$output->uid = $r->u_id;
 		$output->login = $r->u_login;
+        $output->compid = $r->cc_u_id;
+        $output->privid = $r->ci_u_id;
 		$output->sessionid = $sessioncode; 
 		//echo($sessioncode);
 		$addsession = "INSERT INTO sessions VALUES(null, $uid, '$sessioncode', FALSE, now())";

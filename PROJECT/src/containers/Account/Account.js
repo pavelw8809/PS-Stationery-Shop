@@ -171,6 +171,11 @@ const Account = () => {
         EAStyle = {display: 'none'};
         CPStyle = {display: 'block'};
     }
+    if (TabDisp.accord) {
+        ACStyle = {display: 'none'};
+        EAStyle = {display: 'none'};
+        CPStyle = {display: 'none'};
+    }
 
     const changeTab = (option) => {
         if (option === 0) {
@@ -207,8 +212,6 @@ const Account = () => {
             case "CZ2": setFormData({...FormData, czip2: event.target.value}); break;
         }
     }
-
-    console.log(FormData);
 
     const addError = (info) => {
         console.log("arg: " + info);
@@ -259,18 +262,6 @@ const Account = () => {
         let info2 = 'BŁĄD: Format nr REGON jest niepoprawny (9 cyfr).';
         let info3 = 'BŁĄD: Format nr NIP jest niepoprawny (10 cyfr).';
         let info8 = 'BŁĄD: Pola nie mogą być puste';
-
-        console.log(FormData.login.length);
-/*
-        if (FormData.login.length === 0) {
-            console.log("A");
-            //setIsError(true);
-            addError(info8);
-            valid = 1;
-        } else {
-            remError(info8);
-        }
-*/
         let isPropEmpty = false;
 
         if (AccountType === "indywidualne") {
@@ -425,7 +416,7 @@ const Account = () => {
         }
         AccountData = (
             <div>
-                <div className="AccountData" style={ACStyle}>
+                <div className="AccountData">
                     <div className="AccountNameContainer">
                         <div className="AccountName">
                             <FaRegUserCircle size={50}/>
@@ -433,88 +424,76 @@ const Account = () => {
                         </div>
                         <div className="AccountType">Konto {AccountType}</div>
                     </div>
-                    <ShowAccountData
-                        login={User.userinfo.login}
-                        mail={User.accinfo.mail}
-                        iname={User.accinfo.iname}
-                        isurname={User.accinfo.isurname}
-                        address={address}
-                        izip={User.accinfo.izip}
-                        icity={User.accinfo.icity}
-                        cname={User.accinfo.cname}
-                        cnip={User.accinfo.cnip}
-                        cregon={User.accinfo.cregon}
-                        czip={User.accinfo.czip}
-                        ccity={User.accinfo.ccity}
-                        changetabshow={changeTab.bind(this, 0)}
-                        changetabpass={changeTab.bind(this, 1)}
-                    />
-                </div>
-                <div className="AccountData" style={EAStyle}>
-                    <div className="AccountNameContainer">
-                        <div className="AccountName">
-                            <FaRegUserCircle size={50}/>
-                            <h1>{fullname}</h1>
-                        </div>
-                        <div className="AccountType">Konto {AccountType}</div>
+                    <div style={ACStyle}>
+                        <ShowAccountData
+                            login={User.userinfo.login}
+                            mail={User.accinfo.mail}
+                            iname={User.accinfo.iname}
+                            isurname={User.accinfo.isurname}
+                            address={address}
+                            izip={User.accinfo.izip}
+                            icity={User.accinfo.icity}
+                            cname={User.accinfo.cname}
+                            cnip={User.accinfo.cnip}
+                            cregon={User.accinfo.cregon}
+                            czip={User.accinfo.czip}
+                            ccity={User.accinfo.ccity}
+                            changetabshow={changeTab.bind(this, 0)}
+                            changetabpass={changeTab.bind(this, 1)}
+                        />
                     </div>
-                    <EditAccountData
-                        login={User.userinfo.login}
-                        mail={User.accinfo.mail}
-                        iname={User.accinfo.iname}
-                        isurname={User.accinfo.isurname}
-                        istreet={User.accinfo.istreet}
-                        ihouse={User.accinfo.ihouse}
-                        iflat={User.accinfo.iflat}
-                        izip1={User.accinfo.izip1}
-                        izip2={User.accinfo.izip2}
-                        icity={User.accinfo.icity}
-                        cname={User.accinfo.cname}
-                        cnip={User.accinfo.cnip}
-                        cregon={User.accinfo.cregon}
-                        ccity={User.accinfo.ccity}
-                        cstreet={User.accinfo.cstreet}
-                        chouse={User.accinfo.chouse}
-                        cflat={User.accinfo.cflat}
-                        czip1={User.accinfo.czip1}
-                        czip2={User.accinfo.czip2}
-                        changetab={changeTab.bind(this, 2)}
-                        submitdatachange={changeAccountData}
-                        iserror={IsError}
-                        errorinfo={ErrorInfo}
-                        log={handleFormData.bind(this, "LOG")}
-                        cnm={handleFormData.bind(this, "CNM")}                  
-                        cst={handleFormData.bind(this, "CST")}
-                        cct={handleFormData.bind(this, "CCT")}
-                        cho={handleFormData.bind(this, "CHO")}
-                        cfl={handleFormData.bind(this, "CFL")}
-                        czp={handleFormData.bind(this, "CZP")}
-                        cnp={handleFormData.bind(this, "CNP")}
-                        crg={handleFormData.bind(this, "CRG")}
-                        inm={handleFormData.bind(this, "INM")}
-                        isn={handleFormData.bind(this, "ISN")}
-                        ict={handleFormData.bind(this, "ICT")}
-                        ist={handleFormData.bind(this, "IST")}
-                        iho={handleFormData.bind(this, "IHO")}
-                        ifl={handleFormData.bind(this, "IFL")}
-                        iz1={handleFormData.bind(this, "IZ1")}
-                        iz2={handleFormData.bind(this, "IZ2")}
-                        cz1={handleFormData.bind(this, "CZ1")}
-                        cz2={handleFormData.bind(this, "CZ2")}
-                    />
-                </div>
-                <div className="AccountData" style={CPStyle}>
-                    <div className="AccountNameContainer">
-                        <div className="AccountName">
-                            <FaRegUserCircle size={50}/>
-                            <h1>{fullname}</h1>
-                        </div>
-                        <div className="AccountType">Konto {AccountType}</div>
+                    <div style={EAStyle}>
+                        <EditAccountData
+                            login={User.userinfo.login}
+                            mail={User.accinfo.mail}
+                            iname={User.accinfo.iname}
+                            isurname={User.accinfo.isurname}
+                            istreet={User.accinfo.istreet}
+                            ihouse={User.accinfo.ihouse}
+                            iflat={User.accinfo.iflat}
+                            izip1={User.accinfo.izip1}
+                            izip2={User.accinfo.izip2}
+                            icity={User.accinfo.icity}
+                            cname={User.accinfo.cname}
+                            cnip={User.accinfo.cnip}
+                            cregon={User.accinfo.cregon}
+                            ccity={User.accinfo.ccity}
+                            cstreet={User.accinfo.cstreet}
+                            chouse={User.accinfo.chouse}
+                            cflat={User.accinfo.cflat}
+                            czip1={User.accinfo.czip1}
+                            czip2={User.accinfo.czip2}
+                            changetab={changeTab.bind(this, 2)}
+                            submitdatachange={changeAccountData}
+                            iserror={IsError}
+                            errorinfo={ErrorInfo}
+                            log={handleFormData.bind(this, "LOG")}
+                            cnm={handleFormData.bind(this, "CNM")}                  
+                            cst={handleFormData.bind(this, "CST")}
+                            cct={handleFormData.bind(this, "CCT")}
+                            cho={handleFormData.bind(this, "CHO")}
+                            cfl={handleFormData.bind(this, "CFL")}
+                            czp={handleFormData.bind(this, "CZP")}
+                            cnp={handleFormData.bind(this, "CNP")}
+                            crg={handleFormData.bind(this, "CRG")}
+                            inm={handleFormData.bind(this, "INM")}
+                            isn={handleFormData.bind(this, "ISN")}
+                            ict={handleFormData.bind(this, "ICT")}
+                            ist={handleFormData.bind(this, "IST")}
+                            iho={handleFormData.bind(this, "IHO")}
+                            ifl={handleFormData.bind(this, "IFL")}
+                            iz1={handleFormData.bind(this, "IZ1")}
+                            iz2={handleFormData.bind(this, "IZ2")}
+                            cz1={handleFormData.bind(this, "CZ1")}
+                            cz2={handleFormData.bind(this, "CZ2")}
+                        />
                     </div>
+                    <div style={CPStyle}>
                     <ChangePassword
                         uid={User.userinfo.uid}
                         changetab={changeTab.bind(this, 2)}
                     />
+                    </div>
                 </div>
             </div>
         )

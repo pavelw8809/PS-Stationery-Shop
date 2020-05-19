@@ -99,18 +99,18 @@ const CartItem = (props) => {
 
     return(
         <div className="CartItem">
-        <NavLink className="CartItemImg" style={ProdImgStyle} to={{
-            pathname: "/artdetails",
-            artProps: {
-                name: props.name,
-                shortdesc: props.shortdesc,
-                description: props.desc,
-                price: props.price,
-                imagename: props.imagename,
-                prodid: props.id
-            }
-            }}>
-        </NavLink>
+            <NavLink className="CartItemImg" style={ProdImgStyle} to={{
+                pathname: "/artdetails",
+                artProps: {
+                    name: props.name,
+                    shortdesc: props.shortdesc,
+                    description: props.desc,
+                    price: props.price,
+                    imagename: props.imagename,
+                    prodid: props.id
+                }
+                }}>
+            </NavLink>
             <div className="CartItemContainer">
                 <h4 className="CartItemName">{props.name} - {props.desc}</h4>
                 <div className="CartItemPrice">

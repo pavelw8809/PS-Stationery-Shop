@@ -26,7 +26,7 @@ if ($iserror === false) {
     // CHECK IF PASSWORD IS CORRECT
     $userid = $data->userid;
     $password = mysqli_real_escape_string($con, md5($data->oldpass));
-    $newpassword = mysqli_real_escape_string($con, $data->newpass1);
+    $newpassword = mysqli_real_escape_string($con, md5($data->newpass1));
 
     $checkpassquery = "SELECT u_password FROM users WHERE u_id='$userid'";
     $checkpassresult = mysqli_query($con, $checkpassquery);
@@ -38,9 +38,16 @@ if ($iserror === false) {
     }
 
     if ($password === $originpass) {
-        echo("success");
+        $changepassquery = "UPDATE users SET u_password = '$newpassword' WHERE u_id='$userid'";
+        if ($con->query($changepassquery) === true) {
+			echo "success";
+		} else {
+			echo("Błąd połączenia z bazą danych - error ".$con->error);
+		}
     } else {
         echo("Stare hasło jest niepoprawne");
     }
 }
+
+$con -> close();
 ?>

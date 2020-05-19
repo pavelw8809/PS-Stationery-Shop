@@ -44,7 +44,7 @@ import Info from './Info/Info';
 import Footer from '../components/Footer/Footer'
 //import Login from '../components/Login/Login';
 
-export const CartContext = React.createContext();
+//export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
 export const UserContext = React.createContext();
 export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
@@ -98,10 +98,7 @@ function App() {
           console.log(res.data);
           setUser((prevState) => ({...prevState, usercontrol: true, userinfo: res.data}));
       })
-    } else {
-
-    }
-
+    } 
 
     const cartmap = {
       ...CartList.products
@@ -117,6 +114,7 @@ function App() {
     setTotal({total: sum});
 
   }, [])
+  
 
 
   // BACKGROUND IMAGE
