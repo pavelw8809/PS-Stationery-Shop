@@ -41,7 +41,9 @@ import ExtLoginSite from './ExtLoginSite/ExtLoginSite';
 import LoginSite from './LoginSite/LoginSite';
 import AccountEdit from './AccountEdit/AccountEdit';
 import Info from './Info/Info';
-import Footer from '../components/Footer/Footer'
+import Footer from '../components/Footer/Footer';
+import RegCompany from './RegCompany/RegCompany';
+import RegIndividual from './RegIndividual/RegIndividual';
 //import Login from '../components/Login/Login';
 
 //export const CartContext = React.createContext();
@@ -152,6 +154,8 @@ function App() {
                   <Route path="/login" component={LoginSite}/>
                   <Route path="/accountedit" component={AccountEdit}/>
                   <Route path="/info" component={Info}/>
+                  <Route path="/regcompany" component={RegCompany}/>
+                  <Route path="/regindividual" component={RegIndividual}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>
