@@ -15,7 +15,7 @@ const Info = (props) => {
     }
     return(
         <div className="InfoContainer">
-            <div class="InfoWindow">
+            <div className="InfoWindow">
                 <div className="Info">
                     <IoIosInformationCircleOutline size={70}/>
                     <TitleBar className="InfoTitle" title="Informacja"/>

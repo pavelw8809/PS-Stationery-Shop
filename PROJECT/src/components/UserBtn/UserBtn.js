@@ -116,6 +116,7 @@ const UserBtn = (props) => {
                         username={handleUsername} 
                         password={handlePassword} 
                         login={handleLogin}
+                        hidemenu={hideMenu}
                         errorinfo={ErrorInfo} />
     } else {
         UserInfoBtn = <button className="LogBtn AccountBtn" onClick={loginWindow}><FaRegUserCircle size={20} className="UserIcon"/>{User.userinfo.login}</button>

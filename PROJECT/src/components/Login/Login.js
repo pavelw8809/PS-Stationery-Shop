@@ -56,7 +56,7 @@ const Login = (props) => {
             <div className="ErrorInfo">{props.errorinfo}</div>
             <p>Nie masz konta?</p>
             <NavLink to="/regform" className="RegBtnContainer">
-                <button className="RegBtn">ZAREJESTRUJ SIĘ</button>
+                <button className="RegBtn" onClick={props.hidemenu}>ZAREJESTRUJ SIĘ</button>
             </NavLink>
         </div>
     )

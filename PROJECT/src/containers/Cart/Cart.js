@@ -54,6 +54,13 @@ const SCart = () => {
     const sendOrder = () => {
         if (typeof(User.userinfo.uid) === 'undefined') {
             console.log("Użytkownik nie jest zalogowany")
+            History.push({
+                            pathname: '/login',
+                            addProps: {
+                                cartoption: true,
+                                addinfo: "Aby złożyć zamówienie wymagane jest logowanie. Po zalogowaniu ponownie zatwierdź zamówienie."
+                            }
+                        });
         } else {
             let OrderData = {
                                 articles: CartStorage, 
@@ -69,6 +76,7 @@ const SCart = () => {
                     if (res.data === "success") {
                         localStorage.setItem('pscart', JSON.stringify([]));
                         History.push('/thankyou');
+                        setTotal({total: 0});
                     } else {
                         setCartError("BŁĄD: Problem z połączeniem. Sprawdź połączenie internetowe lub spróbuj później.");
                     }

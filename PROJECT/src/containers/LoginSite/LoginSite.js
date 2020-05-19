@@ -21,6 +21,20 @@ const LoginSite = (props) => {
     const [LoginData, setLoginData] = useState();       // Temporary state for sending login data
     const [User, setUser] = useContext(UserContext);
 
+    let cartoption;
+    let addinfo;
+    let infostyle;
+
+    if (typeof(props.location.addProps) !== 'undefined') {
+        addinfo = props.location.addProps.addinfo;
+        cartoption = true;
+    } else {
+        infostyle = {display: 'none'};
+    }
+
+
+    //let addinfo = props.info;
+
     const handleUsername = (event) => {
         if (event.keyCode === 13) {
             handleLogin();
@@ -49,7 +63,11 @@ const LoginSite = (props) => {
                 setUser({...User, userinfo: res.data, usercontrol: true});
                 Cookies.set('pssession', res.data.sessionid);
                 //setLogShow(false);
-                History.push('/');
+                if (cartoption === true) {
+                    History.push('/cart');
+                } else {
+                    History.push('/');
+                }
             } else {
                 let errordata = (
                     <div className="LoginErrInfo">
@@ -76,6 +94,7 @@ const LoginSite = (props) => {
         <div className = "LoginAuthWindow">
             <IoMdLogIn size={70}/>
             <h3>OKNO LOGOWANIA</h3>
+            <div className="LoginAddInfo" style={infostyle}>{addinfo}</div>
             <label htmlFor="mail">Nazwa użytkownika</label>
             <input type="text" name="mail" onChange={handleUsername} onKeyDown={handleUsername}></input><br/>
             <label htmlFor="password">Hasło</label>
@@ -84,7 +103,7 @@ const LoginSite = (props) => {
             {ErrorInfo}
             <hr className="separator"/>
             <p className="LoginRegP">Nie masz konta?</p>
-            <NavLink className="LoginRegBtnContainer" to="/"><button className="LoginRegBtn" type="submit">ZAREJESTRUJ KONTO</button></NavLink>
+            <NavLink className="LoginRegBtnContainer" to="/regform"><button className="LoginRegBtn" type="submit">ZAREJESTRUJ KONTO</button></NavLink>
         </div>
     )
 }

@@ -66,6 +66,8 @@ if ($con->query($neworder) === false) {
 
 // ADD NEW PRODUCTS
 
+//echo("ORDERKEY: ".$orderkey);
+
 foreach($data->articles as $item) {
     $prodid = $item->prodid;
     $quantity = $item->quantity;
