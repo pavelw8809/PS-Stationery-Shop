@@ -1,7 +1,21 @@
 @import '../Main.scss';
 
 .RegIndividual {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    max-width: 700px;
+}
 
+.RegMain {
+    //display: flex;
+    //justify-items: center;;
+    //display: flex;
+}
+
+.RegMainContainer {
+    //display: flex;
+    //justify-content: center;
 }
 
 .separator {

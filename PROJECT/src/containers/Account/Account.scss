@@ -73,7 +73,7 @@
     justify-content: center;
     margin-bottom: 5px;
 }
-.AccountPanel button {
+.AccountPanelBtn {
     background-color: $color0;
     color: $color1;
     border: solid 1px $color0;
@@ -84,7 +84,7 @@
     font-size: 0.9em;
 }
 
-.AccountPanel button:hover {
+.AccountPanelBtn:hover {
     background-color: $color2;
     color: $color0;
 }

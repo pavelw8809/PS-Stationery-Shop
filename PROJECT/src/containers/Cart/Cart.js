@@ -73,9 +73,12 @@ const SCart = () => {
             Axios.post(ServerPath + 'Order.php', OrderData)
                 .then(res => {
                     console.log(res.data);
-                    if (res.data === "success") {
+                    if (res.data.result === "success") {
                         localStorage.setItem('pscart', JSON.stringify([]));
-                        History.push('/thankyou');
+                        History.push({
+                                        pathname: '/confirmation',
+                                        confProps: res.data.orderno
+                                    });
                         setTotal({total: 0});
                     } else {
                         setCartError("BŁĄD: Problem z połączeniem. Sprawdź połączenie internetowe lub spróbuj później.");

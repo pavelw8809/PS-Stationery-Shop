@@ -44,6 +44,7 @@ import Info from './Info/Info';
 import Footer from '../components/Footer/Footer';
 import RegCompany from './RegCompany/RegCompany';
 import RegIndividual from './RegIndividual/RegIndividual';
+import Confirmation from './Confirmation/Confirmation';
 //import Login from '../components/Login/Login';
 
 //export const CartContext = React.createContext();
@@ -156,6 +157,7 @@ function App() {
                   <Route path="/info" component={Info}/>
                   <Route path="/regcompany" component={RegCompany}/>
                   <Route path="/regindividual" component={RegIndividual}/>
+                  <Route path="/confirmation" component={Confirmation}/>
                   <Route component={Notfound}/>
               </Switch>
             </div>

@@ -1,0 +1,16 @@
+.RegAccMain {
+    display: flex;
+    //flex-direction: column;
+    //max-width: 300px;
+    justify-content: center;
+}
+
+.RegAccMainForm {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.RegAccMainForm h3 {
+    text-align: center;
+}

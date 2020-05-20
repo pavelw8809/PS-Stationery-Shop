@@ -14,15 +14,14 @@ const Registration = () => {
     return(
         <div className="RegForm">
             <h1>FORMULARZ REJESTRACYJNY</h1>
-                    <p className="RegIndividual">Konto indywidualne</p>
-                    <NavLink to="/regindividual" className="RegIndividualBtnContainer">
-                <button className="RegIndividualBtn">ZAREJESTRUJ KONTO INDYWIDUALNE</button>
+                <div class="AccountOption">
+                    <NavLink className="IABtn" to="/RegIndividual">
+                        KONTO<br/>INDYWIDUALNE
                     </NavLink>
-            <hr className="separator"/>
-                    <p className="LoginCompany">Konto firmowe</p>
-                    <NavLink to="/regcompany" className="RegCompanyBtnContainer">
-                <button className="RegCompanyBtn">ZAREJESTRUJ KONTO FIRMOWE</button>
+                    <NavLink className="CABtn" to="/RegCompany">
+                        KONTO<br/>FIRMOWE
                     </NavLink>
+                </div>
         </div>
     )
 } 

@@ -9,7 +9,7 @@ $data = json_decode($json);
 $con = new mysqli($dbserv, $dbuser, $dbpass, $dbname);
 $con -> set_charset("utf8");
 
-$articles = $data->articles;
+$response = new \stdClass();
 
 $userid = $data->uid;
 $compid = $data->compid;
@@ -79,9 +79,12 @@ foreach($data->articles as $item) {
 }
 
 if ($e > 0) {
-    echo("Błąd połączenia z bazą danych - error ".$con->error." - segment ".$epos);
+    $response->result = "Błąd połączenia z bazą danych - error ".$con->error." - segment ".$epos;
+    //echo("Błąd połączenia z bazą danych - error ".$con->error." - segment ".$epos);
 } else {
-    echo("success");
+    $response->result = "success";
+    $response->orderno = $orderno;
+    echo json_encode($response);
 }
 
 $con -> close();

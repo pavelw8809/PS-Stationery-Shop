@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const EditAccountData = (props) => {
 
     let AccFormData, errordata;
-
-    console.log(props.errorinfo);
 
     if (props.errorinfo.length > 0) {
         errordata = (
@@ -18,21 +16,7 @@ const EditAccountData = (props) => {
         )
     } else {
         errordata = null;
-    }
-    
-    /*
-    if (props.iserror === true) {
-        errordata = (
-            <div className="EAErrorInfo">
-                <p>{props.errorinfo.info1}</p>
-                <p>{props.errorinfo.info2}</p>
-                <p>{props.errorinfo.info8}</p>
-                <p>{props.errorinfo.info9}</p>
-            </div>
-        )
-    }
-    */
-    
+    }   
 
     if (props.cname === null) {
         AccFormData = (
@@ -146,8 +130,8 @@ const EditAccountData = (props) => {
             {AccFormData}
             {errordata}
             <div className="AccountPanel">
-                <button onClick={props.submitdatachange}>ZAPISZ ZMIANY</button>
-                <button onClick={props.changetab}>POWRÓT</button>
+                <button className="AccountPanelBtn" onClick={props.submitdatachange}>ZAPISZ ZMIANY</button>
+                <button className="AccountPanelBtn" onClick={props.changetab}>POWRÓT</button>
             </div>
         </div>
     )

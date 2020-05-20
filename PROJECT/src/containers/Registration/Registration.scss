@@ -1,0 +1,154 @@
+@import '../Main.scss';
+
+.RegForm h1 {
+    text-align: center;
+}
+
+.RegTitle {
+    background-color: $color2;
+}
+
+.AccountOption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.IABtn, .CABtn {
+    display: flex;
+    width: 300px;
+    height: 300px;
+    border: solid 2px $color0;
+    margin: 10px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5em;
+    color: $color1;
+}
+
+.IABtn:hover, .CABtn:hover {
+    transform: scale(1.04); // zmienna cardHover
+    transition-duration: 0.5s; // zmienna cardHoverTime
+}
+
+.IABtn {
+    background-color: $color5;
+}
+
+.CABtn {
+    background-color: $color7;
+}
+
+.IABtn:hover {
+    background-color: $color6;
+}
+
+.CABtn:hover {
+    background-color: $color8;
+}
+
+.RegNavPanel {
+    text-align: center;
+    padding: 5px;
+}
+
+.RegNavPanel button {
+    background-color: $color0;   
+    border: solid 1px $color1;
+    border-radius: 5px;
+    padding: 5px;
+    min-width: 100px;
+    color: $color1;
+    margin: 5px;
+}
+
+.RegNavPanel button:hover {
+    background-color: $color2;
+    color: $color0;
+    border: solid 1px $color0;
+}
+
+.RegMain {
+    background-color: $color1;
+    //margin: 10px;
+    //border: solid 2px $color0;
+    //border-radius: 5px;
+}
+
+.RegIndividual {
+    background-color: $color1;
+    border: solid 2px $color3;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.RegIndividual input {
+    color: $color3;
+    //background-color: $color1;
+    border: solid 1px $color0;
+    padding: 5px;
+    margin: 5px;
+}
+
+.RegIndividual label {
+    padding: 3px;
+}
+
+.RegMilestones {
+    display: flex;
+    justify-content: center;
+    background-color: $color3;
+    color: $color2;
+    //padding: 10px;
+}
+
+.RegMilestone {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border: solid 2px $color2;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 15px;
+    border-radius: 22px;
+    font-size: 1.1em;
+}
+
+.StepActive {
+    background-color: $color2;
+    color: $color3;
+}
+
+.RegLabel {
+    font-size: 0.8em;
+}
+
+.RegNumber {
+    width: 30px;
+}
+
+.AccRegAddress {
+    display: flex;
+    //flex-wrap: wrap;
+}
+
+.AccRegAccress div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Reghr {
+    border: solid 0.5px $color0;
+    width: 100%;
+}
+
+.RegErrorInfo {
+    color: $color10;
+}
+
+.RegErrorInfo p {
+    padding: 2px;
+    text-align: center;
+}

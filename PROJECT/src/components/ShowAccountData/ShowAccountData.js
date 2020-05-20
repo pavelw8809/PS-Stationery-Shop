@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import './ShowAccountData.scss';
 
 const ShowAccountData = (props) => {
 
@@ -59,9 +60,10 @@ const ShowAccountData = (props) => {
         <div>
             {AccountData}
             <div className="AccountPanel">
-                <button onClick={props.changetabshow}>EDYCJA KONTA</button>
-                <NavLink to="/myorders"><button>MOJE ZAMÓWIENIA</button></NavLink>
-                <button onClick={props.changetabpass}>ZMIEŃ HASŁO</button>
+                <button className="AccountPanelBtn" onClick={props.changetabshow}>EDYCJA KONTA</button>
+                <button className="AccountPanelBtn" onClick={props.changetabpass}>ZMIEŃ HASŁO</button>
+                <NavLink to="/myorders"><button className="AccountPanelBtn">MOJE ZAMÓWIENIA</button></NavLink>
+                <button className="AccountPanelBtn RemBtn" onClick={props.changetabrem}>USUŃ KONTO</button>
             </div>
         </div>
     )

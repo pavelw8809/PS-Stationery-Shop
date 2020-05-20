@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
-import { ServerPath, UserContext } from '../../containers/App';
+import { ServerPath } from '../../containers/App';
 
 const ChangePassword = (props) => {
 
@@ -76,8 +76,8 @@ const ChangePassword = (props) => {
             </div>
             <div className="PassError">{PassError}</div>
             <div className="AccountPanel">
-                <button onClick={changePass}>ZMIEŃ HASŁO</button>
-                <button onClick={props.changetab}>POWRÓT</button>
+                <button className="AccountPanelBtn" onClick={changePass}>ZMIEŃ HASŁO</button>
+                <button className="AccountPanelBtn" onClick={props.changetab}>POWRÓT</button>
             </div>
         </div>
     )
