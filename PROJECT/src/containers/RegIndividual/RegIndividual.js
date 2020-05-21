@@ -202,7 +202,7 @@ const RegIndividual = (props) => {
                         }
                     })
                 } else {
-                    setError(res.data);
+                    ErrorInfo = res.data;
                 }
             })
     }

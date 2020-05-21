@@ -14,15 +14,9 @@ $epos;
 $AT = $data->accounttype;
 $login = mysqli_real_escape_string($con, $data->login);
 $email = mysqli_real_escape_string($con, $data->email);
-$pass0 = mysqli_real_escape_string($con, $data->pass0);
-$pass1 = mysqli_real_escape_string($con, $data->pass1);
-
-// CHECK IF LOGIN EXISTS
-/*
-$prequery = "SELECT u_login FROM users WHERE u_login='$login'"
-
-
-*/
+$pass0 = mysqli_real_escape_string($con, md5($data->pass0));
+$pass1 = mysqli_real_escape_string($con, md5($data->pass1));
+$userid;
 
 // INITIAL QUERIES
 
@@ -43,12 +37,13 @@ if ($e === 0) {
 
     if (mysqli_num_rows($result) === 1) {
         $r = mysqli_fetch_array($result);
-        $userid = $r->u_id;
+        $userid = $r['u_id'];
     } else {
         $e++;
         $epos = 2;
     }
 }
+
 
 // ACCOUNT SPECIFIC QUERIES
 
