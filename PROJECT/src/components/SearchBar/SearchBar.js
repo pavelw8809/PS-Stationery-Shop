@@ -9,20 +9,21 @@ import Cookies from 'js-cookie';
 
 const SearchBar = () => {
 
-    const [User, setUser] = useContext(UserContext);
+    //const [User, setUser] = useContext(UserContext);
     const [QueryData, setQueryData] = useState([]);
 
     let history = useHistory();
 
     const SendQuery = () => {
-        Cookies.set('pssearching', QueryData, { expires: 7 });
+        //Cookies.set('pssearching', QueryData, { expires: 7 });
         Axios.post(ServerPath + 'Search.php',
         QueryData)
         .then(function (res) {
-            setUser({...User, searchmemo: res.data});
+            //setUser({...User, searchmemo: res.data});
             history.push({
                 pathname: '/search',
-            });
+                searchProps: {searchdata: res.data, searchword: QueryData}
+            })
         })
     }
 

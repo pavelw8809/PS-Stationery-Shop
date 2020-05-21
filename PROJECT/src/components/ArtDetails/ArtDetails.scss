@@ -10,7 +10,6 @@
     display: grid;
     grid-template-columns: 400px minmax(100px, 800px);
     grid-template-areas:
-                            //'arttitle arttitle'
                             'artimg artinfo'
                             'orderbtn orderbtn';
     //text-align: center;
@@ -22,6 +21,8 @@
     background-color: white;
     align-items: flex-start;
 }
+
+//.ArtDContainer
 
 .ArtImgContainer {
     background-position: center;

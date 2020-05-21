@@ -54,8 +54,6 @@ const ChangePassword = (props) => {
                     }
                 })
         }
-
-        console.log(testPass);
     }
 
     console.log(Pass);

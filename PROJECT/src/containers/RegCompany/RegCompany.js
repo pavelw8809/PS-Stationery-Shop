@@ -12,7 +12,7 @@ import { ServerPath } from '../App';
 const RegCompany = () => {
     const [Error, setError] = useState([]);
     const [Form, setForm] = useState({
-    /*
+
         accounttype: 0,
         login: null,
         email: null,
@@ -27,26 +27,10 @@ const RegCompany = () => {
         czip1: null,
         czip2: null,
         ccity: null
-    */
-    
-       accounttype: 0,
-       login: 'ldij3455',
-       email: 'gtr@gmail.com',
-       pass0: 'Dupa1234!',
-       pass1: 'Dupa1234!',
-       cname: 'Dupa sp. z o.o.',
-       cnip: 3456789133,
-       cregon: 222333444,
-       cstreet: 'Cebulowa',
-       chouse: 23,
-       cflat: null,
-       czip1: 55,
-       czip2: 100,
-       ccity: 'Trzebnica'
     
     });
 
-    const [ControlMenu, setControlMenu] = useState({step1: false, step2: false, step3: true});
+    const [ControlMenu, setControlMenu] = useState({step1: true, step2: false, step3: false});
 
     const handleFields = (option, event) => {
         switch(option) {

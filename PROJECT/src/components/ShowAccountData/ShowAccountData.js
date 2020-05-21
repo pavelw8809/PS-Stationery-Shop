@@ -63,7 +63,6 @@ const ShowAccountData = (props) => {
                 <button className="AccountPanelBtn" onClick={props.changetabshow}>EDYCJA KONTA</button>
                 <button className="AccountPanelBtn" onClick={props.changetabpass}>ZMIEŃ HASŁO</button>
                 <NavLink to="/myorders"><button className="AccountPanelBtn">MOJE ZAMÓWIENIA</button></NavLink>
-                <button className="AccountPanelBtn RemBtn" onClick={props.changetabrem}>USUŃ KONTO</button>
             </div>
         </div>
     )

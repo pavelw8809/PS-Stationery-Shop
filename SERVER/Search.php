@@ -11,6 +11,8 @@
         die("Connection error");
     }
 
+    $output = [];
+
     $sqlquery = "SELECT * FROM products WHERE p_name LIKE '%$data%'";
     $result = mysqli_query($con, $sqlquery);
 

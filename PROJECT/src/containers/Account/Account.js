@@ -10,7 +10,6 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import ShowAccountData from '../../components/ShowAccountData/ShowAccountData';
 import EditAccountData from '../../components/EditAccountData/EditAccountData';
 import ChangePassword from '../../components/ChangePassword/ChangePassword';
-import RemoveAccount from '../../components/RemoveAccount/RemoveAccount';
 
 const Account = () => {
     const [User, setUser] = useContext(UserContext);
@@ -119,7 +118,7 @@ const Account = () => {
                         
                     })
                 } else {
-                    console.log("We still have it");
+                    //console.log("We still have it");
                     setAccountFound(true);
                     setFormData((prevState) => ({...prevState, 
                         userid: User.userinfo.uid,
@@ -150,51 +149,41 @@ const Account = () => {
         }
     }, [])
 
-    let AccountData, AccFormData, AccountType, address, fullname //zip1, zip2;
+    let AccountData, AccFormData, AccountType, address, fullname;
 
     let ACStyle, EAStyle, CPStyle, RMStyle;
     //ACStyle = {display: 'block'};
     EAStyle = {display: 'none'};
     CPStyle = {display: 'none'};
-    RMStyle = {display: 'none'};
 
     if (TabDisp.accshow) {
         ACStyle = {display: 'block'};
         EAStyle = {display: 'none'};
         CPStyle = {display: 'none'};
-        RMStyle = {display: 'none'};
     }
     if (TabDisp.accedit) {
         ACStyle = {display: 'none'};
         EAStyle = {display: 'block'};
         CPStyle = {display: 'none'};
-        RMStyle = {display: 'none'};
     }
     if (TabDisp.accpass) {
         ACStyle = {display: 'none'};
         EAStyle = {display: 'none'};
         CPStyle = {display: 'block'};
-        RMStyle = {display: 'none'};
-    }
-    if (TabDisp.accrem) {
-        ACStyle = {display: 'none'};
-        EAStyle = {display: 'none'};
-        CPStyle = {display: 'none'};
-        RMStyle = {display: 'block'};
     }
 
     const changeTab = (option) => {
         if (option === 0) {
-            setTabDisp({...TabDisp, accshow: false, accedit: true, accpass: false, accrem: false});
+            setTabDisp({...TabDisp, accshow: false, accedit: true, accpass: false});
         }
         if (option === 1) {
-            setTabDisp({...TabDisp, accshow: false, accedit: false, accpass: true, accrem: false});
+            setTabDisp({...TabDisp, accshow: false, accedit: false, accpass: true});
         }
         if (option === 2) {
-            setTabDisp({...TabDisp, accshow: true, accedit: false, accpass: false, accrem: false});
+            setTabDisp({...TabDisp, accshow: true, accedit: false, accpass: false});
         }
         if (option === 3) {
-            setTabDisp({...TabDisp, accshow: false, accedit: false, accpass: false, accrem: true});
+            setTabDisp({...TabDisp, accshow: false, accedit: false, accpass: false});
         }
     }
 
@@ -407,8 +396,6 @@ const Account = () => {
                             setErrorInfo(res.data);
                         }
                     });
-            } else {
-                console.log("NOTHING CHANGED");
             }
         }
     }
@@ -504,12 +491,6 @@ const Account = () => {
                             changetab={changeTab.bind(this, 2)}
                         />
                     </div>
-                    <div style={RMStyle}>
-                        <RemoveAccount 
-                            uid={User.userinfo.uid}
-                            changetab={changeTab.bind(this, 2)}
-                        />
-                    </div>
                 </div>
             </div>
         )
@@ -526,8 +507,6 @@ const Account = () => {
             </div>
         )
     }
-
-    console.log(User);
 
     return(
         <div className="SiteContainer">

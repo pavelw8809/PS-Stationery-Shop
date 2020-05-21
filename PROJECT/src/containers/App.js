@@ -65,18 +65,12 @@ function App() {
     } else {
       CartStorage = [];
     }
-    
-    console.log(CartStorage);
-    console.log("FOUND");
   }
-
-  const [CartList, setCartList] = useState({products: CartStorage});
-  console.log(CartList);
 
 // *** S T A T E S ***
   
   // 1. Cart state
-  //const [Cart, setCart] = useState([]);
+  const [Cart, setCart] = useState({products: CartStorage});
 
   // 2. Total price state
   
@@ -88,8 +82,7 @@ function App() {
     usercontrol: false,
     userinfo: {},
     acccontrol: false,
-    accinfo: {},
-    searchmemo: []
+    accinfo: {}
   });
 
   useEffect(() => {
@@ -104,7 +97,7 @@ function App() {
     } 
 
     const cartmap = {
-      ...CartList.products
+      ...Cart.products
     };
 
     const cartarray = [];
@@ -172,6 +165,3 @@ function App() {
 }
 
 export default App;
-
-//        <CartContext.Provider value={[Cart, setCart]}>
-//        </CartContext.Provider>

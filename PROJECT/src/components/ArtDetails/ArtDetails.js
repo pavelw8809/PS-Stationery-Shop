@@ -5,9 +5,8 @@ import carticon from '../../images/icons/black_cart.png';
 
 const Artdetails = (props) => {
 
-    //const [Cart, setCart] = useContext(CartContext);                               // stan globalny - stan koszyka
-    const [Total, setTotal] = useContext(TotalContext);                            // stan globalny - suma do zapłaty
-    const [counter, setCounter] = useState({quantity: 0})              // stan lokalny - wyświetla ilość produktu
+    const [Total, setTotal] = useContext(TotalContext);
+    const [counter, setCounter] = useState({quantity: 0});
     
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
     console.log(props.location.artProps);
@@ -26,8 +25,6 @@ const Artdetails = (props) => {
         localStorage.setItem('psdet', JSON.stringify(props.location.artProps));
     } else {
         let ArtStorage = JSON.parse(localStorage.getItem('psdet'));
-        //console.log(ArtStorage);
-
         if (ArtStorage !== null) {
             ImageName = ArtStorage.imagename;
             Image = require('../../images/images/' + ImageName + '.png'); 
@@ -39,12 +36,8 @@ const Artdetails = (props) => {
             ShortDesc = ArtStorage.shortdesc;
             Desc = ArtStorage.description;
         } else {
-            //Price = null;
             NetPrice = 0;
-            //ProdId = null;
             Name = null;
-            //ShortDesc = null;
-            //Desc = null;
         }
     }
 
@@ -104,9 +97,7 @@ const Artdetails = (props) => {
 
             if (q > 0) {
                 if (check === 0) {
-                    //console.log("AAAA");
                     let CartStorageN = ([...CartStorage, {
-                        //id: CartStorage.length,
                         prodid: prodid,
                         imagename: imagename,
                         name: name, 
@@ -127,28 +118,11 @@ const Artdetails = (props) => {
                       .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
                 
                     setTotal({total: sum});
-                    /*
-                    setCart(prevCart => ([...Cart, {
-                        id: Cart.length, 
-                        prodid: prodid,
-                        name: name, 
-                        desc: desc,
-                        price: parseFloat(price),
-                        quantity: q, 
-                        prodtotal: q*price,
-                        imagename: imagename
-                    }]))
-                    */
                 } else {
-                    console.log(q);
                     let CartStorageN = [...CartStorage];
                     CartStorageN[idToChange].quantity = CartStorageN[idToChange].quantity+q;
                     CartStorageN[idToChange].prodtotal = CartStorageN[idToChange].price*CartStorageN[idToChange].quantity;
-                    console.log(CartStorageN[idToChange].quantity);
                     localStorage.setItem('pscart', JSON.stringify(CartStorageN))
-                    //let newCart = [...Cart];
-                    //newCart[idToChange].quantity = newCart[idToChange].quantity+q;
-                    //newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
                     const cartarray = [];
     
                     const sum = Object.values(CartStorageN)

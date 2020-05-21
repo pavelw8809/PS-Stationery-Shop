@@ -7,6 +7,10 @@ $data = json_decode($json);
 $con = new mysqli($dbserv, $dbuser, $dbpass, $dbname);
 $con -> set_charset("utf8");
 
+if ($con->connect_error) {
+	die("Connection failed: " . $con->connect_error);
+}
+
 $response = new \stdClass();
 $e = 0;
 $epos;
@@ -95,7 +99,6 @@ if ($AT === 0) {
 
 if ($e > 0) {
     echo ("Błąd połączenia z bazą danych - error ".$con->error." - segment ".$epos);
-    //echo("Błąd połączenia z bazą danych - error ".$con->error." - segment ".$epos);
 } else {
     echo "success";
 }

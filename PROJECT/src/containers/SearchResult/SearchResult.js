@@ -1,31 +1,29 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React from 'react';
 import './SearchResult.scss';
 import ArtCard from '../../components/ArtCard/ArtCard';
-import Cookies from 'js-cookie';
-import Axios from 'axios';
 import { UserContext, ServerPath } from '../App';
 import TitleBar from '../../components/TitleBar/TitleBar';
+import { FaSearch } from 'react-icons/fa';
 
 const SearchResult = (props) => {
-    const [User, setUser] = useContext(UserContext);
+    //const [User, setUser] = useContext(UserContext);
+    //const [Products, setProducts] = useState();
     //const [ReadCookie, setReadCookie] = useState();
 
-    let SearchingCookie = Cookies.get('pssearching');
-    let DecodedCookie = decodeURIComponent(SearchingCookie);
-    let InfoTxt = "Wyniki wyszukiwania dla frazy: " + DecodedCookie;
+    //let SearchingCookie = Cookies.get('pssearching');
+    //let DecodedCookie = decodeURIComponent(SearchingCookie);
+    //console.log(props.location.searchProps);
 
-    let showCards;
+    let showCards, InfoTxt;
 
-    if (User.searchmemo.length === 0) {
-        if (DecodedCookie !== 'undefined') {
-            Axios.post(ServerPath + 'Search.php',
-            DecodedCookie)
-            .then(function (res) {
-                setUser({...User, searchmemo: res.data});
-            })
+    console.log(props.location.searchProps);
+
+    if (typeof(props.location.searchProps) !== 'undefined') {
+        InfoTxt = "Wyniki wyszukiwania dla frazy: " + props.location.searchProps.searchword;
+        if (props.location.searchProps.searchdata.length > 0) {
             showCards = (
                 <div className="ProdFlexbox">
-                    {User.searchmemo.map((r, index) => {
+                    {props.location.searchProps.searchdata.map((r, index) => {
                         return(
                             <ArtCard 
                                 imagename={r.p_code}
@@ -41,30 +39,25 @@ const SearchResult = (props) => {
                 </div>
             )
         } else {
-            showCards = <h4>Brak wyników</h4>
+            showCards = (
+                <div className="SearchNoResults">
+                    <FaSearch className="SearchIcon" size={70}/>
+                    <p>Nie znaleziono żadnych artykułów.</p>
+                </div>
+            )
         }
     } else {
+        InfoTxt = "Wyniki wyszukiwania"
         showCards = (
-            <div className="ProdFlexbox">
-                {User.searchmemo.map((r, index) => {
-                    return(
-                        <ArtCard 
-                            imagename={r.p_code}
-                            prodid = {r.p_id}
-                            name = {r.p_name}
-                            shortdesc = {r.p_shortdescription}
-                            description = {r.p_description}
-                            price={r.p_price}
-                            key={index}
-                        />
-                    )
-                })}
+            <div className="SearchNoResults">
+                <FaSearch className="SearchIcon" size={70}/>
+                <p>Nie znaleziono żadnych artykułów.</p>
             </div>
         )
     }
 
     return(
-        <div>
+        <div className="SearchResult">
             <TitleBar title={InfoTxt}/>
             {showCards}
         </div>

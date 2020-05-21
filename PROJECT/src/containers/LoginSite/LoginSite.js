@@ -82,12 +82,6 @@ const LoginSite = (props) => {
                 setErrorInfo(errordata);
             }
         })
-        //let sessionid = Cookies.get('pssession');
-        //Axios.post(ServerPath + "Session.php", sessionid)
-        //.then(function(res) {
-            //console.log(User);
-        //    console.log(res.data);
-        //})
     }
 
     return(
@@ -98,7 +92,7 @@ const LoginSite = (props) => {
             <label htmlFor="mail">Nazwa użytkownika</label>
             <input type="text" name="mail" onChange={handleUsername} onKeyDown={handleUsername}></input><br/>
             <label htmlFor="password">Hasło</label>
-            <input type="text" name="password" onChange={handlePassword} onKeyDown={handlePassword}></input><br/>
+            <input type="password" name="password" onChange={handlePassword} onKeyDown={handlePassword}></input><br/>
             <button className="LoginLogBtn" type="submit" onClick={handleLogin}>ZALOGUJ</button>
             {ErrorInfo}
             <hr className="separator"/>

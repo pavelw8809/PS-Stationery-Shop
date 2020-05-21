@@ -56,7 +56,7 @@ const footer = (props) => {
                 </div>
             </div>
             <div className="copyright">
-                <p>&copy; Copyright 2019 P&amp;S, Realizacja: B. Czaja, M. Malinowski, P. Wieczorek</p>
+                <p>&copy; Copyright 2020 P&amp;S, Realizacja: B. Czaja, P. Wieczorek</p>
             </div>
         </div>
     )
