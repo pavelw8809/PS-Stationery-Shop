@@ -16,6 +16,7 @@
 
 .IABtn, .CABtn {
     display: flex;
+    flex-direction: column;
     width: 300px;
     height: 300px;
     border: solid 2px $color0;
@@ -77,14 +78,18 @@
     //border-radius: 5px;
 }
 
-.RegIndividual {
+.RegAccWindow {
     background-color: $color1;
     border: solid 2px $color3;
     border-radius: 5px;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    max-width: 700px;
 }
 
-.RegIndividual input {
+.RegAccWindow input {
     color: $color3;
     //background-color: $color1;
     border: solid 1px $color0;
@@ -92,13 +97,14 @@
     margin: 5px;
 }
 
-.RegIndividual label {
+.RegAccWindow label {
     padding: 3px;
 }
 
 .RegMilestones {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: $color3;
     color: $color2;
     //padding: 10px;
@@ -151,4 +157,8 @@
 .RegErrorInfo p {
     padding: 2px;
     text-align: center;
+}
+
+.RegAccIcon {
+    margin: 20px;
 }

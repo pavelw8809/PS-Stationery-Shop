@@ -45,7 +45,7 @@ const RemoveAccount = (props) => {
             <hr className="remseparator"/>
             <div className="AccountPanel">
                 <button className="AccountPanelBtn" onClick={props.changetab}>POWRÓT</button>
-                <button className="AccountPanelBtn RemBtn" onClick={removeAcc}>USUŃ KONTO</button>
+                <button className="AccountPanelBtn AccRemBtn" onClick={removeAcc}>USUŃ KONTO</button>
             </div>
         </div>
     )

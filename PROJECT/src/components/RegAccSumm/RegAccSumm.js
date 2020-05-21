@@ -28,7 +28,7 @@ const RegAccSumm = (props) => {
             address = props.chouse;
         }
         SummaryContent = (
-            <div>
+            <div className="AccSummDataTile">
                 <p><span className="SummTitle">Nazwa firmy:</span>{props.cname}</p>
                 <p><span className="SummTitle">REGON:</span>{props.cregon}</p>
                 <p><span className="SummTitle">NIP:</span>{props.cnip}</p>
@@ -41,7 +41,7 @@ const RegAccSumm = (props) => {
         <div className="RegAccSummMain">
             <h3>PODSUMOWANIE</h3>
             <div className="RegAccSumm">
-                <div class="AccSummDataTile">
+                <div className="AccSummDataTile">
                     <p><span className="SummTitle">Login:</span>{props.login}</p>
                     <p><span className="SummTitle">E-mail:</span>{props.email}</p>
                 </div>
@@ -50,7 +50,7 @@ const RegAccSumm = (props) => {
             <hr className="Reghr"/>
             <div className="RegNavPanel">
                 <button onClick={props.prev}>COFNIJ</button>
-                <button onClick={props.next}>ZATWIERDŹ DANE</button>
+                <button onClick={props.sendaccdata}>ZATWIERDŹ DANE</button>
             </div>
         </div>
     )

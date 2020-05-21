@@ -1,9 +1,12 @@
 @import '../Main.scss';
 
 .RegCompany {
-
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    max-width: 700px;
 }
 
-.separator {
-    border: inset 0.5px $color0;
-}
+//.separator {
+//    border: inset 0.5px $color0;
+//}

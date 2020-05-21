@@ -1,0 +1,45 @@
+.RegAccCompMain {
+    //display: flex;
+    //flex-direction: column;
+    //max-width: 300px;
+    //justify-content: center;
+    padding: 10px;
+}
+
+.RegAccMainForm {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.RegAccComp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //padding: 10px;
+}
+
+.RegAccCompData {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    //max-width: 300px;
+}
+
+.RegAccCompData div label {
+    width: 130px;
+    display: inline-block;
+}
+
+.RegAccCompData div {
+    margin: 5px;
+}
+
+.RegAccComp p {
+    align-self: flex-start;
+}
+
+.RegAccMainForm h3 {
+    text-align: center;
+}

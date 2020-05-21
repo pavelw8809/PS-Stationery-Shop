@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 import './RegIndividual.scss';
 import Titlebar from '../../components/TitleBar/TitleBar';
 import RegAccMain from '../../components/RegAccMain/RegAccMain';
 import RegAccPers from '../../components/RegAccPers/RegAccPers';
 import RegAccSumm from '../../components/RegAccSumm/RegAccSumm';
-import { FaBreadSlice } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
+import Axios from 'axios';
+import { ServerPath } from '../App';
 
 const RegIndividual = (props) => {
     const [Error, setError] = useState([]);
@@ -39,14 +42,8 @@ const RegIndividual = (props) => {
        icity: 'Trzebnica'
     */
     });
-    const [ControlMenu, setControlMenu] = useState({step1: true, step2: false, step3: false})
 
-    /*
-    const handleSubmit = async (event) => {
-        error.preventDefault()
-        console.log('form submitted', form)
-    }
-    */
+    const [ControlMenu, setControlMenu] = useState({step1: true, step2: false, step3: false});
 
     const handleFields = (option, event) => {
         switch(option) {
@@ -82,6 +79,7 @@ const RegIndividual = (props) => {
     let info12 = "Pole kod pocztowy jest puste";
     let info13 = "Pole Miejscowość jest puste";
     let info14 = "Kod pocztowy powinien składać się z cyfr - format: 00-000";
+    let info20 = "Konto o podanym loginie już istnieje";
 
     const nextSite = (option) => {
         let valid = true;
@@ -118,11 +116,21 @@ const RegIndividual = (props) => {
                     valid = false;
                     ErrorContent = [...ErrorContent, info7];
                 }
-                
-                setError(ErrorContent);
 
                 if (valid === true) {
-                    setControlMenu({step1: false, step2: true, step3: false})
+                    Axios.post(ServerPath + "CheckLogin.php", Form.login)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data > 0) {
+                            valid = false;
+                            ErrorContent = [...ErrorContent, info20];
+                            setError(ErrorContent);
+                        } else {
+                            setControlMenu({step1: false, step2: true, step3: false})
+                        }
+                    })
+                } else {
+                    setError(ErrorContent);
                 }
             } break;
             case 2: {
@@ -179,7 +187,25 @@ const RegIndividual = (props) => {
         }
     }
 
-    console.log(Error);
+    const History = useHistory();
+
+    const sendAccData = () => {
+        Axios.post(ServerPath + "CreateAccount.php", Form)
+            .then(res => {
+                console.log(res.data);
+                if (res.data === "success") {
+                    History.push({
+                        pathname: '/login',
+                        addProps: {
+                            cartoption: true,
+                            addinfo: "Konto zostało pomyślnie założone. Możesz teraz zalogować się."
+                        }
+                    })
+                } else {
+                    setError(res.data);
+                }
+            })
+    }
 
     let RMStyle, RIStyle, RSStyle;
     let s1, s2, s3;
@@ -220,13 +246,15 @@ const RegIndividual = (props) => {
 
     return(
         
-        <div className="RegIndividual">
+        <div className="RegAccWindow">
             <div className="RegTitle">
                 <Titlebar title="Rejestracja konta indywidualnego"/>
             </div>
             <div className="RegMilestones">
                 <div className={s1}>1</div>
+                <FaArrowRight size={30}/>
                 <div className={s2}>2</div>
+                <FaArrowRight size={30}/>
                 <div className={s3}>3</div>
             </div>
             <div className="RegMain" style={RMStyle}>
@@ -255,6 +283,7 @@ const RegIndividual = (props) => {
             <div className="RegSumm" style={RSStyle}>
                 <RegAccSumm
                     prev={prevSite.bind(this, 1)}
+                    sendaccdata={sendAccData}
                     type={Form.accounttype}
                     login={Form.login}
                     email={Form.email}
