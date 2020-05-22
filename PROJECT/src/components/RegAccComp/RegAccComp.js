@@ -1,3 +1,5 @@
+// RegAccComp -> RegCompany - Registration component for companies.
+
 import React from 'react';
 import './RegAccComp.scss';
 

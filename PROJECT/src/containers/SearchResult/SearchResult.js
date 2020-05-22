@@ -1,18 +1,12 @@
+// SearchResult -> SearchBar
+
 import React from 'react';
 import './SearchResult.scss';
 import ArtCard from '../../components/ArtCard/ArtCard';
-import { UserContext, ServerPath } from '../App';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import { FaSearch } from 'react-icons/fa';
 
 const SearchResult = (props) => {
-    //const [User, setUser] = useContext(UserContext);
-    //const [Products, setProducts] = useState();
-    //const [ReadCookie, setReadCookie] = useState();
-
-    //let SearchingCookie = Cookies.get('pssearching');
-    //let DecodedCookie = decodeURIComponent(SearchingCookie);
-    //console.log(props.location.searchProps);
 
     let showCards, InfoTxt;
 

@@ -1,51 +1,46 @@
+// Account -> UserBtn, ShowUserData, EditUserData, ChangePassword
+
 import React, { useContext, useEffect, useState } from 'react';
 import './Account.scss';
 import { UserContext, ServerPath } from '../../containers/App';
-import { useHistory, NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 import { FaRegUserCircle } from 'react-icons/fa';
-//import AccountPanel from '../../components/AccountPanel/AccountPanel';
 import ShowAccountData from '../../components/ShowAccountData/ShowAccountData';
 import EditAccountData from '../../components/EditAccountData/EditAccountData';
 import ChangePassword from '../../components/ChangePassword/ChangePassword';
 
 const Account = () => {
+
+    // STATES
+
     const [User, setUser] = useContext(UserContext);
-    //const [AccountInfo, setAccountInfo] = useState([]);
     const [AccountFound, setAccountFound] = useState(false);
-    const [UserLogged, setUserLogged] = useState(false);
     const [TabDisp, setTabDisp] = useState({accshow: true, accedit: false, accpass: false})
     const [FormData, setFormData] = useState();
-    const [IsError, setIsError] = useState(false);
     const [ErrorInfo, setErrorInfo] = useState([]);
-    //const [InfoType] = useState(["mail", "cname", "ccity", "cstreet"]);
-    //let UserId = Cookies.get('psid');
-    //let DecodedUserId = decodeURIComponent(UserId);
+
+    // READ COOKIE FILES FOR SESSION TOKENS
+
     let SessionId = Cookies.get('pssession');
     let ExtSession = Cookies.get('psacc');
-    //let DecodedUserName = decodeURIComponent(UserName);
-    //const [UserData, setUserData] = useState({
-    //    id: DecodedUserId,
-    //    login: DecodedUserName
-    //});
+
+    // USEHISTORY HOOK
+
     let History = useHistory();
 
-    console.log(ExtSession);
+    // USEEFFECT HOOK - LOAD ACCOUNT DATA BASED ON THE PSSESSION AND PSACC COOKIES
 
     useEffect(() => {
         if (!ExtSession) {
             History.push('/extlogin');
         } else {
             if (SessionId !== null) {
-                console.log(User.accinfo);
                 if (!User.acccontrol) {
-                    
-                    console.log("loading...");
                     Axios.post(ServerPath   + 'UserAccount.php', ExtSession)
                     .then(res => {
-                        console.log(res.data);
                         if(res.data.length > 0) {
                             res.data.map((r, index) => {
                                 let izipA, izipB, czipA, czipB;
@@ -108,17 +103,13 @@ const Account = () => {
                                     izip2: izipB,
                                     czip1: czipA,
                                     czip2: czipB
-                                    //zip2: r.ci_zip.substring(3,6)
                                 
                                 }));
                             })
-                            //console.log(res.data);
                             setAccountFound(true);
                         }
-                        
                     })
                 } else {
-                    //console.log("We still have it");
                     setAccountFound(true);
                     setFormData((prevState) => ({...prevState, 
                         userid: User.userinfo.uid,
@@ -149,12 +140,11 @@ const Account = () => {
         }
     }, [])
 
-    let AccountData, AccFormData, AccountType, address, fullname;
+    // SHOW FEATURE TABS
 
-    let ACStyle, EAStyle, CPStyle, RMStyle;
-    //ACStyle = {display: 'block'};
-    EAStyle = {display: 'none'};
-    CPStyle = {display: 'none'};
+    let AccountData, AccountType, address, fullname;
+
+    let ACStyle, EAStyle, CPStyle;
 
     if (TabDisp.accshow) {
         ACStyle = {display: 'block'};
@@ -171,6 +161,8 @@ const Account = () => {
         EAStyle = {display: 'none'};
         CPStyle = {display: 'block'};
     }
+
+    // FUNCTIONS
 
     const changeTab = (option) => {
         if (option === 0) {
@@ -208,40 +200,30 @@ const Account = () => {
             case "IZ2": setFormData({...FormData, izip2: event.target.value}); break;
             case "CZ1": setFormData({...FormData, czip1: event.target.value}); break;
             case "CZ2": setFormData({...FormData, czip2: event.target.value}); break;
+            default: //do nothing
         }
     }
 
     const addError = (info) => {
-        console.log("arg: " + info);
         let checkErr = 0
         if (ErrorInfo.length > 0) {
             ErrorInfo.map((r, index) => {
-                console.log(r);
                 if (r === info) {
                     checkErr = 1;
                 }
-                console.log(checkErr);
             })
             if (checkErr === 0) {
-                console.log("B: " + info);
                 setErrorInfo((prevState) =>[...prevState, info]);
             }
         } else {
-            console.log(info);
             setErrorInfo((prevState) =>[...prevState, info]);
         }
     }
 
-    //console.log(ErrorInfo);
-
     const remError = (info) => {
-        
-        console.log("Removing: " + info);
         let newErrorList = ErrorInfo.slice();
         newErrorList.map((r, index) => {
-            console.log(r + " / " + info);
             if (r === info) {
-                console.log("slicing")
                 newErrorList.splice(index, 1);
                 setErrorInfo(newErrorList);
             }
@@ -250,7 +232,6 @@ const Account = () => {
     }
 
     const changeAccountData = () => {
-        //let errorlist = new Array;
         let valid = 0;
         let EmptyFields = false;
         let NotANumber = false;
@@ -269,44 +250,32 @@ const Account = () => {
 
             propArray.map((r, index) => {
                 if (r.length === 0) {
-                    console.log("isEmpty");
-                    //setIsError(true);
-                    //addError(info8);
                     isPropEmpty = true;
-                    //setErrorInfo((prevState) => ({...prevState, info8}))
                     valid = 1;
                 }
             })
             if (isPropEmpty === true) {
-                console.log("A");
                 EmptyFields = true;
-                //addError(info8);
             } else {
-                //remError(info8);
             }
 
             if (isNaN(FormData.izip1) || FormData.izip1 === null || FormData.izip1.length !== 2 ||
                 isNaN(FormData.izip2) || FormData.izip2 === null || FormData.izip2.length !== 3) {
-                    NotANumber = true;
+                NotANumber = true;
             }
 
         } else {
             let propArray = [FormData.login, FormData.cname, FormData.cstreet, FormData.ccity, FormData.chouse];
  
             propArray.map((r, index) => {
-                console.log(r);
                 if (r.length === 0) {
                     isPropEmpty = true;
-                    //setIsError(true);
-                    //setErrorInfo((prevState) => ({...prevState, info8}))
                     valid = 1;
                 }
             })
+
             if (isPropEmpty === true) {
                 EmptyFields = true;
-                //addError(info8);
-            } else {
-                //remError(info8);
             }
 
             if (isNaN(FormData.czip1) || FormData.czip1 === null || FormData.czip1.length !== 2 ||
@@ -336,7 +305,6 @@ const Account = () => {
             let mainquery = false; 
             let compquery = false; 
             let privquery = false;
-            //setIsError(false);
             let izipcode, czipcode;
             if (FormData.izip1 === null) {
                 izipcode = null
@@ -374,19 +342,15 @@ const Account = () => {
                     check = 1
             } else {
                 privquery = false;
-                //setFormData((prevState) => ({...prevState, privquery: false}));
             }
 
             let fullFormData = {...FormData, mainquery: mainquery, compquery: compquery, privquery: privquery, izip: izipcode, czip: czipcode};
 
 
             if (check > 0) {
-                console.log("SENDING DATA");
                 let fullAccData = {...fullFormData, userid: User.userinfo.uid};
-                console.log(fullAccData);
                 Axios.post(ServerPath + "EditAccount.php", fullAccData)
                     .then(res => {
-                        console.log(res.data);
                         if (res.data === "success") {
                             setUser((prevState) => ({...prevState,
                                 accinfo: fullAccData, userinfo: {uid: fullAccData.userid, login: fullAccData.login}
@@ -399,6 +363,8 @@ const Account = () => {
             }
         }
     }
+
+    // SHOW ACCOUNT INFORMATION
 
     if (AccountFound) {
         if (User.accinfo.cname === null) {
@@ -462,7 +428,6 @@ const Account = () => {
                             czip2={User.accinfo.czip2}
                             changetab={changeTab.bind(this, 2)}
                             submitdatachange={changeAccountData}
-                            iserror={IsError}
                             errorinfo={ErrorInfo}
                             log={handleFormData.bind(this, "LOG")}
                             cnm={handleFormData.bind(this, "CNM")}                  
@@ -494,18 +459,6 @@ const Account = () => {
                 </div>
             </div>
         )
-    } else if (!UserLogged) {
-        AccountData = (
-            <div>
-                Nie wykryto zalogowanego usera.
-            </div>
-        )
-    } else {
-        AccountData = (
-            <div>
-                Brak danych
-            </div>
-        )
     }
 
     return(
@@ -517,7 +470,3 @@ const Account = () => {
 }
 
 export default Account;
-
-//<NavLink to="/accountedit"><button>EDYCJA KONTA</button></NavLink>
-//<NavLink to="/myorders"><button>MOJE ZAMÓWIENIA</button></NavLink>
-//<NavLink to="/myorders"><button>ZMIEŃ HASŁO</button></NavLink>

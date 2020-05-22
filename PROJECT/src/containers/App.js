@@ -1,20 +1,11 @@
-/*
-    Plik:               App.js
-    Funkcja:            GŁÓWNY KOMPONENT APLIKACJI
-    Opis:               *** MAIN COMPONENT ***
-    Elementy:           Baner aplikacji (Header), 
-                        Część główna (Bodystyle) - ROUTING,
-                        Footer
-    Funkcje:
-    Przykład użycia:    N/A
-    Dodatkowe info:     Główna strona wyświetlająca cały kontekt aplikacji oraz funkcję odpowiedzialne za zmianę stanu.
-*/
+// App - CENTRAL APP COMPONENT
 
 import React, {useState, useEffect} from 'react';
 import './App.scss';                                                          // import arkusza dla głównego komponentu
 import './Main.scss';                                                         // import arkusza ze zmiennymi głównymi SASS
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';    // import komponentów routingu
-import Header from '../components/Header/Header';                             // import komponentu bannera                                                          // Import komponentu przycisku koszyka
+import Header from '../components/Header/Header';                             // import komponentu bannera
+import Footer from '../components/Footer/Footer';                             // Footer
 import '../components/Header/Header.scss';
 import Cookies from 'js-cookie';
 import Axios from 'axios';
@@ -22,7 +13,6 @@ import Axios from 'axios';
 import Index from './Index/Index';                                            // Strona Główna
 import About from './About/About';                                            // O Nas
 import Contact from './Contact/Contact';                                      // Kontakt
-import Offer from './Offer/Offer';                                            // Oferta
 import Orders from './Orders/Orders';                                         // Zamówienia
 import ShopService from './ShopService/Services';                             // Usługi
 import Notfound from './Notfound/Notfound';                                   // 404 - Not found
@@ -30,29 +20,32 @@ import SStationary from './SStationary/SStationary';                          //
 import SOffice from './SOffice/SOffice';                                      // Sklep - Art. biurowe
 import SEnvelopes from './SEnvelopes/SEnvelopes';                             // Sklep - Koperty
 import SPaper from './SPaper/SPaper';                                         // Sklep - Art. papiernicze
-import SHygienic from './SHygienic/SHygienic';                                // Sklep - Materiały higieniczne
 import SCart from './Cart/Cart';                                              // Koszyk
 import Registration from './Registration/Registration';                       // Formularz rejestracyjny
 import ArtDetails from '../components/ArtDetails/ArtDetails';                 // Karta produktu - szczegóły
-import Account from './Account/Account';
-import UserOrders from './UserOrders/UserOrders';
-import SearchResult from './SearchResult/SearchResult';            
-import ExtLoginSite from './ExtLoginSite/ExtLoginSite'; 
-import LoginSite from './LoginSite/LoginSite';
-import AccountEdit from './AccountEdit/AccountEdit';
-import Info from './Info/Info';
-import Footer from '../components/Footer/Footer';
-import RegCompany from './RegCompany/RegCompany';
-import RegIndividual from './RegIndividual/RegIndividual';
-import Confirmation from './Confirmation/Confirmation';
-import CookieInfo from '../components/CookieInfo/CookieInfo';
-//import Login from '../components/Login/Login';
+import Account from './Account/Account';                                      // Informacje o koncie
+import UserOrders from './UserOrders/UserOrders';                             // Moje zamówienia
+import SearchResult from './SearchResult/SearchResult';                       // Rezultaty wyszukiwania
+import ExtLoginSite from './ExtLoginSite/ExtLoginSite';                       // Strona logowania rozszerzonego
+import LoginSite from './LoginSite/LoginSite';                                // Strona logowania zwykłego
+import Info from './Info/Info';                                               // Komponent informacyjny
+import RegCompany from './RegCompany/RegCompany';                             // Rejestracja konta firmowego
+import RegIndividual from './RegIndividual/RegIndividual';                    // Rejestracja konta indywidualnego
+import Confirmation from './Confirmation/Confirmation';                       // Potwierdzenie złożenia zamówienia
+import CookieInfo from '../components/CookieInfo/CookieInfo';                 // Informacja o plikach Cookie
+
+// REACT GLOBAL STATE CONTEXT 
 
 export const TotalContext = React.createContext();
 export const UserContext = React.createContext();
+
+// SERVER ADDRESS CONFIGURATION
+
 export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
 
 function App() {
+
+  // LOAD CART CONTENT FROM LOCAL STORAGE
 
   let CartStorage;
 
@@ -70,7 +63,7 @@ function App() {
 // *** S T A T E S ***
   
   // 1. Cart state
-  const [Cart, setCart] = useState({products: CartStorage});
+  const [Cart] = useState({products: CartStorage});
 
   // 2. Total price state
   const [Total, setTotal] = useState(0);
@@ -83,13 +76,14 @@ function App() {
     accinfo: {}
   });
 
+  // USEEFFECT HOOK - Read session cookie files, Count total sum in cart
+
   useEffect(() => {
     let SessionId = Cookies.get('pssession');
     let DecodedSessionId = decodeURIComponent(SessionId);
     if (DecodedSessionId !== 'undefined') {
       Axios.post(ServerPath + 'Session.php', SessionId)
         .then(function(res) {
-          console.log(res.data);
           setUser((prevState) => ({...prevState, usercontrol: true, userinfo: res.data}));
       })
     } 
@@ -99,25 +93,24 @@ function App() {
     };
 
     const cartarray = [];
-    
     const sum = Object.values(cartmap)
       .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
     })
-      .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+      .reduce((sum, el) => {return sum+el;}, 0);
 
     setTotal({total: sum});
 
-  }, [])
-  
-
+  }, [Cart.products])
 
   // BACKGROUND IMAGE
 
   const backgroundImg = require('../images/images/backgroud_main.jpg');
 
+  // APP DISPLAY / ROUTING
+
   return (
     <div className="App">
-      <img className="BackgroundImg" src={backgroundImg}/>
+      <img className="BackgroundImg" src={backgroundImg} alt="appbckg"/>
       <Router>
         <UserContext.Provider value={[User, setUser]}>
         <TotalContext.Provider value={[Total, setTotal]}>
@@ -128,14 +121,12 @@ function App() {
                   <Route exact path="/" component={Index}/>
                   <Route path="/about" component={About}/>
                   <Route path="/contact" component={Contact}/>
-                  <Route path="/offer" component={Offer}/>
                   <Route path="/orders" component={Orders}/>
                   <Route path="/service" component={ShopService}/>
                   <Route path="/sstationary" component={SStationary}/>
                   <Route path="/soffice" component={SOffice}/>
                   <Route path="/senvelopes" component={SEnvelopes}/>
                   <Route path="/spaper" component={SPaper}/>
-                  <Route path="/shygienic" component={SHygienic}/>
                   <Route path="/cart" component={SCart}/>
                   <Route path="/regform" component={Registration}/>
                   <Route path="/artdetails" component={ArtDetails}/>
@@ -144,7 +135,6 @@ function App() {
                   <Route path="/search" component={SearchResult}/>
                   <Route path="/extlogin" component={ExtLoginSite}/>
                   <Route path="/login" component={LoginSite}/>
-                  <Route path="/accountedit" component={AccountEdit}/>
                   <Route path="/info" component={Info}/>
                   <Route path="/regcompany" component={RegCompany}/>
                   <Route path="/regindividual" component={RegIndividual}/>

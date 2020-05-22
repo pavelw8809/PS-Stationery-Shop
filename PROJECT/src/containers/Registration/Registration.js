@@ -1,16 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+// Registration -> Login, RegCompany, RegIndividual
+
+import React from 'react';
 import './Registration.scss';
-import { useHistory, NavLink } from 'react-router-dom';
-import { FaRegUserCircle, FaRegBuilding  } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
+import { FaRegUserCircle, FaRegBuilding } from 'react-icons/fa';
 
 const Registration = () => {
-    const [error, setError] = React.useState(null);
-    const [form, setForm] = React.useState({
-    });
-    const handleSubmit = async (event) => {
-        error.preventDefault()
-        console.log('form submitted', form)
-    }
 
     return(
         <div className="RegForm">

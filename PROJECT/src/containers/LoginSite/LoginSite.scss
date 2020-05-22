@@ -33,7 +33,6 @@
 }
 
 .LoginAuthWindow button {
-    //background-color: $color5;
     border: solid 1px $color0;
     border-radius: 5px;
     color: $color1;
@@ -68,15 +67,13 @@
 }
 
 .LoginErrInfo {
-    //padding: 10px;
-    color: maroon;
+    color: $color10;
 }
 
 .separator {
     border: inset 0.5px $color0;
     display: block;
     width: 100%;
-    //margin: 5px;
 }
 
 .LoginAddInfo {

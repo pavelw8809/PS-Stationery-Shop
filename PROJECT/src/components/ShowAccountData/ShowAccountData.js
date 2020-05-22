@@ -1,3 +1,5 @@
+// ShowAccountData -> Account, EditAccountData, ChangePassword
+
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import './ShowAccountData.scss';

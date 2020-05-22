@@ -1,11 +1,4 @@
-/*
-    Plik:               Services.js
-    Funkcja:            STRONA INFORMACYJNA - USŁUGI
-    Opis:               Strona z informacją o usługach dodatkowych, świadczonych przez firmę
-    Elementy:           
-    Przykład użycia:    N/A
-    Dodatkowe info:     Do wypełnienia o treści statyczne - treść w funkcji return().
-*/
+// Services -> Body - static component
 
 import React from 'react';
 import TitleBar from '../../components/TitleBar/TitleBar';

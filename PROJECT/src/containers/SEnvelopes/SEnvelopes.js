@@ -1,14 +1,6 @@
-/*
-    Plik:               SEnvelopes.js
-    Funkcja:            SKLEP - KOPERTY
-    Opis:               Strona sklepu wyświetlająca artykuły z kategorii koperty.
-    Elementy:           Product Query - ComponentDidMount(), 
-                        Karta Produktu dla każdego z elementów (ArdCard)
-    Przykład użycia:    N/A
-    Dodatkowe info:     Query + zwrócenie wyniku w kartach
-*/
+// SEnvelopes -> ArtCard, ArtDetails
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
 import { ServerPath } from '../App';
 import axios from 'axios';
@@ -16,7 +8,12 @@ import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss"
 
 const Shopenvelopes = () => {
+
+    // STATES
+
     const [Products, setProducts] = useState([]);
+
+    // USEEFFECT HOOK - Load articles
 
     useEffect(() => {
         axios.get(ServerPath + "SEnvelopes.php")
@@ -24,6 +21,8 @@ const Shopenvelopes = () => {
             setProducts(res.data);
         })
     }, [])
+
+    // DISPLAY ARTICLE CARDS
 
     let showCards;
 

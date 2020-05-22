@@ -1,9 +1,9 @@
+// RegAccSumm -> RegCompany, RegIndividual - Registration summary
+
 import React from 'react';
 import './RegAccSumm.scss';
 
 const RegAccSumm = (props) => {
-
-    console.log(props.iname);
 
     let SummaryContent, address;
 

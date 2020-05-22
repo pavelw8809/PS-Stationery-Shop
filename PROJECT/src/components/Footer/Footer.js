@@ -1,8 +1,10 @@
+// Footer -> App (MAIN APP COMPONENT)
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Footer.scss';
 
-const footer = (props) => {
+const footer = () => {
     return(
         <div className="footer">
             <div className="contactbox">

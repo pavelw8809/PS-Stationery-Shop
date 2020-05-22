@@ -15,9 +15,13 @@
     $sqlquery = "SELECT distinct * FROM products p 
     left join order_details od on p.p_id=od.od_o_id 
     ORDER BY od.od_quality DESC LIMIT 5";
+    
     $result = mysqli_query($con, $sqlquery);
     while ($r = mysqli_fetch_assoc($result)) {
         $output[] = $r;
     }
 
     echo json_encode($output);
+
+    $con->close();
+?>

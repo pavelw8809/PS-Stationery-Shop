@@ -1,50 +1,10 @@
-import React, { useState, useContext} from 'react';
-import './Login.scss'
+// Login -> UserBtn
+
+import React from 'react';
+import './Login.scss';
 import { NavLink } from 'react-router-dom';
 
 const Login = (props) => {
-/*
-    const [LoginData, setLoginData] = useState({
-        userdata: [
-            {user: ''},
-            {password: ''}
-        ]
-    });
-
-
-    const [LoginData, setLoginData] = useState()
-    const [User, setUser] = useContext(UserContext)
-
-    const handleUsername = (event) => {
-        setLoginData({...LoginData, user: event.target.value});
-    }
-
-    const handlePassword = (event) => {
-        setLoginData({...LoginData, password: event.target.value});
-    }
-
-    let history = useHistory();
-
-    const handleLogin = () => {
-        //console.log(LoginData.user + "/" + LoginData.password);
-        console.log(LoginData);
-        Axios.post(ServerPath + "Login.php", LoginData)
-        .then(function(res) {
-            console.log(res.data);
-            setUser({
-               userinfo: {
-                   id: res.data.u_id,
-                   login: res.data.u_login
-               } 
-            })
-            Cookies.set('psid', res.data.u_id);
-            Cookies.set('psname', res.data.u_login);
-            //props.LogShow = false;
-        })
-    }
-
-    )
-*/
 
     return(
         <div className="Login">

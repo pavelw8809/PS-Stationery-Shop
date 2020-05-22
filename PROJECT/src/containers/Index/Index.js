@@ -1,15 +1,7 @@
-/*
-    Plik:               Index.js
-    Funkcja:            KONTENER STARTOWY - INDEX STRONY
-    Opis:               Strona główna po wpisaniu adresu głównego
-    Elementy:           
-    Przykład użycia:    N/A
-    Dodatkowe info:     Treści statyczne + slider z ofertą + randomowe karty z ofertami
-*/
+// Index -> Body, Slider, ArtCart
 
 import React, { useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
-//import { CartContext } from '../App';
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss";
@@ -18,7 +10,11 @@ import Slider from '../../components/Slider/Slider';
 
 const Index = () => {
 
+    // STATES
+
     const [Products, setProducts] = useState([]);
+
+    // USEEFFECT HOOK - Get top 5 products
 
     useEffect(() => {
         axios.get(ServerPath + `Index.php`)
@@ -26,6 +22,8 @@ const Index = () => {
             setProducts(res.data);
         })
     }, [])
+
+    // SHOW TOP 5 PRODUCTS CARDS
 
     let showCards;
 
@@ -51,9 +49,7 @@ const Index = () => {
         <div className="SiteContainer">
             <TitleBar title="Zapraszamy do skorzystania z naszej oferty"/>
             <Slider/>
-
             <TitleBar title="Top 5 najczęściej kupowanych produktów w naszym sklepie"/>
-
             {showCards}
         </div>
     )

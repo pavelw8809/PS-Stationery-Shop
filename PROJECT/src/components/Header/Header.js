@@ -1,25 +1,11 @@
-/*
-    Plik:               Header.js
-    Funkcja:            BANNER APLIKACJI
-    Opis:               Górna część nawigacyjno-informacyjna
-    Elementy:           Nawigacja górna (Navbar), 
-                        Logo (PS Logo), 
-                        Searching Bar (SearchBar), 
-                        Przycisk Zaloguj (LogBtn => Login.js), 
-                        Przycisk Koszyka (CartBtn => Cart.js), 
-                        Suma zakupów {props.totalprice} - wyświetlane w przycisku Koszyk
-                        Nawigacja dolna - sklep (ArtNav)
-    Przykład użycia:    Komponent bazowy wyświetlany w App.js - <Header totalprice={suma} />
-    Dodatkowe info:     <Navlink> - list przekierowujący do odpowiedniego kontenera w routingu - routing w pliku głównym App.js
-*/
+// Header -> App (MAIN APP COMPONENT)
 
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';                                                         // Import komponentu Navlick - element react-router-dom
-import { TotalContext, CartContext } from '../../containers/App';
-import logo0 from '../../images/icons/pands.png';                                                   // Logo firmy duże
+import { NavLink } from 'react-router-dom';
+import { TotalContext } from '../../containers/App';
+import logo0 from '../../images/icons/pands.png';
 import logo1 from '../../images/icons/pands_small.png';
-import { FaSearch } from 'react-icons/fa';                                                   // Ikona lupy
-import CartBtn from '../CartBtn/CartBtn';                                                           // Import komponentu przycisku koszyka
+import CartBtn from '../CartBtn/CartBtn';
 import { FaChevronDown } from "react-icons/fa";
 import UserBtn from '../UserBtn/UserBtn';
 import SearchBar from '../SearchBar/SearchBar';
@@ -29,8 +15,7 @@ const Header = () => {
 
     // STATES
     
-    const [Total, setTotal] = useContext(TotalContext);
-    //const [Cart, setCart] = useContext(CartContext);
+    const [Total] = useContext(TotalContext);
     const [Dropdown, setDropdown] = useState(false);
     const [StyleNavBar, setStyleNavBar] = useState();
     const [StyleArtNav, setStyleArtNav] = useState();
@@ -38,11 +23,7 @@ const Header = () => {
 
     // SCROLLING LISTENER FOR BANNER
 
-    //let CartStorage = localStorage.getItem('pscart');
-    //let TotalStorage = localStorage.getItem('pstotal');
-
     const listenScrollEvent = (event) => {
-        //console.log(window.scrollY);
         if (window.scrollY >= 100) {
             setStyleNavBar({maxHeight: 0, overflow: 'hidden', transitionDuration: '1s'});
             setStyleArtNav({maxHeight: 0, overflow: 'hidden', transitionDuration: '1s'});
@@ -55,12 +36,11 @@ const Header = () => {
         }
     }
 
-    // RUN AFTER LOADING COMPONENT
-
     useEffect(() => {
         window.addEventListener('scroll', listenScrollEvent);
     }, [])
 
+    // FUNCTIONS
 
     const dropDown = () => {
         if (!Dropdown) {

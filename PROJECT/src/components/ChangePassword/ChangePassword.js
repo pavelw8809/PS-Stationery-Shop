@@ -1,3 +1,5 @@
+// ChangePassword -> Account, ShowAccountData
+
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
@@ -5,16 +7,23 @@ import { ServerPath } from '../../containers/App';
 
 const ChangePassword = (props) => {
 
+    // STATES
+
     const [Pass, setPass] = useState({oldpass: "", newpass0: "", newpass1: ""});
     const [PassError, setErrorPass] = useState();
 
+    // USE HISTORY
+
     const History = useHistory();
+
+    // FUNCTIONS
 
     const handlePassword = (option, event) => {
         switch(option) {
             case 0: setPass({...Pass, oldpass: event.target.value}); break;
             case 1: setPass({...Pass, newpass0: event.target.value}); break;
             case 2: setPass({...Pass, newpass1: event.target.value}); break;
+            default: // do nothing
         }
     }
 
@@ -36,15 +45,13 @@ const ChangePassword = (props) => {
             sendPass = false;
         } else {
             setErrorPass();
-            sendPass = true
+            sendPass = true;
         }
 
         if (sendPass === true) {
             let passData = {...Pass, userid: props.uid};
-            console.log(passData);
             Axios.post(ServerPath + "ChangePass.php", passData)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data === "success") {
                         History.push({
                             pathname: '/info', 
@@ -55,8 +62,6 @@ const ChangePassword = (props) => {
                 })
         }
     }
-
-    console.log(Pass);
 
     return(
         <div className="AccountInfo">

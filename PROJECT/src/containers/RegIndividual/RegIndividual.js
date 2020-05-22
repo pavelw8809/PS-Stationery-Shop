@@ -9,10 +9,12 @@ import { FaArrowRight } from 'react-icons/fa';
 import Axios from 'axios';
 import { ServerPath } from '../App';
 
-const RegIndividual = (props) => {
+const RegIndividual = () => {
+
+    // STATES
+
     const [Error, setError] = useState([]);
-    const [Form, setForm] = useState({
-        
+    const [Form, setForm] = useState({ 
         accounttype: 1,
         login: null,
         email: null,
@@ -26,43 +28,34 @@ const RegIndividual = (props) => {
         izip1: null,
         izip2: null,
         icity: null
-    /*
-       accounttype: 1,
-       login: 'ldij3455',
-       email: 'gtr@gmail.com',
-       pass0: null,
-       pass1: null,
-       iname: 'Janusz',
-       isurname: 'Nosacz',
-       istreet: 'Cebulowa',
-       ihouse: 23,
-       iflat: 5,
-       izip1: 55,
-       izip2: 100,
-       icity: 'Trzebnica'
-    */
     });
-
     const [ControlMenu, setControlMenu] = useState({step1: true, step2: false, step3: false});
+
+    // USEHISTORY HOOK
+
+    const History = useHistory();
+
+    // FIELDS LISTENER
 
     const handleFields = (option, event) => {
         switch(option) {
-            case 0: {setForm({...Form, login: event.target.value})}; break;
-            case 1: {setForm({...Form, email: event.target.value})}; break;
-            case 2: {setForm({...Form, pass0: event.target.value})}; break;
-            case 3: {setForm({...Form, pass1: event.target.value})}; break;
-            case 4: {setForm({...Form, iname: event.target.value})}; break;
-            case 5: {setForm({...Form, isurname: event.target.value})}; break;
-            case 6: {setForm({...Form, istreet: event.target.value})}; break;
-            case 7: {setForm({...Form, ihouse: event.target.value})}; break;
-            case 8: {setForm({...Form, iflat: event.target.value})}; break;
-            case 9: {setForm({...Form, izip1: event.target.value})}; break;
-            case 10: {setForm({...Form, izip2: event.target.value})}; break;
-            case 11: {setForm({...Form, icity: event.target.value})}; break;
+            case 0: setForm({...Form, login: event.target.value}); break;
+            case 1: setForm({...Form, email: event.target.value}); break;
+            case 2: setForm({...Form, pass0: event.target.value}); break;
+            case 3: setForm({...Form, pass1: event.target.value}); break;
+            case 4: setForm({...Form, iname: event.target.value}); break;
+            case 5: setForm({...Form, isurname: event.target.value}); break;
+            case 6: setForm({...Form, istreet: event.target.value}); break;
+            case 7: setForm({...Form, ihouse: event.target.value}); break;
+            case 8: setForm({...Form, iflat: event.target.value}); break;
+            case 9: setForm({...Form, izip1: event.target.value}); break;
+            case 10: setForm({...Form, izip2: event.target.value}); break;
+            case 11: setForm({...Form, icity: event.target.value}); break;
+            default: //do nothing
         }
     }
 
-    // ERRORS
+    // ERROR LIST
 
     let info0 = "Pole Login jest puste";
     let info1 = "Pole E-mail jest puste";
@@ -81,13 +74,15 @@ const RegIndividual = (props) => {
     let info14 = "Kod pocztowy powinien składać się z cyfr - format: 00-000";
     let info20 = "Konto o podanym loginie już istnieje";
 
+    // FUNCTIONS
+
     const nextSite = (option) => {
         let valid = true;
         let ErrorContent = [];
         let passFormat = new RegExp("^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[\\W]).*$");
 
         switch(option) {
-            case 1: {
+            case 1: 
                 if(Form.login === null || Form.login === "") {
                     valid = false;
                     ErrorContent = [...ErrorContent, info0];
@@ -120,7 +115,6 @@ const RegIndividual = (props) => {
                 if (valid === true) {
                     Axios.post(ServerPath + "CheckLogin.php", Form.login)
                     .then(res => {
-                        console.log(res.data);
                         if (res.data > 0) {
                             valid = false;
                             ErrorContent = [...ErrorContent, info20];
@@ -132,8 +126,8 @@ const RegIndividual = (props) => {
                 } else {
                     setError(ErrorContent);
                 }
-            } break;
-            case 2: {
+            break;
+            case 2:
                 if(Form.iname === null || Form.iname === "") {
                     valid = false;
                     ErrorContent = [...ErrorContent, info8];
@@ -172,7 +166,8 @@ const RegIndividual = (props) => {
                     setForm({...Form, izip: izip});
                     setControlMenu({step1: false, step2: false, step3: true})
                 }
-            }; break;
+            break;
+            default: //nothing
         }
     }
 
@@ -184,15 +179,13 @@ const RegIndividual = (props) => {
             case 1: {
                 setControlMenu({step1: false, step2: true, step3: false}); break;
             }
+            default: //nothing
         }
     }
-
-    const History = useHistory();
 
     const sendAccData = () => {
         Axios.post(ServerPath + "CreateAccount.php", Form)
             .then(res => {
-                console.log(res.data);
                 if (res.data === "success") {
                     History.push({
                         pathname: '/login',
@@ -207,9 +200,10 @@ const RegIndividual = (props) => {
             })
     }
 
+    // DISPLAY FEATURE COMPONENTS
+
     let RMStyle, RIStyle, RSStyle;
     let s1, s2, s3;
-    //let sActive = {backgroundColor: $color2, color: $color3}
 
     if (ControlMenu.step1) {
         RMStyle = {display: 'block'}; 
@@ -241,8 +235,6 @@ const RegIndividual = (props) => {
             })
         )
     }
-
-    console.log(Form);
 
     return(
         

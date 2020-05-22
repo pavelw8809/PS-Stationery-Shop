@@ -14,7 +14,7 @@
 
 .CartItemImg {
     width: 100px;
-    border-radius: 4px;     // zmienna radius
+    border-radius: 4px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -55,7 +55,6 @@
 .CartItemTotal {
     font-size: 1.2em;
     width: 80px;
-    //font-weight: bold;
 }
 
 .CartRemBtn {
@@ -71,7 +70,6 @@
 
 .RemBtn {
     color: $color1;
-    //vertical-align: middle;
 }
 
 .RemBtn:hover {

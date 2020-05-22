@@ -7,13 +7,11 @@
     border-radius: 5px;
     margin:10px;
     background-color: $color1;
-    //padding: 10px;
 }
 
 .AccountNameContainer {
     color: $color1;
     background-color: $color5;
-    //display: flex;
     padding: 10px;
 }
 
@@ -30,7 +28,6 @@
 }
 
 .AccountInfo {
-    //background-color: $color1;
     padding: 10px;
 }
 
@@ -111,7 +108,7 @@
 }
 
 .EAErrorInfo {
-    color: maroon;
+    color: $color10;
     text-align: center;
 }
 
@@ -136,7 +133,6 @@
     flex-direction: column;
     width: 100%;
     max-width: 400px;
-    //min-width: 300px;;
 }
 
 .PassPanel h3 {
@@ -149,6 +145,6 @@
 
 .PassError {
     text-align: center;
-    color: maroon;
+    color: $color10;
 }
 

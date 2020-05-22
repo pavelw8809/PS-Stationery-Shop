@@ -20,4 +20,6 @@
 
     echo json_encode($output);
 
+    $con->close();
+
 ?>

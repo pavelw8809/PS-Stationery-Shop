@@ -1,3 +1,5 @@
+// Info -> RegAccSumm - information component with props
+
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import './Info.scss';
@@ -9,10 +11,11 @@ const Info = (props) => {
     let information;
 
     if (typeof(props.location.infoProp) === 'undefined') {
-        information = "Tutaj wyświetlona zostanie informacja";
+        information = "";
     } else {
         information = props.location.infoProp.info;
     }
+    
     return(
         <div className="InfoContainer">
             <div className="InfoWindow">

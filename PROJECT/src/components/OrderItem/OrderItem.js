@@ -1,6 +1,7 @@
+// OrderItem -> UserOrders
+
 import React from 'react';
 import './OrderItem.scss';
-import { FaGreaterThanEqual } from 'react-icons/fa';
 
 const OrderItem = (props) => {
 

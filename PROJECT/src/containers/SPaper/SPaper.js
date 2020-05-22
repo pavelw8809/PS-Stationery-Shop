@@ -1,22 +1,19 @@
-/*
-    Plik:               SPackages.js
-    Funkcja:            SKLEP - MATERIAŁY OPAKOWANIOWE
-    Opis:               Strona sklepu wyświetlająca artykuły z kategorii met. opakowaniowe.
-    Elementy:           Product Query - ComponentDidMount(), 
-                        Karta Produktu dla każdego z elementów (ArdCard)
-    Przykład użycia:    N/A
-    Dodatkowe info:     Query + zwrócenie wyniku w kartach
-*/
+// SPackages - ArtCard, ArtDetails
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
-import { ServerPath, CartContext } from '../App';
+import { ServerPath } from '../App';
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss"
 
 const SPaper = () => {
+
+    // STATES
+
     const [Products, setProducts] = useState([]);
+
+    // USEEFFECT HOOK - Load articles
 
     useEffect(() => {
         axios.get(ServerPath + 'SPaper.php')
@@ -24,6 +21,8 @@ const SPaper = () => {
             setProducts(res.data);
         })
     }, [])
+
+    // DISPLAY ARTICLE CARDS
 
     let showCards;
 

@@ -1,8 +1,9 @@
+// UserBtn -> Login, AccountMenu, COMMON APP COMPONENT
+
 import React, { useContext, useState } from 'react';
 import './UserBtn.scss';
 import Login from '../Login/Login';
 import AccountMenu from '../AccountMenu/AccountMenu';
-import { NavLink, useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { ServerPath, UserContext } from '../../containers/App';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -10,12 +11,14 @@ import Cookies from 'js-cookie';
 
 const UserBtn = (props) => {
 
-    // LOGIN STATES
+    // STATES
 
     const [User, setUser] = useContext(UserContext);    // User State
     const [LogShow, setLogShow] = useState(false);      // Show loggin button
     const [LoginData, setLoginData] = useState();       // Temporary state for sending login data
-    const [ErrorInfo, setErrorInfo] = useState();       // Error container    
+    const [ErrorInfo, setErrorInfo] = useState();       // Error container   
+    
+    // FUNCTIONS
 
     // check content in username field and update LoginData state
     const handleUsername = (event) => {
@@ -36,14 +39,10 @@ const UserBtn = (props) => {
     }
 
     // handle login action after subitting user data
-
     const handleLogin = () => {
         Axios.post(ServerPath + "Login.php", LoginData)
         .then(function(res) {
-            //console.log(res.data);
-            
             if (res.data.uid) {
-                //console.log(res.data);
                 setUser({...User, userinfo: res.data, usercontrol: true});
                 Cookies.set('pssession', res.data.sessionid);
                 setLogShow(false);
@@ -57,17 +56,10 @@ const UserBtn = (props) => {
                             )
                         })}
                     </div>
-                
                 )
                 setErrorInfo(errordata);
             }
         })
-        //let sessionid = Cookies.get('pssession');
-        //Axios.post(ServerPath + "Session.php", sessionid)
-        //.then(function(res) {
-            //console.log(User);
-        //    console.log(res.data);
-        //})
     }
 
     // hadle logout action
@@ -123,8 +115,6 @@ const UserBtn = (props) => {
         UserMenu = <AccountMenu logout={handleLogout} hidemenu={hideMenu}/>
     }
 
-    //console.log(User);
-
     return(
         <div className="UserBtnContainer">
             {UserInfoBtn}
@@ -133,21 +123,6 @@ const UserBtn = (props) => {
             </div>
         </div>
     )
-
 }
 
 export default UserBtn;
-
-/*
-            <div className="Login">
-                <label htmlFor="login">Nazwa użytkownika:</label>
-                <input type="text" onChange={handleUsername} name="login"/>
-                <label htmlFor="pass">Hasło:</label>
-                <input type="password" onChange={handlePassword} name="pass"/>
-                <button className="LoginBtn" onClick={handleLogin}>ZALOGUJ</button>
-                <p>Nie masz konta?</p>
-                <NavLink to="/regform" className="RegBtnContainer">
-                    <button className="RegBtn">ZAREJESTRUJ SIĘ</button>
-                </NavLink>
-            </div>
-*/

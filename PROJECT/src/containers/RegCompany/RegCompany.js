@@ -1,3 +1,5 @@
+// RegCompany -> Registration, RegAccMain, RegAccComp, RegAccSumm
+
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import './RegCompany.scss';
@@ -10,9 +12,11 @@ import Axios from 'axios';
 import { ServerPath } from '../App';
 
 const RegCompany = () => {
+
+    // STATES
+
     const [Error, setError] = useState([]);
     const [Form, setForm] = useState({
-
         accounttype: 0,
         login: null,
         email: null,
@@ -27,30 +31,35 @@ const RegCompany = () => {
         czip1: null,
         czip2: null,
         ccity: null
-    
     });
-
     const [ControlMenu, setControlMenu] = useState({step1: true, step2: false, step3: false});
+
+    // USEHISTORY HOOK
+
+    const History = useHistory();
+
+    // FIELDS LISTENER
 
     const handleFields = (option, event) => {
         switch(option) {
-            case 0: {setForm({...Form, login: event.target.value})}; break;
-            case 1: {setForm({...Form, email: event.target.value})}; break;
-            case 2: {setForm({...Form, pass0: event.target.value})}; break;
-            case 3: {setForm({...Form, pass1: event.target.value})}; break;
-            case 4: {setForm({...Form, cname: event.target.value})}; break;
-            case 5: {setForm({...Form, cnip: event.target.value})}; break;
-            case 6: {setForm({...Form, cregon: event.target.value})}; break;
-            case 7: {setForm({...Form, cstreet: event.target.value})}; break;
-            case 8: {setForm({...Form, chouse: event.target.value})}; break;
-            case 9: {setForm({...Form, cflat: event.target.value})}; break;
-            case 10: {setForm({...Form, czip1: event.target.value})}; break;
-            case 11: {setForm({...Form, czip2: event.target.value})}; break;
-            case 12: {setForm({...Form, ccity: event.target.value})}; break;
+            case 0: setForm({...Form, login: event.target.value}); break;
+            case 1: setForm({...Form, email: event.target.value}); break;
+            case 2: setForm({...Form, pass0: event.target.value}); break;
+            case 3: setForm({...Form, pass1: event.target.value}); break;
+            case 4: setForm({...Form, cname: event.target.value}); break;
+            case 5: setForm({...Form, cnip: event.target.value}); break;
+            case 6: setForm({...Form, cregon: event.target.value}); break;
+            case 7: setForm({...Form, cstreet: event.target.value}); break;
+            case 8: setForm({...Form, chouse: event.target.value}); break;
+            case 9: setForm({...Form, cflat: event.target.value}); break;
+            case 10: setForm({...Form, czip1: event.target.value}); break;
+            case 11: setForm({...Form, czip2: event.target.value}); break;
+            case 12: setForm({...Form, ccity: event.target.value}); break;
+            default: // do nothing
         }
     }
 
-     // ERRORS
+     // ERROR LIST
 
      let info0 = "Pole Login jest puste";
      let info1 = "Pole E-mail jest puste";
@@ -65,12 +74,14 @@ const RegCompany = () => {
      let info10 = "Pole Numer REGON jest puste";
      let info11 = "Pole Ulica jest puste";
      let info12 = "Pole Nr domu jest puste";
-     let info13 = "Pole Kod pocztowy jest puste";
+     //let info13 = "Pole Kod pocztowy jest puste";
      let info14 = "Kod pocztowy powinien składać się z cyfr - format: 00-000";
      let info15 = "Pole Miejscowość jest puste";
      let info16 = "Numer NIP powinien składać się z 10 cyfr - wzór: 0000000000";
      let info17 = "Numer REGON powinien składać się z 9 cyfr - wzór: 000000000";
      let info20 = "Konto o podanym loginie już istnieje";
+
+     // FUNCTIONS
 
      const nextSite = (option) => {
         let valid = true;
@@ -78,7 +89,7 @@ const RegCompany = () => {
         let passFormat = new RegExp("^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[\\W]).*$");
 
         switch(option) {
-            case 1: {
+            case 1:
                 if(Form.login === null || Form.login === "") {
                     valid = false;
                     ErrorContent = [...ErrorContent, info0];
@@ -111,7 +122,6 @@ const RegCompany = () => {
                 if (valid === true) {
                     Axios.post(ServerPath + "CheckLogin.php", Form.login)
                     .then(res => {
-                        console.log(res.data);
                         if (res.data > 0) {
                             valid = false;
                             ErrorContent = [...ErrorContent, info20];
@@ -123,17 +133,8 @@ const RegCompany = () => {
                 } else {
                     setError(ErrorContent);
                 }
-                /*
-                setError(ErrorContent);
-                console.log(ErrorContent);
-                console.log("valid: " + valid);
-
-                if (valid === true) {
-                    setControlMenu({step1: false, step2: true, step3: false})
-                }
-                */
-            } break;
-            case 2: {
+            break;
+            case 2:
                 if(Form.cname === null || Form.cname === "") {
                     valid = false;
                     ErrorContent = [...ErrorContent, info8];
@@ -178,7 +179,8 @@ const RegCompany = () => {
                     setForm({...Form, czip: czip});
                     setControlMenu({step1: false, step2: false, step3: true})
                 }
-            }; break;
+            break;
+            default: //nothing
         }
     }
 
@@ -190,15 +192,13 @@ const RegCompany = () => {
             case 1: {
                 setControlMenu({step1: false, step2: true, step3: false}); break;
             }
+            default: //nothing
         }
     }
-
-    const History = useHistory();
 
     const sendAccData = () => {
         Axios.post(ServerPath + "CreateAccount.php", Form)
             .then(res => {
-                console.log(res.data);
                 if (res.data === "success") {
                     History.push({
                         pathname: '/login',
@@ -212,6 +212,8 @@ const RegCompany = () => {
                 }
             })
     }
+
+    // DISPLAY FEATURE COMPONENTS
 
     let RMStyle, RCStyle, RSStyle;
     let s1, s2, s3;
@@ -246,8 +248,6 @@ const RegCompany = () => {
             })
         )
     }
-
-    console.log(Form);
 
     return(
         <div className="RegAccWindow">
@@ -309,31 +309,3 @@ const RegCompany = () => {
 }
 
 export default RegCompany;
-
-/*
-            <h1>Rejestracja konta firmowego</h1>
-                    <label htmlFor="u_login">Login</label><br></br>
-                    <input required type="text" name="u_login" title="Proszę wpisać login"></input><br></br>
-                    <label htmlFor="u_mail">E-mail</label><br></br>
-                    <input required type="text" name="u_mail" title="Proszę podać adres mail"></input><br></br>
-                    <label htmlFor="u_password">Ulica</label><br></br>
-                    <input required type="text" name="u_password" title="Nowe hasło"></input><br></br>
-                    <label htmlFor="u_passwordAgain">Numer domu/bloku</label><br></br>
-                    <input required  type="numeric" name="u_passwordAgain" title="Powtórz hasło"></input><br></br>
-                    <label htmlFor="cc_name">Nazwa</label><br></br>
-                    <input required type="text" name="cc_name" title="Proszę podać nazwę firmy/działalności gospodarczej"></input><br></br>
-                    <label htmlFor="cc_NIP">NIP</label><br></br>
-                    <input required type="text" name="cc_NIP" title="Proszę podać NIP firmy"></input><br></br>
-                    <label htmlFor="cc_REGON">REGON</label><br></br>
-                    <input required type="text" name="cc_REGON" title="Proszę podać regon firmy"></input><br></br>
-                    <label htmlFor="cc_street">Ulica</label><br></br>
-                    <input required type="text" name="cc_street" title="Proszę podać ulicę na której znajduje sie siedziba firmy"></input><br></br>
-                    <label htmlFor="cc_number">Numer domu/bloku</label><br></br>
-                    <input required  type="numeric" name="cc_number" title="Proszę podać numer domu"></input><br></br>
-                    <label htmlFor="cc_number_flat">Numer mieszkania</label><br></br>
-                    <input required type="numeric" name="cc_number_flat" title="Proszę podać numer lokalu"></input><br></br>
-                    <label htmlFor="cc_zip">Kod pocztowy</label><br></br>
-                    <input required type="numeric" name="cc_zip" title="Proszę podać swoje kod pocztowy"></input><br></br>
-                    <label htmlFor="cc_city">Miejscowośc</label><br></br>
-                    <input required type="text" name="cc_city" title="Proszę podać miejscowość"></input><br></br>
-*/

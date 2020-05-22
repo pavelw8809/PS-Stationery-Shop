@@ -1,6 +1,6 @@
 <?php
-$dbserv = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "shop";
+    $dbserv = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "shop";
 ?>

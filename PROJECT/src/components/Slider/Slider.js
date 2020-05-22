@@ -1,9 +1,15 @@
+// Slider -> Index
+
 import React, { useEffect, useState } from 'react';
 import './Slider.scss';
 
 const Slider = () => {
 
+    // STATES
+
     const [SlideNo, setSlideNo] = useState(0);
+
+    // VARIABLES
     
     let boxStyle, boxText;
     let img0 = require('../../images/images/APS.jpg');
@@ -11,12 +17,16 @@ const Slider = () => {
     let img2 = require('../../images/images/KOP.jpg');
     let img3 = require('../../images/images/APP.jpg');
 
+    // FUNCTIONS
+
     const changeSlide = () => {
         setSlideNo(SlideNo + 1);
         if(SlideNo > 2) {
             setSlideNo(0);
         }
     }
+
+    // USEEFFECT HOOK
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -26,10 +36,11 @@ const Slider = () => {
     })
 
     switch(SlideNo) {
-        case 0: {boxStyle = {backgroundImage: "url(" + img0 + ")", transitionDuration: '1s'}; boxText="Artykuły piśmiennicze"}; break;
-        case 1: {boxStyle = {backgroundImage: "url(" + img1 + ")", transitionDuration: '1s'}; boxText="Artykuły biurowe"}; break;
-        case 2: {boxStyle = {backgroundImage: "url(" + img2 + ")", transitionDuration: '1s'}; boxText="Koperty"}; break;
-        case 3: {boxStyle = {backgroundImage: "url(" + img3 + ")", transitionDuration: '1s'}; boxText="Artykuły papiernicze"}; break;
+        case 0: boxStyle = {backgroundImage: "url(" + img0 + ")", transitionDuration: '1s'}; boxText="Artykuły piśmiennicze"; break;
+        case 1: boxStyle = {backgroundImage: "url(" + img1 + ")", transitionDuration: '1s'}; boxText="Artykuły biurowe"; break;
+        case 2: boxStyle = {backgroundImage: "url(" + img2 + ")", transitionDuration: '1s'}; boxText="Koperty"; break;
+        case 3: boxStyle = {backgroundImage: "url(" + img3 + ")", transitionDuration: '1s'}; boxText="Artykuły papiernicze"; break;
+        default: //do nothing
     }
 
     return(

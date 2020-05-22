@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+// TitleBar -> COMMON APP COMPONENT
+
+import React from 'react';
 import './TitleBar.scss';
 
 const Titlebar = (props) => {
@@ -8,7 +10,6 @@ const Titlebar = (props) => {
     return(
         <div className="TitleBar">
             <h1>{title}</h1>
-
         </div>
     )
 }

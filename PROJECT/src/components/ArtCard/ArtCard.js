@@ -1,50 +1,34 @@
-/*
-    Plik:               ArtCard.js
-    Funkcja:            KARTA PRODUKTU
-    Opis:               Wyświetla bieżący produkt w karcie.
-    Elementy:           Zdjęcie {props.imagename}, 
-                        nazwa produktu {props.name}, 
-                        opis produktu {props.description}, 
-                        cena {props.price}, 
-                        wybór ilości +/-, 
-                        przycisk koszyka
-    Przykład użycia:    <ArtCard imagename={nazwa_zdjecia} name={nazwa_artykulu} description={opis artykulu} price={cena} />
-    Dodatkowe info:     {nazwa_zdjecia} ma korespondowac z numerem artykulu w bazie danych
-*/
+// ArtCard -> Index, SOffice, SEnvelops, SPaper, SStationary
 
-import React, { useState, useContext, useEffect } from 'react';
-import App, { TotalContext } from '../../containers/App';
+import React, { useState, useContext } from 'react';
+import { TotalContext } from '../../containers/App';
 import carticon from '../../images/icons/black_cart.png';
-import "./ArtCard.scss";                                                            // Import arkusza stylu dla dla komponentu
+import "./ArtCard.scss";    
 import { NavLink } from 'react-router-dom';
 
 const Artcard = (props) =>{
 
+    // STATES
+
     const [counter, setCounter] = useState({
         quantity: 0
     })
-    //const [Cart, setCart] = useContext(CartContext);
     const [Total, setTotal] = useContext(TotalContext);
-    //const [CartTemp, setCartTemp] = useState([]);
+    const Image = require('../../images/images/' + props.imagename + '.png'); 
 
-    //let CartStorage
-    const Image = require('../../images/images/' + props.imagename + '.png');       // Ścieżka do zdjęcia
+    // BACKROUND IMG STYLE
 
     let ProdImgStyle;
-    ProdImgStyle = {                                                                // Stylizacja zdjęcia - zdjęcie jako tło karty
+    ProdImgStyle = {
         backgroundImage: "url(" + Image + ")",
         backgroundColor: 'white',
     }
 
-    useEffect(() => {
-        //CartStorage = JSON.parse(localStorage.getItem('pscart'));
-        //setCartTemp(CartStorage);
-        //console.log(CartTemp);
-    }, []);
-
-    //console.log(initCart);
+    // LOAD CART CONTENT FROM LOCAL STORAGE
 
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
+
+    // FUNCTIONS
 
     const increaseQuantity = () => {
         if (counter.quantity < 100) {
@@ -77,8 +61,6 @@ const Artcard = (props) =>{
     const addProd = (prodid, name, desc, q, price, imagename) => {
         let check = 0;
         let idToChange;
-        let orSum = parseFloat((q*price));
-        //let CartStorage;
 
         CartStorage.map((r, index) => {
             if (r.prodid === prodid) {
@@ -88,21 +70,8 @@ const Artcard = (props) =>{
         })
 
         if (q > 0) {
-            if (check === 0) {
-                
-                //setCart(prevCart => ([...Cart, {
-                    //id: Cart.length, 
-                //    prodid: prodid,
-                //    name: name, 
-                //    desc: desc,
-                //    price: parseFloat(price),
-                //   quantity: q, 
-                //    prodtotal: q*price,
-                //    imagename: imagename
-                //}]))
-                
+            if (check === 0) {              
                 let CartStorageN = ([...CartStorage, {
-                    //id: CartStorage.length,
                     prodid: prodid,
                     name: name, 
                     shortdesc: props.shortdesc,
@@ -112,36 +81,29 @@ const Artcard = (props) =>{
                     prodtotal: q*price,                             
                     imagename: imagename
                 }]);
+
                 localStorage.setItem('pscart', JSON.stringify(CartStorageN))
 
                 const cartarray = [];
-    
                 const sum = Object.values(CartStorageN)
                   .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
                 })
-                  .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+                  .reduce((sum, el) => {return sum+el;}, 0);
 
-                setTotal({total: sum});
-        
-                //console.log(newCartStorage);
+                setTotal({...Total, total: sum});       
             } else {
-                //let newCart = [...Cart];
-                //newCart[idToChange].quantity = newCart[idToChange].quantity+q;
-                //newCart[idToChange].prodtotal = newCart[idToChange].price*newCart[idToChange].quantity;
                 let CartStorageN = [...CartStorage];
-                console.log(CartStorageN[idToChange]);
                 CartStorageN[idToChange].quantity = CartStorageN[idToChange].quantity+q;
                 CartStorageN[idToChange].prodtotal = CartStorageN[idToChange].price*CartStorageN[idToChange].quantity;
                 localStorage.setItem('pscart', JSON.stringify(CartStorageN))
             
                 const cartarray = [];
-    
                 const sum = Object.values(CartStorageN)
                   .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
                 })
-                  .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+                  .reduce((sum, el) => {return sum+el;}, 0);
 
-                setTotal({total: sum});
+                setTotal({...Total, total: sum});
             }
 
             setCounter({
@@ -162,11 +124,11 @@ const Artcard = (props) =>{
                     imagename: props.imagename,
                     prodid: props.prodid
                 }
-                }}>
-                <div className="ProdImgContainer" style={ProdImgStyle}></div>
-                <div className="ProdInfo">
-                    <h4>{props.name}</h4>
-                    <p>{props.shortdesc}</p>
+            }}>
+            <div className="ProdImgContainer" style={ProdImgStyle}></div>
+            <div className="ProdInfo">
+                <h4>{props.name}</h4>
+                <p>{props.shortdesc}</p>
             </div>
             </NavLink>
             <div className="ProdState">

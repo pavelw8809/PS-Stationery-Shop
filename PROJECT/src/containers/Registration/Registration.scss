@@ -30,8 +30,8 @@
 }
 
 .IABtn:hover, .CABtn:hover {
-    transform: scale(1.04); // zmienna cardHover
-    transition-duration: 0.5s; // zmienna cardHoverTime
+    transform: scale(1.04);
+    transition-duration: 0.5s;
 }
 
 .IABtn {
@@ -73,9 +73,6 @@
 
 .RegMain {
     background-color: $color1;
-    //margin: 10px;
-    //border: solid 2px $color0;
-    //border-radius: 5px;
 }
 
 .RegAccWindow {
@@ -91,7 +88,6 @@
 
 .RegAccWindow input {
     color: $color3;
-    //background-color: $color1;
     border: solid 1px $color0;
     padding: 5px;
     margin: 5px;
@@ -107,7 +103,6 @@
     align-items: center;
     background-color: $color3;
     color: $color2;
-    //padding: 10px;
 }
 
 .RegMilestone {
@@ -137,7 +132,6 @@
 
 .AccRegAddress {
     display: flex;
-    //flex-wrap: wrap;
 }
 
 .AccRegAccress div {

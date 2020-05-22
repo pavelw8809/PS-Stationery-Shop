@@ -1,13 +1,6 @@
-/*
-    Plik:               Login.js
-    Funkcja:            STRONA Z FORMULARZEM REJESTRACYJNYM
-    Opis:               Formularz rejestracyjny dla osób chcących założyć konto
-    Elementy:           Formularz rejestracyjny
-    Przykład użycia:    N/A
-    Dodatkowe info:     Walidacja danych, dodawanie nowego usera
-*/
+// LoginSite -> UserBtn, Account - Login site
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import './LoginSite.scss'
 import Axios from 'axios';
 import { UserContext, ServerPath } from '../App';
@@ -17,9 +10,17 @@ import Cookies from 'js-cookie';
 
 const LoginSite = (props) => {
 
+    // STATES
+
     const [ErrorInfo, setErrorInfo] = useState();
     const [LoginData, setLoginData] = useState();       // Temporary state for sending login data
     const [User, setUser] = useContext(UserContext);
+
+    // USEHISTORY HOOK
+
+    const History = useHistory();
+
+    // SHOW INFORMATION FROM PROPS
 
     let cartoption;
     let addinfo;
@@ -32,8 +33,7 @@ const LoginSite = (props) => {
         infostyle = {display: 'none'};
     }
 
-
-    //let addinfo = props.info;
+    // FUNCTIONS
 
     const handleUsername = (event) => {
         if (event.keyCode === 13) {
@@ -51,18 +51,12 @@ const LoginSite = (props) => {
         }
     }
 
-    const History = useHistory();
-
     const handleLogin = () => {
         Axios.post(ServerPath + "Login.php", LoginData)
         .then(function(res) {
-            //console.log(res.data);
-            
             if (res.data.uid) {
-                //console.log(res.data);
                 setUser({...User, userinfo: res.data, usercontrol: true});
                 Cookies.set('pssession', res.data.sessionid);
-                //setLogShow(false);
                 if (cartoption === true) {
                     History.push('/cart');
                 } else {

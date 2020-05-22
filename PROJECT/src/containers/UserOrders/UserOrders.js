@@ -1,21 +1,34 @@
-import React, { useState, useEffect, useContext } from 'react';
+// UserOrders -> AccountMenu, Account
+
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Axios from 'axios';
-import { ServerPath, UserContext } from '../App';
+import { ServerPath } from '../App';
 import './UserOrders.scss';
 import Titlebar from '../../components/TitleBar/TitleBar';
 import OrderItem from '../../components/OrderItem/OrderItem';
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 
-const UserOrders = (props) => {
-    const [OrderList, setOrderList] = useState([]);
-    //const [User, setUser] = useContext(UserContext);
+const UserOrders = () => {
 
-    const History = useHistory();    
+    // STATE
+
+    const [OrderList, setOrderList] = useState([]);
+
+    // USEHISTORY HOOK
+
+    const History = useHistory();
+
+    // DEFINE VARIABLES
+
     let OrderData;
 
+    // LOAD SESSION TOKEN FROM PSSESSION COOKIE FILE
+
     let SessionId = Cookies.get('pssession');
+
+    // USEEFFECT HOOK - LOAD ORDERS DATA BASED ON USER TOKEN
 
     useEffect(() => {
         if (typeof(SessionId) === 'undefined') {
@@ -23,11 +36,12 @@ const UserOrders = (props) => {
         } else {
             Axios.post(ServerPath + 'ShowOrders.php', SessionId)
             .then(res => {
-                console.log(res.data);
                 setOrderList(res.data);
             })
         }
-    }, [])
+    }, [History, SessionId])
+
+    // DISPLAY CONTENT
 
     if (OrderList.length > 0) {
         OrderData = (

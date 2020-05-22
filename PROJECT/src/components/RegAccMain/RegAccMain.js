@@ -1,3 +1,5 @@
+// RegAccMain -> RegCompany, RegIndividual - Register component for company and individual clients - Main user data
+
 import React from 'react';
 import './RegAccMain.scss';
 import { NavLink } from 'react-router-dom';

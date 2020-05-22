@@ -1,20 +1,27 @@
+// ArtDetails <- CartItem, ArtCard
+
 import React, { useState, useContext } from 'react';
-import { CartContext, TotalContext } from '../../containers/App';
+import { TotalContext } from '../../containers/App';
 import './ArtDetails.scss';
 import carticon from '../../images/icons/black_cart.png';
 
 const Artdetails = (props) => {
 
+    // STATES
+
     const [Total, setTotal] = useContext(TotalContext);
     const [counter, setCounter] = useState({quantity: 0});
+
+    // LOAD CART CONTENT FROM LOCAL STORAGE
     
     let CartStorage = JSON.parse(localStorage.getItem('pscart'));
-    console.log(props.location.artProps);
+
+    // GET DATA FROM DEPENDENT COMPONENTS
 
     let Image, InitPrice, Price, NetPrice, ProdId, Name, ShortDesc, Desc, ImageName;
     if (typeof(props.location.artProps) !== 'undefined') {
         ImageName = props.location.artProps.imagename;
-        Image = require('../../images/images/' + props.location.artProps.imagename + '.png');       // Ścieżka do zdjęcia
+        Image = require('../../images/images/' + props.location.artProps.imagename + '.png');
         InitPrice = parseFloat(props.location.artProps.price);
         Price = InitPrice.toFixed(2)
         NetPrice = (InitPrice/1.23).toFixed(2);
@@ -22,7 +29,7 @@ const Artdetails = (props) => {
         Name = props.location.artProps.name;
         ShortDesc = props.location.artProps.shortdesc;
         Desc = props.location.artProps.description;
-        localStorage.setItem('psdet', JSON.stringify(props.location.artProps));
+        localStorage.setItem('psdet', JSON.stringify(props.location.artProps));     // Set details item in local storage
     } else {
         let ArtStorage = JSON.parse(localStorage.getItem('psdet'));
         if (ArtStorage !== null) {
@@ -41,11 +48,15 @@ const Artdetails = (props) => {
         }
     }
 
+    // BACKGOUND IMAGE STYLE
+
     let ProdImgStyle;
-    ProdImgStyle = {                                                                // Stylizacja zdjęcia - zdjęcie jako tło karty
+    ProdImgStyle = {
         backgroundImage: "url(" + Image + ")",
         backgroundColor: 'white',
     }
+
+    // FUNCTIONS
 
     const increaseQuantity = () => {
         if (counter.quantity < 100) {
@@ -78,7 +89,6 @@ const Artdetails = (props) => {
     const addProd = (prodid, name, desc, shortdesc, q, price, imagename) => {
         let check = 0;
         let idToChange;
-        let orSum = parseFloat((q*price));
 
         if (name !== null) {
             CartStorage.map((r, index) => {
@@ -111,32 +121,29 @@ const Artdetails = (props) => {
                     localStorage.setItem('pscart', JSON.stringify(CartStorageN));
 
                     const cartarray = [];
-    
                     const sum = Object.values(CartStorageN)
                       .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
                     })
-                      .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+                      .reduce((sum, el) => {return sum+el; }, 0);
                 
-                    setTotal({total: sum});
+                    setTotal({...Total, total: sum});
                 } else {
                     let CartStorageN = [...CartStorage];
                     CartStorageN[idToChange].quantity = CartStorageN[idToChange].quantity+q;
                     CartStorageN[idToChange].prodtotal = CartStorageN[idToChange].price*CartStorageN[idToChange].quantity;
                     localStorage.setItem('pscart', JSON.stringify(CartStorageN))
                     const cartarray = [];
-    
                     const sum = Object.values(CartStorageN)
                       .map(obj => { cartarray.push(obj.prodtotal); return obj.prodtotal
                     })
-                      .reduce((sum, el) => {console.log(sum+el); return sum+el; }, 0);
+                      .reduce((sum, el) => {return sum+el; }, 0);
                 
-                    setTotal({total: sum});
+                    setTotal({...Total, total: sum});
                 }
 
                 setCounter({
                     quantity: 0
                 })
-
             }
         }
     }
@@ -170,13 +177,12 @@ const Artdetails = (props) => {
                             <button className="ArtDqBtn" onClick={decreaseQuantity}>-</button>
                         </div>
                     </div>
-                    <div className="ArtDOrderBar">
-
-                    </div>
                 </div>
                 <button 
                     className="ArtDOrderBtn" 
-                    onClick={addProd.bind(this, ProdId, Name, Desc, ShortDesc, counter.quantity, Price, ImageName)}><img className="carticonBtn" src={carticon} alt="cart"/>DO KOSZYKA</button>
+                    onClick={addProd.bind(this, ProdId, Name, Desc, ShortDesc, counter.quantity, Price, ImageName)}>
+                    <img className="carticonBtn" src={carticon} alt="cart"/>DO KOSZYKA
+                </button>
             </div>
         </div>
     )

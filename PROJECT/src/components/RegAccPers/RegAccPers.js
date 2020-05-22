@@ -1,6 +1,7 @@
+// RegAccPers -> RegIndividual - Register component for individual client.
+
 import React from 'react';
 import './RegAccPers.scss';
-import { NavLink } from 'react-router-dom';
 
 const RegAccPers = (props) => {
     return(
