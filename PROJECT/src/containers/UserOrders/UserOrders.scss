@@ -1,7 +1,8 @@
 @import '../Main.scss';
 
 .Order {
-
+    max-width: 1200px;
+    width: 100%;
 }
 
 .OrderContainer {
@@ -28,6 +29,7 @@
     text-align: center;
     padding: 10px;
     min-height: 300px;
+    width: 100%;
 }
 
 .OrderList {

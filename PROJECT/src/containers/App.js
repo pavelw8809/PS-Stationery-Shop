@@ -45,9 +45,9 @@ import Footer from '../components/Footer/Footer';
 import RegCompany from './RegCompany/RegCompany';
 import RegIndividual from './RegIndividual/RegIndividual';
 import Confirmation from './Confirmation/Confirmation';
+import CookieInfo from '../components/CookieInfo/CookieInfo';
 //import Login from '../components/Login/Login';
 
-//export const CartContext = React.createContext();
 export const TotalContext = React.createContext();
 export const UserContext = React.createContext();
 export const ServerPath = "http://localhost:80/WSB_SELCOR/SERVER/";
@@ -73,11 +73,9 @@ function App() {
   const [Cart, setCart] = useState({products: CartStorage});
 
   // 2. Total price state
-  
   const [Total, setTotal] = useState(0);
 
   // 3. User account state
-
   const [User, setUser] = useState({
     usercontrol: false,
     userinfo: {},
@@ -159,6 +157,7 @@ function App() {
         </TotalContext.Provider>
         </UserContext.Provider>
       </Router>
+      <CookieInfo/>
     </div>
   );
 

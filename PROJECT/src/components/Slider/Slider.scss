@@ -1,0 +1,29 @@
+@import '../../containers/Main.scss';
+
+.Slider {
+    margin: 10 0px;
+}
+
+.SlideBox {
+    height: 300px;
+    border: 1px solid $color0;
+    border-radius: 5px;
+    margin: 20px;
+    font-size: 3.0em;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: 100% auto;
+    color: $color1;
+    text-shadow: 0 0 10px $color3;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+@media only screen and (max-width: 800px) {
+    .SlideBox {
+        background-size: auto 100%;
+    }
+} 

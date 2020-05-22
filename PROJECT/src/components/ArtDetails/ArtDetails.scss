@@ -22,7 +22,22 @@
     align-items: flex-start;
 }
 
-//.ArtDContainer
+@media only screen and (max-width: 800px) {
+    .ArtDContainer {
+        grid-template-columns: min(300px);
+        grid-template-areas:
+                                'artimg'
+                                'artinfo'
+                                'orderbtn';
+    }
+
+    .ArtImgContainer {
+        max-width: 100%;
+        grid-area: artimg;
+        max-height: 300px;
+    }
+}
+
 
 .ArtImgContainer {
     background-position: center;

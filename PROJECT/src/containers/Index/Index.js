@@ -7,26 +7,17 @@
     Dodatkowe info:     Treści statyczne + slider z ofertą + randomowe karty z ofertami
 */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ArtCard from '../../components/ArtCard/ArtCard';
 //import { CartContext } from '../App';
 import axios from 'axios';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import "../../components/ArtCard/ArtCard.scss";
 import { ServerPath } from '../App';
+import Slider from '../../components/Slider/Slider';
 
 const Index = () => {
-   /* const [User, setUser] = useContext(UserContext);
 
-    let UserWelcome;
-
-    if (User.name) {
-        UserWelcome = (
-            <div>
-                Miło Cię znowu widzieć, {User.name}
-            </div>
-        )
-    } */
     const [Products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -56,20 +47,11 @@ const Index = () => {
         </div>
     )
 
-   /* return(
-        <div className="SiteContainer">
-            <TitleBar title= "Zapraszamy do skorzystania z naszej oferty"/>
-            {UserWelcome}
-        </div>
-    )*/
     return(
         <div className="SiteContainer">
             <TitleBar title="Zapraszamy do skorzystania z naszej oferty"/>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <Slider/>
+
             <TitleBar title="Top 5 najczęściej kupowanych produktów w naszym sklepie"/>
 
             {showCards}
